@@ -6,11 +6,13 @@ public class GameControl : MonoBehaviour
 {
     public GameObject PauseImg;
     public RectTransform SettingMenu;
+    public RectTransform QuestListMenu;
 
     void Start()
     {
         PauseImg = GameObject.Find("Canvas-UI").transform.GetChild(6).gameObject;
         SettingMenu = PauseImg.transform.GetChild(0).GetComponent<RectTransform>();
+        QuestListMenu = GameObject.Find("Canvas-UI").transform.GetChild(7).GetComponent<RectTransform>();
     }
 
     void Update()
@@ -40,4 +42,19 @@ public class GameControl : MonoBehaviour
         }
 
     }
+
+    public void QuestList()
+    {
+        if(QuestListMenu.gameObject.activeInHierarchy==false)
+        {
+            QuestListMenu.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            QuestListMenu.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
+
 }
