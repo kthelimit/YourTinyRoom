@@ -9,12 +9,17 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;//싱글턴
 
     //자원관리
-    public int gold=10000;
+    private float gold =10000;
     private Text goldText;
-    public int crystal=0;
+    private float crystal =0;
     private Text crystalText;
-    public int dayCount=0;
+    //날짜
+    private float dayCount =0;
     private Text dayCountText;
+    //경험치. 추후 레벨 테이블 구성 및 단계 구현하기
+    private float curExp = 0f;
+    private float maxExp = 10f;
+    private Image expGauge;
    
     
    
@@ -28,9 +33,9 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         goldText = GameObject.Find("Canvas-UI").transform.GetChild(4).GetChild(0).GetChild(1).transform.GetComponent<Text>();
-        crystalText= GameObject.Find("Canvas-UI").transform.GetChild(4).GetChild(1).transform.GetComponent<Text>();
+        crystalText= GameObject.Find("Canvas-UI").transform.GetChild(4).GetChild(1).GetChild(1).transform.GetComponent<Text>();
         dayCountText = GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(5).transform.GetComponent<Text>();
-
+        expGauge= GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(7).GetChild(1).transform.GetComponent<Image>();
 
     }
 
@@ -39,7 +44,8 @@ public class GameManager : MonoBehaviour
     {
         goldText.text = gold.ToString("#,###");
         crystalText.text = crystal.ToString("#,###");
-        dayCountText.text = dayCount.ToString() + "일째";
+        dayCountText.text = dayCount.ToString();
+        expGauge.fillAmount = curExp / maxExp;
     }
 
 
