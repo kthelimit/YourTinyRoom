@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 7150886580083313520}
   - component: {fileID: 5044052325004881696}
   - component: {fileID: 5663750788954113998}
+  - component: {fileID: -4439233113257517081}
   - component: {fileID: 5620040814832555213}
   m_Layer: 5
   m_Name: QuestItem
@@ -219,6 +220,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 5
+--- !u!114 &-4439233113257517081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817632314577926543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c6c1655eb63f440af9e5b103e53f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5620040814832555213
 MonoBehaviour:
   m_ObjectHideFlags: 0

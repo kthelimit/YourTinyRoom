@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40177c288328c3438e20f8f32cb0393, type: 3}
+  m_Name: 001_puppet
+  m_EditorClassIdentifier: 
+  ItemName: "\uCE58\uC774\uB85C \uC778\uD615"
+  itemType: 0
+  itemImage: {fileID: 21300000, guid: c2f693051fb774b489944e6a7d50f06c, type: 3}
+  itemPrefab: {fileID: 2041376555286131007, guid: 68c66cc1fbbd95d4aafe3d2d4168e164,
+    type: 3}
+  ItemDesc: "\uB9D0\uB791 \uD479\uC2E0\uD55C \uCE58\uC774\uB85C \uC778\uD615"
+  ItemPrice: 500

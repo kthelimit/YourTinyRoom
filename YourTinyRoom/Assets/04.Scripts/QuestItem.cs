@@ -8,8 +8,6 @@ public class QuestItem : MonoBehaviour
     [SerializeField]
     private Button rewardButton;
     private Transform scrollContents;
-    public Text QuestName;
-    public Text QuestCondition;
     public bool isCompleted = false;
     public bool isTakeOut = false;
     public GameObject finishImg;
@@ -20,17 +18,9 @@ public class QuestItem : MonoBehaviour
     {
         scrollContents = this.transform.parent;
         rewardButton = transform.GetChild(0).GetComponent<Button>();
-        QuestName = transform.GetChild(1).GetComponent<Text>();
-        QuestCondition = transform.GetChild(2).GetComponent<Text>();
         rewardButton.interactable = false;
         
     }
-    public void SetQuest(string questName, string questCondition)
-    {
-        QuestName.text = questName;
-        QuestCondition.text = questCondition;
-    }
-
 
     private void Update()
     {
