@@ -15,6 +15,8 @@ public class Crop : MonoBehaviour
     private Text timeTxt; //시간 출력용 텍스트
     private CanvasGroup canvasTimeBar; //타임게이지를 숨기는 용도
     public bool isComplete = false; //작물이 완성 되었는가?
+    public int quantity = 1;
+    Inventory inventory;
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class Crop : MonoBehaviour
         completeTxt.enabled = false;
         timeTxt= transform.GetChild(1).GetChild(0).GetChild(4).GetComponent<Text>();
         timeTxt.enabled = false;
+        inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
         canvasTimeBar = transform.GetChild(1).GetChild(0).GetComponent<CanvasGroup>();
         StartCoroutine("Timer");
 
@@ -59,25 +62,9 @@ public class Crop : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    public void ShowLeftTime()
     {
-        if(isComplete)//완성되었다면
-        {
-            Harvest();
-        }
-        //TO DO: 클릭시 남은 시간을 보여줄지에 대해서 고민중...
-        else
-        {
-            timeTxt.enabled = !timeTxt.enabled;
-        }
-    }
-
-    private void Harvest()
-    {
-        Debug.Log("수확!");
-        Destroy(this.gameObject);
-        //TO DO: 작물 아이콘이 인벤토리 방향으로 이동하는 효과
-        //TO DO: 작물의 수량이 증가하는 코드
+        timeTxt.enabled = !timeTxt.enabled;
     }
 
     //TO DO: 맵의 정해진 위치에 심는 코드

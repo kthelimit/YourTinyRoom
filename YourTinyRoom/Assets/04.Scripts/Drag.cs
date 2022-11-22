@@ -5,44 +5,32 @@ using UnityEngine.EventSystems;
 
 public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    private Transform itemTr;
-    private Transform inventoryTr;
-    public static GameObject draggingItem = null;
-    private Transform itemListTr;
-    private CanvasGroup canvasGroup;
+    private RectTransform Tr;
+    private CanvasGroup canvasGroup; 
+    public float height = 2f; //위치 이동할때 기준이 될 부분
 
 
     void Start()
     {
-        itemTr = GetComponent<Transform>();
-        inventoryTr = GameObject.Find("Inventory").GetComponent<Transform>();
-        itemListTr = GameObject.Find("ItemList").GetComponent<Transform>();
+        Tr = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
     //드래그 시작했을때
     public void OnBeginDrag(PointerEventData eventData)
     {
-        this.transform.SetParent(inventoryTr);
-        draggingItem = this.gameObject;
         canvasGroup.blocksRaycasts = false;
     }
 
     //드래그이벤트
     public void OnDrag(PointerEventData eventData)
     {
-        itemTr.position = Input.mousePosition;
+        Tr.position = Input.mousePosition + new Vector3(0,height,0);
     }
 
     //드래그 끝났을때
     public void OnEndDrag(PointerEventData eventData)
     {
-        draggingItem = null;
-        canvasGroup.blocksRaycasts = true;
-        if (itemTr.parent == inventoryTr)
-        {
-            itemTr.SetParent(itemListTr.transform);
-            //GameManager.gameManager.RemoveItem(GetComponent<ItemInfo>().itemData);
-        }
+        canvasGroup.blocksRaycasts = true;        
     }
 }

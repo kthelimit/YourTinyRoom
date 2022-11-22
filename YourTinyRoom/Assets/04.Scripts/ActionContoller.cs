@@ -6,12 +6,14 @@ public class ActionContoller : MonoBehaviour
 {
     private Camera cam;
     Vector3 MousePosition;
-    private Inventory inventory;
+    Inventory inventory;
+
     private readonly string hashITEM = "ITEM";
 
     void Start()
     {
         cam = GetComponent<Camera>();
+        inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
     }
 
     void Update()
@@ -25,12 +27,27 @@ public class ActionContoller : MonoBehaviour
             Debug.DrawRay(MousePosition, transform.forward * 20, Color.red, 0.3f);
             if(hit.collider.tag=="ITEM")
             {
-                Debug.Log(hit.transform.name);
-                Item _item = hit.transform.GetComponent<ItemInfo>().item;
-                inventory.AcquireItem(_item);
+                Debug.Log(hit.transform.GetComponent<ItemInfo>().item.ItemName);
+                inventory.AcquireItem(hit.transform.GetComponent<ItemInfo>().item);
                 Destroy(hit.transform.gameObject);
                 
             }
+            if (hit.collider.tag == "CROP")
+            {
+                Crop crop = hit.collider.GetComponent<Crop>();
+                if (crop.isComplete == true)
+                {
+                    Debug.Log(hit.transform.GetComponent<ItemInfo>().item.ItemName);
+                    inventory.AcquireItem(hit.transform.GetComponent<ItemInfo>().item, crop.quantity);
+                    Destroy(hit.transform.gameObject);
+                }
+                else
+                {
+                    crop.ShowLeftTime();
+                }
+
+            }
+
         }
 
     }
