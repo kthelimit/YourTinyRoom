@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private Text dayCountText;
     //경험치. 추후 레벨 테이블 구성 및 단계 구현하기
     private float curExp = 0f;
-    private float maxExp = 10f;
+    private float maxExp = 100f;
     private Image expGauge;
    
     
@@ -51,30 +51,34 @@ public class GameManager : MonoBehaviour
 
 
 
-    void IncreaseGold(int amount)
+    public void IncreaseGold(int amount)
     {
         gold += amount;
         goldText.text = gold.ToString("#,###");
     }
-    void DecreaseGold(int amount)
+    public void DecreaseGold(int amount)
     {
         gold -= amount;
         goldText.text = gold.ToString("#,###");
     }
 
 
-    void IncreaseCrystal(int amount)
+    public void IncreaseCrystal(int amount)
     {
         crystal += amount;
         crystalText.text = crystal.ToString("#,###");
     }
-    void DecreaseCrystal(int amount)
+    public void DecreaseCrystal(int amount)
     {
         crystal -= amount;
         crystalText.text = crystal.ToString("#,###");
     }
 
-
+    public void IncreaseExp(float amount)
+    {
+        curExp += amount;
+        expGauge.fillAmount = curExp / maxExp;
+    }
 
     void Update()
     {

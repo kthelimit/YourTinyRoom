@@ -10020,6 +10020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd977a7e2d29644d9586130c5bd2e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasUI: {fileID: 0}
 --- !u!1 &1321968463
 GameObject:
   m_ObjectHideFlags: 0
