@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ActionContoller : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class ActionContoller : MonoBehaviour
 
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         ClickItem();
 
     }
@@ -39,38 +41,41 @@ public class ActionContoller : MonoBehaviour
             Debug.DrawRay(MousePosition, transform.forward * 20, Color.red, 0.3f);
             if (hit.collider.tag == "ITEM")
             {
-                Debug.Log(hit.transform.GetComponent<ItemInfo>().item.ItemName);
-                inventory.AcquireItem(hit.transform.GetComponent<ItemInfo>().item);                
-                Destroy(hit.transform.gameObject,0.5f);
-                //obj.transform.SetParent(canvasUI);
-
-                //잘 안되네.. 좀 더 고민해보자
-                GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
-
-                obj.GetComponentInChildren<Image>().sprite= obj.GetComponent<Item>().itemImage;
-                obj.GetComponentInChildren<Text>().text = 1.ToString();
-                
+                GetItem(hit);
             }
             if (hit.collider.tag == "CROP")
             {
-                Crop crop = hit.collider.GetComponent<Crop>();
-                if (crop.isComplete == true)
-                {
-                    Debug.Log(hit.transform.GetComponent<ItemInfo>().item.ItemName);
-                    inventory.AcquireItem(hit.transform.GetComponent<ItemInfo>().item, crop.quantity);
-                    GameManager.gameManager.IncreaseExp(10f);
-                    Destroy(hit.transform.gameObject);
-                }
-                else
-                {
-                    crop.ShowLeftTime();
-                }
+                GetCrop(hit);
 
             }
 
         }
     }
 
+    private void GetCrop(RaycastHit2D hit)
+    {
+        Crop crop = hit.collider.GetComponent<Crop>();
+        if (crop.isComplete == true)
+        {
+            ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
+            inventory.AcquireItem(itemInfo.item, crop.quantity);
+            GameManager.gameManager.IncreaseExp(crop.exp);
+            Destroy(hit.transform.gameObject);
+            GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
+            obj.GetComponent<CsScore>().ChangeInfo(itemInfo, crop.quantity);
+        }
+        else
+        {
+            crop.ShowLeftTime();
+        }
+    }
 
-
+    private void GetItem(RaycastHit2D hit)
+    {
+        ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
+        inventory.AcquireItem(itemInfo.item);
+        Destroy(hit.transform.gameObject, 0.1f);
+        GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
+        obj.GetComponent<CsScore>().ChangeInfo(itemInfo);
+    }
 }

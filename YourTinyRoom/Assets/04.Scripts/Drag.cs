@@ -12,8 +12,8 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     void Start()
     {
-        Tr = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
+        Tr = transform.parent.GetComponent<RectTransform>();
+        canvasGroup = transform.parent.GetComponent<CanvasGroup>();
     }
 
     //드래그 시작했을때

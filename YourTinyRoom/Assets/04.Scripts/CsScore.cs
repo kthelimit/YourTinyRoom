@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class CsScore : MonoBehaviour
 {
 	private Vector3 pos = Vector3.zero;
-	public float ScoreDelay = 0.5f;
+	public float ScoreDelay = 0.1f;
 	private CanvasGroup cg;
+	public Image getItemImage;
+	public Text getItemQuantity;
 	void Start()
 	{
 		cg = GetComponent<CanvasGroup>();
@@ -16,7 +18,7 @@ public class CsScore : MonoBehaviour
 
 	void Update()
 	{		
-		pos.y += 0.12f;
+		pos.y += 0.012f;
 		transform.position = pos;
 	}
 	IEnumerator DisplayScore()
@@ -28,7 +30,12 @@ public class CsScore : MonoBehaviour
 			cg.alpha = a;
 			yield return new WaitForFixedUpdate();
 		}
+		Destroy(this.gameObject, 0.1f);
+	}
 
-		//Destroy(gameObject);
+	public void ChangeInfo(ItemInfo itemInfo, int quantity=1)
+    {
+		getItemImage.sprite = itemInfo.item.itemImage;
+		getItemQuantity.text = "+"+ quantity.ToString();
 	}
 }
