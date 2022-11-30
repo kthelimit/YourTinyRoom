@@ -9,6 +9,7 @@ public class ActionContoller : MonoBehaviour
     private Camera cam;
     Vector3 MousePosition;
     Inventory inventory;
+    Collections collections;
     [SerializeField]
     Transform canvasUI;
     private GameObject getEffectPrefab;
@@ -21,6 +22,7 @@ public class ActionContoller : MonoBehaviour
         cam = GetComponent<Camera>();
         getEffectPrefab = Resources.Load<GameObject>("GetEffect");
         inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
+        collections = GameObject.Find("Collection").transform.GetComponent<Collections>();
     }
 
     void Update()
@@ -59,6 +61,7 @@ public class ActionContoller : MonoBehaviour
         {
             ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
             inventory.AcquireItem(itemInfo.item, crop.quantity);
+            collections.Collect(itemInfo.item);
             GameManager.gameManager.IncreaseExp(crop.exp);
             Destroy(hit.transform.gameObject);
             GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
@@ -74,6 +77,7 @@ public class ActionContoller : MonoBehaviour
     {
         ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
         inventory.AcquireItem(itemInfo.item);
+        collections.Collect(itemInfo.item);
         Destroy(hit.transform.gameObject, 0.1f);
         GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
         obj.GetComponent<CsScore>().ChangeInfo(itemInfo);

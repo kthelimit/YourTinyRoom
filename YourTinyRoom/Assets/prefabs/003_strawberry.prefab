@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 6704256582144203509}
   - component: {fileID: 4882213469838902137}
   m_Layer: 0
-  m_Name: Strawberry
+  m_Name: 003_strawberry
   m_TagString: CROP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

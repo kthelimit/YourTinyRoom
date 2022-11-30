@@ -18,5 +18,7 @@ public class Item : ScriptableObject
     public GameObject itemPrefab;//아이템 프리팹
     public string ItemDesc; //아이템 설명
     public float ItemPrice; //아이템 가격
+    public int ItemNumber;
+
 
 }

@@ -7,19 +7,17 @@ public class GameControl : MonoBehaviour
     public GameObject PauseImg;
     public RectTransform SettingMenu;
     public RectTransform QuestListMenu;
-    public RectTransform InventoryMenu;
     public CanvasGroup InventoryCG;
+    public CanvasGroup CollectionCG;
 
-    void Start()
-    {
-        PauseImg = GameObject.Find("Canvas-UI").transform.GetChild(6).gameObject;
-        SettingMenu = PauseImg.transform.GetChild(0).GetComponent<RectTransform>();
-        QuestListMenu = GameObject.Find("Canvas-UI").transform.GetChild(7).GetComponent<RectTransform>();
-        InventoryMenu= GameObject.Find("Canvas-UI").transform.GetChild(9).GetComponent<RectTransform>();
-        InventoryCG = InventoryMenu.GetComponent<CanvasGroup>();
+    void Awake()
+    {        
         InventoryCG.alpha = 0;
         InventoryCG.blocksRaycasts = false;
         InventoryCG.interactable = false;
+        CollectionCG.alpha = 0;
+        CollectionCG.blocksRaycasts = false;
+        CollectionCG.interactable = false;
     }
 
     void Update()
@@ -71,4 +69,10 @@ public class GameControl : MonoBehaviour
         InventoryCG.interactable = isopen;
     }
 
+    public void OpenCollection(bool isopen)
+    {
+        CollectionCG.alpha = isopen ? 1.0f : 0.0f;
+        CollectionCG.blocksRaycasts = isopen;
+        CollectionCG.interactable = isopen;
+    }
 }
