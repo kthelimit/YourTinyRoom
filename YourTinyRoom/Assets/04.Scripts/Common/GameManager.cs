@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;//싱글턴
 
     //자원관리
-    private float gold =10000;
+    private float gold =10000f;
     private Text goldText;
-    private float crystal =0;
+    private float crystal =100f;
     private Text crystalText;
     //날짜
     private float dayCount =0;

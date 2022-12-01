@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e40177c288328c3438e20f8f32cb0393, type: 3}
-  m_Name: 002_rabbitpuppet
+  m_Name: Exp
   m_EditorClassIdentifier: 
-  ItemName: "\uD1A0\uB07C \uC778\uD615"
-  itemType: 1
-  itemImage: {fileID: 21300000, guid: 73cf4ce38a719bd499460b1313bafecc, type: 3}
-  itemPrefab: {fileID: 3787226488603465684, guid: d1fa26f5c3e96ba458252b60395fa5e4,
-    type: 3}
-  ItemDesc: "\uBCF4\uB4E4\uBCF4\uB4E4 \uD1A0\uB07C\uC778\uD615"
-  ItemPrice: 300
-  ItemNumber: 2
+  ItemName: Exp
+  itemType: 0
+  itemImage: {fileID: 21300000, guid: d082f7d1a45964a459d9bdf37d524a92, type: 3}
+  itemPrefab: {fileID: 0}
+  ItemDesc: 
+  ItemPrice: 0
+  ItemNumber: 0

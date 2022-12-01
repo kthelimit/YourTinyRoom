@@ -94,6 +94,7 @@ MonoBehaviour:
   itemImage: {fileID: 5279914520098109374}
   text_count: {fileID: 1461515422195409669}
   go_CountImage: {fileID: 2889839989970914663}
+  showItemInfo: {fileID: 0}
 --- !u!114 &5284232553123475604
 MonoBehaviour:
   m_ObjectHideFlags: 0

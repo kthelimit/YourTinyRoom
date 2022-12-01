@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ITEM
   - CROP
+  - CLOSE
   layers:
   - Default
   - TransparentFX

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerClickHandler
 {
     public Item item;
     public int itemCount;
@@ -57,6 +58,11 @@ public class Slot : MonoBehaviour
         SetColor(0);
         text_count.text = "0";
         go_CountImage.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ShowItemInfo.showItemInfo.ShowInfo(item, itemCount);
     }
 }
 

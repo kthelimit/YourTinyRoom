@@ -45,7 +45,7 @@ public class ActionContoller : MonoBehaviour
             {
                 GetItem(hit);
             }
-            if (hit.collider.tag == "CROP")
+            else if (hit.collider.tag == "CROP")
             {
                 GetCrop(hit);
 
@@ -66,6 +66,8 @@ public class ActionContoller : MonoBehaviour
             Destroy(hit.transform.gameObject);
             GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
             obj.GetComponent<CsScore>().ChangeInfo(itemInfo, crop.quantity);
+            GameObject obj2 = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
+            obj2.GetComponent<CsScore>().ChangeInfo2(2, crop.exp);
         }
         else
         {

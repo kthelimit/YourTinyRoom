@@ -9,6 +9,9 @@ public class CsScore : MonoBehaviour
 	private CanvasGroup cg;
 	public Image getItemImage;
 	public Text getItemQuantity;
+	public Item Exp;
+	public Item Gold;
+	public Item Crystal;
 	void Start()
 	{
 		cg = GetComponent<CanvasGroup>();
@@ -37,5 +40,22 @@ public class CsScore : MonoBehaviour
     {
 		getItemImage.sprite = itemInfo.item.itemImage;
 		getItemQuantity.text = "+"+ quantity.ToString();
+	}
+
+	public void ChangeInfo2(int rtype, float quantity)
+	{
+		switch(rtype)
+        {
+			case 0:
+				getItemImage.sprite = Gold.itemImage;
+				break;
+			case 1:
+				getItemImage.sprite = Crystal.itemImage;
+				break;
+			case 2:
+				getItemImage.sprite = Exp.itemImage;
+				break;
+		}            
+		getItemQuantity.text = "+" + quantity.ToString();
 	}
 }
