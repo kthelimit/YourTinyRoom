@@ -18,12 +18,16 @@ public class ShowItemInfo : MonoBehaviour
     public static ShowItemInfo showItemInfo;
     private CanvasGroup cg;
     public bool isShowing = false;
+    Inventory inventory;
+    public Button UseBtn;
+    public Button ThrowBtn;
+    public GameObject tdPanel;
+    private int curCount;
+    private int throwQuantity=0;
 
     private void Awake()
     {
         itemImage = transform.GetChild(0).GetComponent<Image>();
-       // go_CountImage = transform.GetChild(0).GetChild(0).GetComponent<GameObject>();
-       // text_count = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>();
         itemName = transform.GetChild(1).GetComponent<Text>();
         itemDesc = transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Text>();
         ClosePanel.SetActive(false);
@@ -33,6 +37,8 @@ public class ShowItemInfo : MonoBehaviour
         cg.alpha = 0;
         cg.interactable = false;
         cg.blocksRaycasts = false;
+        inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
+        tdPanel.SetActive(false);
     }
     public void ShowInfo(Item _item, int _itemCount)
     {
@@ -48,15 +54,20 @@ public class ShowItemInfo : MonoBehaviour
             itemImage.sprite = _item.itemImage;
             itemName.text = _item.ItemName;
             itemDesc.text = _item.ItemDesc;
+            curCount = _itemCount;
             if (item.itemType != Item.ItemType.COLLECT)
             {
                 go_CountImage.SetActive(true);
-                text_count.text = _itemCount.ToString();
+                text_count.text = curCount.ToString();
+                UseBtn.interactable = true;
+                ThrowBtn.interactable = true;
             }
             else
             {
                 text_count.text = "0";
                 go_CountImage.SetActive(false);
+                UseBtn.interactable = false;
+                ThrowBtn.interactable = false;
             }
 
         }
@@ -74,4 +85,37 @@ public class ShowItemInfo : MonoBehaviour
         cg.interactable = false;
         cg.blocksRaycasts = false;
     }
+
+    public void UseItem()
+    {
+        inventory.AcquireItem(item, -1);
+        curCount--;
+        text_count.text = curCount.ToString();
+        //효과 발휘하기(추후 추가)
+    }
+
+    public void OpenThrowDetail()
+    {
+        tdPanel.SetActive(true);
+        Slider throwSlider = GetComponentInChildren<Slider>();
+        throwSlider.minValue = 1f;
+        throwSlider.maxValue = curCount;
+    }
+    public void CloseThrowDetail()
+    {
+        tdPanel.SetActive(false);
+    }
+
+    public void SetQuantity(float sliderValue)
+    {
+        throwQuantity = (int)sliderValue;
+        tdPanel.transform.GetChild(0).GetComponent<Text>().text = throwQuantity.ToString() + "개";
+    }
+
+
+    public void ThrowItem()
+    {
+        inventory.AcquireItem(item, -throwQuantity);
+    }
+
 }

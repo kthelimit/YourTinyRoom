@@ -64,6 +64,9 @@ public class GameControl : MonoBehaviour
 
     public void OpenInventory(bool isopen)
     {
+        if(InventoryCG.alpha==1f)
+            isopen = false;
+        
         InventoryCG.alpha = isopen?1.0f:0.0f;
         InventoryCG.blocksRaycasts = isopen;
         InventoryCG.interactable = isopen;
@@ -71,6 +74,8 @@ public class GameControl : MonoBehaviour
 
     public void OpenCollection(bool isopen)
     {
+        if (CollectionCG.alpha == 1f)
+            isopen = false;
         CollectionCG.alpha = isopen ? 1.0f : 0.0f;
         CollectionCG.blocksRaycasts = isopen;
         CollectionCG.interactable = isopen;

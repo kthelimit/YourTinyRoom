@@ -35,27 +35,14 @@ public class CsScore : MonoBehaviour
 		}
 		Destroy(this.gameObject, 0.1f);
 	}
-
-	public void ChangeInfo(ItemInfo itemInfo, int quantity=1)
+	public void ChangeInfo(ItemInfo itemInfo, float quantity)
+	{
+		getItemImage.sprite = itemInfo.item.itemImage;
+		getItemQuantity.text = "+" + quantity.ToString();
+	}
+	public void ChangeInfo(ItemInfo itemInfo, int quantity)
     {
 		getItemImage.sprite = itemInfo.item.itemImage;
 		getItemQuantity.text = "+"+ quantity.ToString();
-	}
-
-	public void ChangeInfo2(int rtype, float quantity)
-	{
-		switch(rtype)
-        {
-			case 0:
-				getItemImage.sprite = Gold.itemImage;
-				break;
-			case 1:
-				getItemImage.sprite = Crystal.itemImage;
-				break;
-			case 2:
-				getItemImage.sprite = Exp.itemImage;
-				break;
-		}            
-		getItemQuantity.text = "+" + quantity.ToString();
 	}
 }

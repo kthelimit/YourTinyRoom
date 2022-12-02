@@ -13,8 +13,11 @@ public class ActionContoller : MonoBehaviour
     [SerializeField]
     Transform canvasUI;
     private GameObject getEffectPrefab;
-
-    private readonly string hashITEM = "ITEM";
+    public ItemInfo Exp;
+    public ItemInfo Gold;
+    public ItemInfo Crystal;
+    private readonly string hashItem = "ITEM";
+    private readonly string hashCrop = "CROP";
 
     void Start()
     {
@@ -41,11 +44,11 @@ public class ActionContoller : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(MousePosition, -Vector2.up);
             Debug.DrawRay(MousePosition, transform.forward * 20, Color.red, 0.3f);
-            if (hit.collider.tag == "ITEM")
+            if (hit.collider.tag == hashItem)
             {
                 GetItem(hit);
             }
-            else if (hit.collider.tag == "CROP")
+            else if (hit.collider.tag == hashCrop)
             {
                 GetCrop(hit);
 
@@ -64,24 +67,27 @@ public class ActionContoller : MonoBehaviour
             collections.Collect(itemInfo.item);
             GameManager.gameManager.IncreaseExp(crop.exp);
             Destroy(hit.transform.gameObject);
-            GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
-            obj.GetComponent<CsScore>().ChangeInfo(itemInfo, crop.quantity);
-            GameObject obj2 = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
-            obj2.GetComponent<CsScore>().ChangeInfo2(2, crop.exp);
+            ShowGetEffect(hit.transform, itemInfo, crop.quantity);
+            Transform tr2 = hit.transform;
+            tr2.position = new Vector3(tr2.position.x, tr2.position.y-0.6f, tr2.position.z);
+            ShowGetEffect(tr2, Exp, (int)crop.exp);
         }
         else
         {
             crop.ShowLeftTime();
         }
     }
-
     private void GetItem(RaycastHit2D hit)
     {
         ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
         inventory.AcquireItem(itemInfo.item);
         collections.Collect(itemInfo.item);
         Destroy(hit.transform.gameObject, 0.1f);
-        GameObject obj = Instantiate(getEffectPrefab, hit.transform.position, hit.transform.rotation);
-        obj.GetComponent<CsScore>().ChangeInfo(itemInfo);
+        ShowGetEffect(hit.transform, itemInfo);
+    }
+    private void ShowGetEffect(Transform tr, ItemInfo itemInfo, int quantity = 1)
+    {
+        GameObject obj = Instantiate(getEffectPrefab, tr.position, tr.rotation);
+        obj.GetComponent<CsScore>().ChangeInfo(itemInfo, quantity);
     }
 }
