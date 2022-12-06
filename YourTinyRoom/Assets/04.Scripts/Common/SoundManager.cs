@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public float sfxVolume = 1.0f; // 볼륨
+    public float sfxVolume = 1.0f; // 효과음 볼륨
     public bool isSfxMute = false; //뮤트여부
     public static SoundManager soundManager;//싱글턴
     public Slider audioslider;
@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
         Destroy(soundobj, sfx.length);
     }
 
-    public void SetVolume(float sliderValue)
+    public void SetSfxVolume(float sliderValue)
     {
         sfxVolume = sliderValue;
     }

@@ -10,8 +10,13 @@ public class CollectSlot : MonoBehaviour
     public Image itemImage;
     public int itemNumber;
     public Button button;
-    public bool isCollected; //수집한 적이 있는지 여부 등록
+    public bool isCollected=false; //수집한 적이 있는지 여부 등록
     public ShowCollectInfo showCInfo;
+
+    private void Awake()
+    {
+        showCInfo = GameObject.Find("Collection").transform.GetChild(2).GetComponent<ShowCollectInfo>();
+    }
 
     public void SetItem(Item _item)
     {
@@ -30,7 +35,7 @@ public class CollectSlot : MonoBehaviour
         else
         {
             itemImage.color = Color.grey;
-            //button.interactable = false;
+            button.interactable = false;
         }
     }
 

@@ -9,6 +9,7 @@ public class GameControl : MonoBehaviour
     public RectTransform QuestListMenu;
     public CanvasGroup InventoryCG;
     public CanvasGroup CollectionCG;
+    public RectTransform ShopMenu;
 
     void Awake()
     {        
@@ -61,6 +62,21 @@ public class GameControl : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
+    public void Shop()
+    {
+        if (ShopMenu.gameObject.activeInHierarchy == false)
+        {
+            ShopMenu.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            ShopMenu.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
+
 
     public void OpenInventory(bool isopen)
     {

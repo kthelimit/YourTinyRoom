@@ -48,27 +48,43 @@ public class GameManager : MonoBehaviour
         expGauge.fillAmount = curExp / maxExp;
     }
 
+    public bool IsBuyable(float price, int priceType)
+    {
+        if(priceType==1)
+        {
+            if (price <= crystal)
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            if (price <= gold)
+                return true;
+            else
+                return false;
+        }
+    }
 
 
-
-    public void IncreaseGold(int amount)
+    public void IncreaseGold(float amount)
     {
         gold += amount;
         goldText.text = gold.ToString("#,###");
     }
-    public void DecreaseGold(int amount)
+    public void DecreaseGold(float amount)
     {
         gold -= amount;
         goldText.text = gold.ToString("#,###");
     }
 
 
-    public void IncreaseCrystal(int amount)
+    public void IncreaseCrystal(float amount)
     {
         crystal += amount;
         crystalText.text = crystal.ToString("#,###");
     }
-    public void DecreaseCrystal(int amount)
+    public void DecreaseCrystal(float amount)
     {
         crystal -= amount;
         crystalText.text = crystal.ToString("#,###");

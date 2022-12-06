@@ -23,7 +23,8 @@ public class ShowItemInfo : MonoBehaviour
     public Button ThrowBtn;
     public GameObject tdPanel;
     private int curCount;
-    private int throwQuantity=0;
+    public int throwQuantity=1;
+    public Slider throwSlider;
 
     private void Awake()
     {
@@ -97,9 +98,10 @@ public class ShowItemInfo : MonoBehaviour
     public void OpenThrowDetail()
     {
         tdPanel.SetActive(true);
-        Slider throwSlider = GetComponentInChildren<Slider>();
+
         throwSlider.minValue = 1f;
         throwSlider.maxValue = curCount;
+        tdPanel.transform.GetChild(0).GetComponent<Text>().text = throwQuantity.ToString() + "개";
     }
     public void CloseThrowDetail()
     {
@@ -107,7 +109,7 @@ public class ShowItemInfo : MonoBehaviour
     }
 
     public void SetQuantity(float sliderValue)
-    {
+    {                
         throwQuantity = (int)sliderValue;
         tdPanel.transform.GetChild(0).GetComponent<Text>().text = throwQuantity.ToString() + "개";
     }
@@ -116,6 +118,9 @@ public class ShowItemInfo : MonoBehaviour
     public void ThrowItem()
     {
         inventory.AcquireItem(item, -throwQuantity);
+        curCount-=throwQuantity;
+        text_count.text = curCount.ToString();
+        tdPanel.SetActive(false);
     }
 
 }

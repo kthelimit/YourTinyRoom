@@ -16,8 +16,8 @@ public class Crop : MonoBehaviour
     private CanvasGroup canvasTimeBar; //타임게이지를 숨기는 용도
     public bool isComplete = false; //작물이 완성 되었는가?
     public int quantity;
-    public int quantityMin=2;
-    public int quantityMax=8;
+    public int quantityMin =2;
+    public int quantityMax =8;
     public float exp = 10f;
     Inventory inventory;
 

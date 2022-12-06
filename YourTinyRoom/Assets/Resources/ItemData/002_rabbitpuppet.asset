@@ -18,5 +18,8 @@ MonoBehaviour:
   itemPrefab: {fileID: 3787226488603465684, guid: d1fa26f5c3e96ba458252b60395fa5e4,
     type: 3}
   ItemDesc: "\uBCF4\uB4E4\uBCF4\uB4E4 \uD1A0\uB07C\uC778\uD615"
-  ItemPrice: 300
+  ItemPrice: 15
+  itemPriceType: 1
   ItemNumber: 2
+  itemInfo: {fileID: 2116657901994602089, guid: d1fa26f5c3e96ba458252b60395fa5e4,
+    type: 3}
