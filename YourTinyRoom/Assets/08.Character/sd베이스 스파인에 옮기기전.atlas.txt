@@ -1,0 +1,73 @@
+sd베이스 스파인에 옮기기전.png
+size:284,267
+filter:Linear,Linear
+pma:true
+eyebrow l
+bounds:193,115,21,12
+offsets:1,2,22,16
+eyebrow r
+bounds:147,108,19,12
+offsets:1,2,20,17
+rotate:90
+eyelash l
+bounds:30,4,33,22
+offsets:0,7,34,34
+rotate:90
+eyelash r
+bounds:230,8,27,20
+offsets:0,6,27,31
+rotate:90
+face
+bounds:147,129,135,136
+offsets:0,3,136,140
+hair
+bounds:2,108,157,143
+rotate:90
+mouth
+bounds:114,40,11,8
+offsets:0,1,11,9
+pupil l
+bounds:201,35,20,30
+offsets:4,1,27,32
+pupil r
+bounds:161,110,17,30
+offsets:1,4,19,36
+rotate:90
+skin1/arm l
+bounds:114,50,39,56
+offsets:0,1,40,57
+skin1/arm r
+bounds:227,83,44,44
+offsets:0,1,44,46
+skin1/body
+bounds:2,39,54,67
+offsets:9,1,84,72
+skin1/leg l
+bounds:54,5,32,56
+offsets:0,0,41,56
+rotate:90
+skin1/leg r
+bounds:170,2,29,46
+offsets:0,0,29,48
+skin2/arm l
+bounds:155,50,39,56
+offsets:0,1,40,57
+skin2/arm r
+bounds:227,37,44,44
+offsets:0,1,44,46
+skin2/body
+bounds:58,39,54,67
+offsets:9,1,84,72
+skin2/leg l
+bounds:112,5,32,56
+offsets:0,0,41,56
+rotate:90
+skin2/leg r
+bounds:196,67,29,46
+offsets:0,0,29,48
+whiteeye l
+bounds:201,2,27,31
+offsets:4,0,31,32
+whiteeye r
+bounds:2,3,26,34
+offsets:1,2,27,36

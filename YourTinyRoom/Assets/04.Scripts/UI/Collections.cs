@@ -11,7 +11,6 @@ public class Collections : MonoBehaviour
     private CollectSlot[] slots;
     [SerializeField]
     private Item[] Items;
-    int idx = 0;
     void Awake()
     {
         slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
