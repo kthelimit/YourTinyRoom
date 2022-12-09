@@ -31,30 +31,29 @@ public class ActionContoller : MonoBehaviour
     void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        ClickItem();
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            ClickItem();
+        }
     }
 
     private void ClickItem()
     {
-        if (Input.GetMouseButtonDown(0))
+        MousePosition = Input.mousePosition;
+        MousePosition = cam.ScreenToWorldPoint(MousePosition);
+
+        RaycastHit2D hit = Physics2D.Raycast(MousePosition, -Vector2.up);
+        Debug.DrawRay(MousePosition, transform.forward * 20, Color.red, 0.3f);
+        if (hit.collider.tag == hashItem)
         {
-            MousePosition = Input.mousePosition;
-            MousePosition = cam.ScreenToWorldPoint(MousePosition);
-
-            RaycastHit2D hit = Physics2D.Raycast(MousePosition, -Vector2.up);
-            Debug.DrawRay(MousePosition, transform.forward * 20, Color.red, 0.3f);
-            if (hit.collider.tag == hashItem)
-            {
-                GetItem(hit);
-            }
-            else if (hit.collider.tag == hashCrop)
-            {
-                GetCrop(hit);
-
-            }
+            GetItem(hit);
+        }
+        else if (hit.collider.tag == hashCrop)
+        {
+            GetCrop(hit);
 
         }
+
     }
 
     private void GetCrop(RaycastHit2D hit)
@@ -62,7 +61,7 @@ public class ActionContoller : MonoBehaviour
         Crop crop = hit.collider.GetComponent<Crop>();
         if (crop.isComplete == true)
         {
-            Item item = hit.transform.GetComponent<Item>();
+            Item item = hit.transform.GetComponent<ItemInfo>().item;
             inventory.AcquireItem(item, crop.quantity);
             collections.Collect(item);
             GameManager.gameManager.IncreaseExp(crop.exp);
@@ -79,7 +78,7 @@ public class ActionContoller : MonoBehaviour
     }
     private void GetItem(RaycastHit2D hit)
     {
-        Item item = hit.transform.GetComponent<Item>();
+        Item item = hit.transform.GetComponent<ItemInfo>().item;
         inventory.AcquireItem(item);
         collections.Collect(item);
         Destroy(hit.transform.gameObject, 0.1f);

@@ -14,7 +14,7 @@ public class Collections : MonoBehaviour
     void Awake()
     {
         slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
-        Items = Resources.LoadAll<Item>("ItemData");
+        Items = Resources.LoadAll<Item>("Item");
         AssignSlot();
         CheckItem();
     }

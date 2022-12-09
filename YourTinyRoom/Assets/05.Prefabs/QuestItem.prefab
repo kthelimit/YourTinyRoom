@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 7150886580083313520}
   - component: {fileID: 5044052325004881696}
   - component: {fileID: 5663750788954113998}
-  - component: {fileID: -4439233113257517081}
   - component: {fileID: 5620040814832555213}
   m_Layer: 5
   m_Name: QuestItem
@@ -220,18 +219,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 5
---- !u!114 &-4439233113257517081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817632314577926543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c6c1655eb63f440af9e5b103e53f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5620040814832555213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,12 +231,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b6c84e77155b24c8708c752625c9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questData: {fileID: 0}
   rewardButton: {fileID: 0}
-  QuestName: {fileID: 0}
-  QuestCondition: {fileID: 0}
   isCompleted: 0
   isTakeOut: 0
   finishImg: {fileID: 2168160918022918943}
+  questTitle: {fileID: 2140346199549709329}
+  questDesc: {fileID: 8376256842551806885}
 --- !u!1 &2168160918022918943
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +415,7 @@ GameObject:
   - component: {fileID: 875848914269098231}
   - component: {fileID: 8376256842551806885}
   m_Layer: 5
-  m_Name: Text-QuestExp
+  m_Name: Text-QuestDesc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

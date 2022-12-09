@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c6c1655eb63f440af9e5b103e53f32, type: 3}
+  m_Script: {fileID: 11500000, guid: 0650848b139c76344b93e1a0eb0261b0, type: 3}
   m_Name: Quest2
   m_EditorClassIdentifier: 
   questID: 2
   questName: "\uD53C\uADDC\uC5B4 \uC218\uC9D1\uD558\uAE30"
   questDesc: "\uD53C\uADDC\uC5B4\uB97C \uC218\uC9D1\uD55C\uB2E4."
-  questItem: {fileID: 11400000, guid: 9a5a0d0ff8d15c843a34115edf8f7fe9, type: 2}
+  questItem: {fileID: 11400000, guid: cef504fee87760e44b06df0ba4fc397c, type: 2}
   questItemQuantity: 1
   RewardItem1: {fileID: 11400000, guid: 776ad3551ad8a344c8f6aa15b399ff79, type: 2}
   RewardQuantity1: 150

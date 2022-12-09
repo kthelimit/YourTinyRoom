@@ -54,12 +54,10 @@ public class GameControl : MonoBehaviour
         if(QuestListMenu.gameObject.activeInHierarchy==false)
         {
             QuestListMenu.gameObject.SetActive(true);
-            Time.timeScale = 0f;
         }
         else
         {
             QuestListMenu.gameObject.SetActive(false);
-            Time.timeScale = 1f;
         }
     }
 

@@ -43,5 +43,20 @@ public class Inventory : MonoBehaviour
 
     }
 
+    public bool CheckItem(Item _item, int quantity)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
+                break;
+            if (slots[i].item.ItemName == _item.ItemName)
+            {
+                if (slots[i].itemCount >= quantity)
+                    return true;
+            }
+        }
+        return false;
+    }
+
 
 }
