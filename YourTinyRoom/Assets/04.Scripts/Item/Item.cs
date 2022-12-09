@@ -20,12 +20,10 @@ public class Item : ScriptableObject
     public string ItemName; //아이템 이름
     public ItemType itemType; //아이템 유형
     public Sprite itemImage;//아이템 이미지(인벤토리에 띄움)
-    public GameObject itemPrefab;//아이템 프리팹
     public string ItemDesc; //아이템 설명
     public float ItemPrice; //아이템 가격
     public ItemPriceType itemPriceType;//아이템 구매자원 유형
     public int ItemNumber;
-    public ItemInfo itemInfo;
-
+    //추후 CSV랑 순서 맞추기
 
 }

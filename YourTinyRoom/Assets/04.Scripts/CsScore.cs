@@ -40,9 +40,9 @@ public class CsScore : MonoBehaviour
 	//	getItemImage.sprite = itemInfo.item.itemImage;
 	//	getItemQuantity.text = "+" + quantity.ToString();
 	//}
-	public void ChangeInfo(ItemInfo itemInfo, int quantity)
+	public void ChangeInfo(Item item, int quantity)
     {
-		getItemImage.sprite = itemInfo.item.itemImage;
+		getItemImage.sprite = item.itemImage;
 		getItemQuantity.text = "+"+ quantity.ToString();
 	}
 }

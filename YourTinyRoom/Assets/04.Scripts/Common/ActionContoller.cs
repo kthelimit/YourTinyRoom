@@ -62,15 +62,15 @@ public class ActionContoller : MonoBehaviour
         Crop crop = hit.collider.GetComponent<Crop>();
         if (crop.isComplete == true)
         {
-            ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
-            inventory.AcquireItem(itemInfo.item, crop.quantity);
-            collections.Collect(itemInfo.item);
+            Item item = hit.transform.GetComponent<Item>();
+            inventory.AcquireItem(item, crop.quantity);
+            collections.Collect(item);
             GameManager.gameManager.IncreaseExp(crop.exp);
             Destroy(hit.transform.gameObject);
-            ShowGetEffect(hit.transform, itemInfo, crop.quantity);
+            ShowGetEffect(hit.transform, item, crop.quantity);
             Transform tr2 = hit.transform;
             tr2.position = new Vector3(tr2.position.x, tr2.position.y-0.6f, tr2.position.z);
-            ShowGetEffect(tr2, Exp, (int)crop.exp);
+            ShowGetEffect(tr2, Exp.item, (int)crop.exp);
         }
         else
         {
@@ -79,15 +79,15 @@ public class ActionContoller : MonoBehaviour
     }
     private void GetItem(RaycastHit2D hit)
     {
-        ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
-        inventory.AcquireItem(itemInfo.item);
-        collections.Collect(itemInfo.item);
+        Item item = hit.transform.GetComponent<Item>();
+        inventory.AcquireItem(item);
+        collections.Collect(item);
         Destroy(hit.transform.gameObject, 0.1f);
-        ShowGetEffect(hit.transform, itemInfo);
+        ShowGetEffect(hit.transform, item);
     }
-    private void ShowGetEffect(Transform tr, ItemInfo itemInfo, int quantity = 1)
+    private void ShowGetEffect(Transform tr, Item item, int quantity = 1)
     {
         GameObject obj = Instantiate(getEffectPrefab, tr.position, tr.rotation);
-        obj.GetComponent<CsScore>().ChangeInfo(itemInfo, quantity);
+        obj.GetComponent<CsScore>().ChangeInfo(item, quantity);
     }
 }
