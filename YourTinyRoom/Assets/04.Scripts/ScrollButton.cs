@@ -8,58 +8,46 @@ public class ScrollButton : MonoBehaviour
     public RectTransform contentsList;
     public int count;
     private float pos;
-    private float movepos;
     private bool isScroll = false;
     private float moveDist;
     private float moveLimitRight;
     private float moveLimitLeft;
+    private float offsetY;
 
     void Awake()
     {
         pos = contentsList.localPosition.x;
-        movepos = contentsList.rect.xMax - contentsList.rect.xMax / count;
         count = contentsList.childCount;
-        moveDist= contentsList.GetComponent<GridLayout>().cellSize.x + contentsList.GetComponent<GridLayout>().cellGap.x;
-        Debug.Log(moveDist); //44
-        moveLimitLeft = contentsList.rect.xMin - moveDist;
-        moveLimitRight = contentsList.rect.xMax;
-
+        moveDist= contentsList.GetComponent<GridLayoutGroup>().cellSize.x + contentsList.GetComponent<GridLayoutGroup>().spacing.x;
+        float contentWidth = contentsList.GetComponent<GridLayoutGroup>().cellSize.x * count + contentsList.GetComponent<GridLayoutGroup>().spacing.x * (count - 1);
+        moveLimitLeft = contentsList.rect.xMin+ contentsList.localPosition.x;
+        moveLimitRight = moveLimitLeft - (contentWidth - contentsList.rect.width);
+        offsetY = GetComponent<RectTransform>().sizeDelta.y / 2;
     }
 
     public void Right()
     {
         pos = contentsList.localPosition.x;
-        if (pos >= moveLimitRight)
-        {
-            isScroll = false;
 
-        }
-        else
-        {
-            isScroll = true;
-            movepos = pos - moveDist;
-            Debug.Log(movepos);
-            pos = movepos;
-            StartCoroutine("scroll");
-        }
-        
+        if (pos <= moveLimitRight) return;
+
+        isScroll = true;
+        pos -= moveDist;
+        StartCoroutine("scroll");
+
+
     }
 
     public void Left()
     {
         pos = contentsList.localPosition.x;
-        if (pos <= 0f)
-        {
-            isScroll = false;
-            pos = 0f;
-        }
-        else
-        {
-            isScroll = true;
-            movepos = pos + moveDist;
-            pos = movepos;
-         //   StartCoroutine("scroll");
-        }
+
+        if (pos >= moveLimitLeft) return;
+
+        isScroll = true;
+        pos += moveDist;
+        StartCoroutine("scroll");
+
     }
 
 
@@ -67,11 +55,12 @@ public class ScrollButton : MonoBehaviour
     {
         while(isScroll)
         {
-            contentsList.localPosition = Vector2.Lerp(contentsList.localPosition, new Vector2(movepos, 40), Time.deltaTime * 5);
-            if(Vector2.Distance(contentsList.localPosition, new Vector2(movepos,40))<0.1f)
+            if(Vector2.Distance(contentsList.localPosition, new Vector2(pos, offsetY))<0.1f)
             {
                 isScroll = false;
             }
+            contentsList.localPosition = Vector2.Lerp(contentsList.localPosition, new Vector2(pos, offsetY), Time.deltaTime * 5);
+            
             yield return null;
         }
     }
