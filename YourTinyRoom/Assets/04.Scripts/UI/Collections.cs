@@ -11,19 +11,26 @@ public class Collections : MonoBehaviour
     private CollectSlot[] slots;
     [SerializeField]
     private Item[] Items;
+    private List<Item> ItemList;
     void Awake()
     {
         slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
         Items = Resources.LoadAll<Item>("Item");
+        ItemList = new List<Item>();
+        foreach(Item item in Items)
+        {
+            if (item.itemType != Item.ItemType.USED)
+                ItemList.Add(item);
+        }    
         AssignSlot();
         CheckItem();
     }
 
     void AssignSlot() // 컬렉션 내의 슬롯에 아이템 번호대로 아이템 인포를 배정함
     {
-        for(int i=0;i<Items.Length;i++)
+        for(int i=0;i<ItemList.Count;i++)
         {
-                slots[i].SetItem(Items[i]);
+             slots[i].SetItem(ItemList[i]);
         }
     }
 

@@ -10,6 +10,7 @@ public class GameControl : MonoBehaviour
     public CanvasGroup InventoryCG;
     public CanvasGroup CollectionCG;
     public RectTransform ShopMenu;
+    public CanvasGroup CustomizeCG;
 
     void Awake()
     {        
@@ -93,5 +94,14 @@ public class GameControl : MonoBehaviour
         CollectionCG.alpha = isopen ? 1.0f : 0.0f;
         CollectionCG.blocksRaycasts = isopen;
         CollectionCG.interactable = isopen;
+    }
+
+    public void OpenCustomize(bool isopen)
+    {
+        if (CustomizeCG.alpha == 1f)
+            isopen = false;
+        CustomizeCG.alpha = isopen ? 1.0f : 0.0f;
+        CustomizeCG.blocksRaycasts = isopen;
+        CustomizeCG.interactable = isopen;
     }
 }
