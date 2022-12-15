@@ -18,11 +18,13 @@ public class GameManager : MonoBehaviour
     private Text dayCountText;
     //경험치. 추후 레벨 테이블 구성 및 단계 구현하기
     private float curExp = 0f;
-    private float maxExp = 100f;
+    private float minExp = 0f;
+    private float maxExp = 30f;
     private Image expGauge;
-   
-    
-   
+    private Text levelText;
+    LevelSystem levelSystem;
+
+
 
     void Awake()
     {
@@ -36,7 +38,8 @@ public class GameManager : MonoBehaviour
         crystalText= GameObject.Find("Canvas-UI").transform.GetChild(4).GetChild(1).GetChild(1).transform.GetComponent<Text>();
         dayCountText = GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(5).transform.GetComponent<Text>();
         expGauge= GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(7).GetChild(1).transform.GetComponent<Image>();
-
+        levelText = GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(7).GetChild(3).transform.GetComponent<Text>();
+        levelSystem = transform.GetComponent<LevelSystem>();
     }
 
 
@@ -93,11 +96,21 @@ public class GameManager : MonoBehaviour
     public void IncreaseExp(float amount)
     {
         curExp += amount;
-        expGauge.fillAmount = curExp / maxExp;
+        expGauge.fillAmount = (curExp-minExp) / (maxExp-minExp);
+        levelSystem.LevelUpCheck(curExp);
     }
 
-    void Update()
+    public void ChangeExpInterval(float MinExp, float MaxExp)
     {
+        minExp = MinExp;
+        Debug.Log(minExp);
+        maxExp = MaxExp;
+        Debug.Log(maxExp);
 
+    }
+
+    public void UpdateLevelText(int _level)
+    {
+        levelText.text = "Lv " + _level.ToString();
     }
 }
