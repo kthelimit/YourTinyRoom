@@ -6,11 +6,11 @@ public class GameControl : MonoBehaviour
 {
     public GameObject PauseImg;
     public RectTransform SettingMenu;
-    public RectTransform QuestListMenu;
     public CanvasGroup InventoryCG;
     public CanvasGroup CollectionCG;
     public RectTransform ShopMenu;
     public CanvasGroup CustomizeCG;
+    public CanvasGroup QuestListCG;
 
     void Awake()
     {        
@@ -50,17 +50,6 @@ public class GameControl : MonoBehaviour
 
     }
 
-    public void QuestList()
-    {
-        if(QuestListMenu.gameObject.activeInHierarchy==false)
-        {
-            QuestListMenu.gameObject.SetActive(true);
-        }
-        else
-        {
-            QuestListMenu.gameObject.SetActive(false);
-        }
-    }
 
     public void Shop()
     {
@@ -85,6 +74,16 @@ public class GameControl : MonoBehaviour
         InventoryCG.alpha = isopen?1.0f:0.0f;
         InventoryCG.blocksRaycasts = isopen;
         InventoryCG.interactable = isopen;
+    }
+
+    public void OpenQuestList(bool isopen)
+    {
+        if (QuestListCG.alpha == 1f)
+            isopen = false;
+
+        QuestListCG.alpha = isopen ? 1.0f : 0.0f;
+        QuestListCG.blocksRaycasts = isopen;
+        QuestListCG.interactable = isopen;
     }
 
     public void OpenCollection(bool isopen)

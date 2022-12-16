@@ -238,6 +238,9 @@ MonoBehaviour:
   finishImg: {fileID: 2168160918022918943}
   questTitle: {fileID: 2140346199549709329}
   questDesc: {fileID: 8376256842551806885}
+  QuestAlarmPrefab: {fileID: 5263516759232778894, guid: b51ed4ba7f95efe4491229635ff39731,
+    type: 3}
+  QuestAlarmPanelText: {fileID: 0}
 --- !u!1 &2168160918022918943
 GameObject:
   m_ObjectHideFlags: 0

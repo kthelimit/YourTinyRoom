@@ -28,7 +28,6 @@ public class Collections : MonoBehaviour
 
     void AssignSlot() // 컬렉션 내의 슬롯에 아이템 번호대로 아이템 인포를 배정함
     {
-        Debug.Log(ItemList.Count);
         for(int i=0;i<ItemList.Count;i++)
         {
              slots[i].SetItem(ItemList[i]);

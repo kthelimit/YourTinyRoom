@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0650848b139c76344b93e1a0eb0261b0, type: 3}
+  m_Name: Quest3
+  m_EditorClassIdentifier: 
+  questID: 1
+  questName: "\uC778\uD615 \uC90D\uAE30!2"
+  questDesc: "\uCE58\uC774\uB85C \uC778\uD615\uC744 \uC90D\uC790!"
+  questItem: {fileID: 11400000, guid: ec30130f885b00f45a1b96cb0afd487e, type: 2}
+  questItemQuantity: 3
+  RewardItem1: {fileID: 11400000, guid: 776ad3551ad8a344c8f6aa15b399ff79, type: 2}
+  RewardQuantity1: 200
+  RewardItem2: {fileID: 11400000, guid: 50522d1f806bfc648bf2c68f2d1f63cc, type: 2}
+  RewardQuantity2: 100

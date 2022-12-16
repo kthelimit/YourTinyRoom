@@ -10,18 +10,18 @@ public class GameManager : MonoBehaviour
 
     //자원관리
     private float gold =10000f;
-    private Text goldText;
+    public Text goldText;
     private float crystal =100f;
-    private Text crystalText;
+    public Text crystalText;
     //날짜
     private float dayCount =0;
-    private Text dayCountText;
+    public Text dayCountText;
     //경험치. 추후 레벨 테이블 구성 및 단계 구현하기
     private float curExp = 0f;
     private float minExp = 0f;
     private float maxExp = 30f;
-    private Image expGauge;
-    private Text levelText;
+    public Image expGauge;
+    public Text levelText;
     LevelSystem levelSystem;
 
 
@@ -34,11 +34,6 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         DontDestroyOnLoad(this.gameObject);
 
-        goldText = GameObject.Find("Canvas-UI").transform.GetChild(4).GetChild(0).GetChild(1).transform.GetComponent<Text>();
-        crystalText= GameObject.Find("Canvas-UI").transform.GetChild(4).GetChild(1).GetChild(1).transform.GetComponent<Text>();
-        dayCountText = GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(5).transform.GetComponent<Text>();
-        expGauge= GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(7).GetChild(1).transform.GetComponent<Image>();
-        levelText = GameObject.Find("Canvas-UI").transform.GetChild(2).GetChild(0).GetChild(7).GetChild(3).transform.GetComponent<Text>();
         levelSystem = transform.GetComponent<LevelSystem>();
     }
 
@@ -103,9 +98,7 @@ public class GameManager : MonoBehaviour
     public void ChangeExpInterval(float MinExp, float MaxExp)
     {
         minExp = MinExp;
-        Debug.Log(minExp);
         maxExp = MaxExp;
-        Debug.Log(maxExp);
 
     }
 

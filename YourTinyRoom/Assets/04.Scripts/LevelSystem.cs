@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
+    public GameObject levelUpPanel;
+    public Text levelText;
+    public Text GoldText;
+    public Text CrystalText;
+    private int beforeLevel = 1;
+    private float totalGold = 0;
+    private float totalCrystal = 0;
     private struct Level
     {
         public int level;
@@ -43,12 +51,25 @@ public class LevelSystem : MonoBehaviour
         while(exp>=levelTable[levelCount].expLimit)
         {
             levelCount++;
+            levelUpPanel.SetActive(true);
+            levelText.text = beforeLevel.ToString() + '→' + levelCount.ToString();
+            totalGold += levelTable[levelCount - 1].rewardGold;
+            GoldText.text = totalGold.ToString();
+            totalCrystal += levelTable[levelCount - 1].rewardCrystal;
+            CrystalText.text = totalCrystal.ToString();
             GameManager.gameManager.ChangeExpInterval(levelTable[levelCount-1].expLimit, levelTable[levelCount].expLimit);
             GameManager.gameManager.IncreaseExp(0);
             GameManager.gameManager.UpdateLevelText(levelCount);           
             GameManager.gameManager.IncreaseGold(levelTable[levelCount].rewardGold);
             GameManager.gameManager.IncreaseCrystal(levelTable[levelCount].rewardCrystal);
         }
+        beforeLevel = levelCount;
+        totalGold = 0f;
+        totalCrystal = 0f;
     }
 
+    public void CloseLevelUpPanel()
+    {
+        levelUpPanel.SetActive(false);
+    }
 }
