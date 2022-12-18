@@ -1,0 +1,170 @@
+sd베이스 스파인에 옮기기전2.png
+size:427,981
+filter:Linear,Linear
+pma:true
+arm l
+bounds:320,467,40,56
+offsets:0,0,40,57
+arm l back
+bounds:322,773,38,60
+arm r
+bounds:2,12,44,46
+arm r back
+bounds:48,13,44,45
+offsets:0,1,44,46
+body
+bounds:362,427,60,72
+offsets:5,0,84,72
+body back
+bounds:361,357,64,68
+offsets:1,0,84,72
+clothes arm l back
+bounds:314,299,40,52
+clothes/clothes arm l
+bounds:314,299,40,52
+clothes arm r back
+bounds:272,155,33,44
+offsets:0,0,34,44
+clothes/clothes arm r
+bounds:272,155,33,44
+offsets:0,0,34,44
+clothes body  back
+bounds:360,289,57,66
+clothes leg l  back
+bounds:278,305,34,58
+offsets:0,3,34,61
+clothes leg r  back
+bounds:314,192,33,51
+offsets:1,0,34,52
+clothes/clothes body
+bounds:356,221,57,66
+clothes/clothes leg l
+bounds:322,710,33,61
+offsets:1,0,34,61
+clothes/clothes leg r
+bounds:278,253,34,50
+offsets:0,1,34,52
+eyebrow l
+bounds:132,384,22,14
+offsets:0,0,22,16
+eyebrow r
+bounds:160,711,20,12
+offsets:0,3,20,17
+eyelash1/eyelash l
+bounds:304,122,34,22
+offsets:0,7,34,34
+eyelash1/eyelash r
+bounds:288,395,27,23
+offsets:0,3,27,31
+eyelash2/eyelash l
+bounds:380,129,34,22
+offsets:0,7,34,35
+eyelash2/eyelash r
+bounds:233,66,30,24
+offsets:0,3,30,32
+eyelash3/eyelash l
+bounds:342,129,36,22
+offsets:0,6,36,33
+eyelash3/eyelash r
+bounds:288,370,27,23
+offsets:0,3,27,31
+face
+bounds:140,225,136,138
+face back
+bounds:2,238,136,138
+hair1/hair
+bounds:2,533,157,143
+hair2/hair
+bounds:161,520,157,143
+hair3/hair
+bounds:183,835,178,144
+offsets:0,0,178,145
+hairback
+bounds:2,678,156,147
+offsets:71,30,300,214
+hairback long
+bounds:183,665,137,168
+offsets:1,1,138,169
+hairback semi
+bounds:131,92,139,131
+hairback short
+bounds:272,12,137,107
+offsets:1,1,138,108
+hairback short2
+bounds:101,2,130,88
+offsets:4,0,134,88
+hairback2
+bounds:2,827,179,152
+haircut long
+bounds:159,365,127,153
+haircut semi
+bounds:2,378,128,153
+haircut short
+bounds:2,125,127,111
+offsets:0,1,127,112
+haircut short2
+bounds:2,60,97,63
+offsets:1,0,98,63
+leg l
+bounds:318,409,41,56
+leg l back
+bounds:317,353,41,54
+offsets:0,2,41,56
+leg r
+bounds:288,420,28,48
+offsets:0,0,29,48
+leg r back
+bounds:288,470,28,48
+offsets:0,0,29,48
+mouth
+bounds:160,701,10,8
+offsets:1,1,11,9
+pony tail long
+bounds:362,623,57,175
+pony tail long back
+bounds:363,800,57,179
+pupil/pupil l
+bounds:132,400,22,31
+offsets:3,1,27,32
+pupil/pupil l cat
+bounds:132,466,22,31
+offsets:3,1,27,32
+pupil/pupil l none
+bounds:132,433,22,31
+offsets:3,1,27,32
+pupil/pupil r
+bounds:160,725,17,32
+offsets:1,4,19,36
+pupil/pupil r cat
+bounds:160,793,18,32
+offsets:1,4,19,36
+pupil/pupil r none
+bounds:160,759,18,32
+offsets:1,4,19,36
+suit/clothes arm l
+bounds:314,245,40,52
+suit/clothes arm r
+bounds:307,146,33,44
+offsets:0,0,34,44
+suit/clothes body
+bounds:349,153,57,66
+suit/clothes leg l
+bounds:322,647,33,61
+offsets:1,0,34,61
+suit/clothes leg r
+bounds:278,201,34,50
+offsets:0,1,34,52
+twin tail l b
+bounds:320,525,40,120
+twin tail l
+bounds:320,525,40,120
+twin tail r b
+bounds:362,501,40,120
+twin tail r
+bounds:362,501,40,120
+whiteeye l
+bounds:272,121,30,32
+offsets:1,0,31,32
+whiteeye r
+bounds:132,499,25,32
+offsets:1,3,27,36
