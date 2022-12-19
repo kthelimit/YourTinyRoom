@@ -34,30 +34,42 @@ public class MakeColor : MonoBehaviour
         if (colorPart == ColorPartType.HAIR)
         {
             if (colorPart2 == ColorPartType2.Tint)
+            {
                 makeColor = colorChange.hairTintColor;
+            }
+
             else
-                makeColor = colorChange.hairDarkColor;
+            { 
+                makeColor = colorChange.hairDarkColor; 
+            }
         }
         else if (colorPart == ColorPartType.PUPIL)
         {
             if (colorPart2 == ColorPartType2.Tint)
+            {
                 makeColor = colorChange.pupilTintColor;
+            }
             else
+            {
                 makeColor = colorChange.pupilDarkColor;
+            }
         }
         else
         {
             if (colorPart2 == ColorPartType2.Tint)
+            {
                 makeColor = colorChange.clothesTintColor;
+            }
             else
+            {
                 makeColor = colorChange.clothesDarkColor;
+            }
         }
         RedColor = 255 * makeColor.r;
         GreenColor = 255 * makeColor.g;
         BlueColor = 255 * makeColor.b;
         colorShowImage.color = makeColor;
         rSlider.value = RedColor;
-        //여기서부터 갑자기 왜 갱신이 안되지..?
         gSlider.value = GreenColor;
         bSlider.value = BlueColor;
         RedColorText.text = "R : " + RedColor.ToString();

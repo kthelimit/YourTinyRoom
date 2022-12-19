@@ -15,6 +15,7 @@ public class ColorChange : MonoBehaviour
     MaterialPropertyBlock clothesBlock;
     MaterialPropertyBlock hairBlock;
     MeshRenderer meshRenderer;
+    public SkeletonMecanim skMecanim;
     int id;
     int idBlack;
     void Start()
@@ -39,12 +40,37 @@ public class ColorChange : MonoBehaviour
     {
         hairBlock.SetColor(id, hairTintColor);
         hairBlock.SetColor(idBlack, hairDarkColor);
-        meshRenderer.SetPropertyBlock(hairBlock, 4);
+
         pupilBlock.SetColor(id, pupilTintColor);
         pupilBlock.SetColor(idBlack, pupilDarkColor);
-        meshRenderer.SetPropertyBlock(pupilBlock, 2);
+
         clothesBlock.SetColor(id, clothesTintColor);
         clothesBlock.SetColor(idBlack, clothesDarkColor);
-        meshRenderer.SetPropertyBlock(clothesBlock, 0);
+
+        if(meshRenderer.materials.Length%2==0)
+        {
+            meshRenderer.SetPropertyBlock(hairBlock, 13);
+            meshRenderer.SetPropertyBlock(clothesBlock, 1);
+            meshRenderer.SetPropertyBlock(clothesBlock, 3);
+            meshRenderer.SetPropertyBlock(clothesBlock, 5);
+            meshRenderer.SetPropertyBlock(clothesBlock, 7);
+            meshRenderer.SetPropertyBlock(clothesBlock, 9);
+            meshRenderer.SetPropertyBlock(pupilBlock, 11);
+        }
+        else
+        {
+            meshRenderer.SetPropertyBlock(hairBlock, 0);
+            meshRenderer.SetPropertyBlock(hairBlock, 14);
+            meshRenderer.SetPropertyBlock(clothesBlock, 2);
+            meshRenderer.SetPropertyBlock(clothesBlock, 4);
+            meshRenderer.SetPropertyBlock(clothesBlock, 6);
+            meshRenderer.SetPropertyBlock(clothesBlock, 8);
+            meshRenderer.SetPropertyBlock(clothesBlock, 10);
+            meshRenderer.SetPropertyBlock(pupilBlock, 12);
+
+        }
+
+
+
     }
 }

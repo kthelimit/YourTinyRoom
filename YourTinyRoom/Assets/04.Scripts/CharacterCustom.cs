@@ -9,25 +9,27 @@ public class CharacterCustom : MonoBehaviour
 {
 
 	// 캐릭터 스킨
-	[SpineSkin] public string suitSkin = "suit";
-	[SpineSkin] public string underwearSkin = "underwear";
+	[SpineSkin] public string baseSkin = "skin-base";
+
 
 	//배열 쓰기.  here we use arrays of strings to be able to cycle between them easily.
-	[SpineSkin] public string[] hairSkins = { "hair/brown", "hair/grey" };
+	[SpineSkin] public string[] hairSkins = { "hair_front/hairfront1", "hair_front/hairfront2", "hair_front/hairfront3" };
 	public int activeHairIndex = 0;
-	[SpineSkin] public string[] eyesSkins = { "eyes/brown", "eyes/grey" };
+	[SpineSkin] public string[] eyesSkins = { "pupil/pupil1", "pupil/pupil2 cat", "pupil/pupil3 none" };
 	public int activeEyesIndex = 0;
-	[SpineSkin] public string[] clothSkins = { "suit", "underwear" };
+	[SpineSkin] public string[] eyelashSkins = { "eyelash/eyelash high", "eyelash/eyelash normal", "eyelash/eyelash low" };
+	public int activeEyelashIndex = 0;
+	[SpineSkin] public string[] clothSkins = { "clothes/suit", "clothes/clothes" };
 	public int activeClothIndex = 0;
 
-	// 옷
+	// 장비 스킨
 	public enum ItemType
 	{
-		Cloth,
-		Pants
+		Tail,
+		HairBack
 	}
-	[SpineSkin] public string clothesSkin = "clothes/suit";
-	[SpineSkin] public string pantsSkin = "legs/pants-jeans";
+	[SpineSkin] public string TailSkin = "";
+	[SpineSkin] public string HairBackSkin = "";
 
 	[SerializeField]
 	SkeletonAnimation skeletonAnimation;
@@ -40,15 +42,24 @@ public class CharacterCustom : MonoBehaviour
 	public Material runtimeMaterial;
 	public Texture2D runtimeAtlas;
 
+	ColorChange colorChange;
 	void Awake()
 	{
 		skeletonAnimation = this.GetComponent<SkeletonAnimation>();
+		colorChange = this.GetComponent<ColorChange>();
 	}
 
 	void Start()
 	{
 		UpdateCharacterSkin();
 		UpdateCombinedSkin();
+	}
+	public void SelectHairSkin(int num)
+	{
+		activeHairIndex = num;
+		UpdateCharacterSkin();
+		UpdateCombinedSkin();
+
 	}
 
 	public void NextHairSkin()
@@ -65,6 +76,12 @@ public class CharacterCustom : MonoBehaviour
 		UpdateCombinedSkin();
 	}
 
+	public void SelectEyesSkin(int num)
+	{
+		activeEyesIndex = num;
+		UpdateCharacterSkin();
+		UpdateCombinedSkin();
+	}
 	public void NextEyesSkin()
 	{
 		activeEyesIndex = (activeEyesIndex + 1) % eyesSkins.Length;
@@ -75,6 +92,32 @@ public class CharacterCustom : MonoBehaviour
 	public void PrevEyesSkin()
 	{
 		activeEyesIndex = (activeEyesIndex + eyesSkins.Length - 1) % eyesSkins.Length;
+		UpdateCharacterSkin();
+		UpdateCombinedSkin();
+	}
+	public void SelectEyelashSkin(int num)
+	{
+		activeEyelashIndex = num;
+		UpdateCharacterSkin();
+		UpdateCombinedSkin();
+	}
+	public void NextEyelashSkin()
+	{
+		activeEyelashIndex = (activeEyelashIndex + 1) % eyelashSkins.Length;
+		UpdateCharacterSkin();
+		UpdateCombinedSkin();
+	}
+
+	public void PrevEyelashSkin()
+	{
+		activeEyelashIndex = (activeEyelashIndex + eyelashSkins.Length - 1) % eyelashSkins.Length;
+		UpdateCharacterSkin();
+		UpdateCombinedSkin();
+	}
+
+	public void SelectClothSkin(int num)
+	{
+		activeClothIndex = num;
 		UpdateCharacterSkin();
 		UpdateCombinedSkin();
 	}
@@ -95,9 +138,18 @@ public class CharacterCustom : MonoBehaviour
 
 	public void Equip(string itemSkin, ItemType itemType)
 	{
-		
-				clothesSkin = itemSkin;
-			
+
+		switch (itemType)
+		{
+			case ItemType.Tail:
+				TailSkin = itemSkin;
+				break;
+			case ItemType.HairBack:
+				HairBackSkin = itemSkin;
+				break;		
+			default:
+				break;
+		}
 		UpdateCombinedSkin();
 	}
 
@@ -129,25 +181,26 @@ public class CharacterCustom : MonoBehaviour
 
 	void UpdateCharacterSkin()
 	{
-		//var skeleton = skeletonAnimation.Skeleton;
+		var skeleton = skeletonAnimation.Skeleton;
 		var skeletonData = skeleton.Data;
 		characterSkin = new Skin("character-base");
 		// Note that the result Skin returned by calls to skeletonData.FindSkin()
 		// could be cached once in Start() instead of searching for the same skin
 		// every time. For demonstration purposes we keep it simple here.
-		characterSkin.AddSkin(skeletonData.FindSkin(suitSkin));
-		characterSkin.AddSkin(skeletonData.FindSkin(underwearSkin));
+		characterSkin.AddSkin(skeletonData.FindSkin(baseSkin));
 		characterSkin.AddSkin(skeletonData.FindSkin(eyesSkins[activeEyesIndex]));
+		characterSkin.AddSkin(skeletonData.FindSkin(eyelashSkins[activeEyelashIndex]));
 		characterSkin.AddSkin(skeletonData.FindSkin(hairSkins[activeHairIndex]));
 		characterSkin.AddSkin(skeletonData.FindSkin(clothSkins[activeClothIndex]));
+		
 	}
 
 	void AddEquipmentSkinsTo(Skin combinedSkin)
 	{
 		var skeleton = skeletonAnimation.Skeleton;
 		var skeletonData = skeleton.Data;
-		combinedSkin.AddSkin(skeletonData.FindSkin(clothesSkin));
-		combinedSkin.AddSkin(skeletonData.FindSkin(pantsSkin));
+		if (!string.IsNullOrEmpty(TailSkin)) combinedSkin.AddSkin(skeletonData.FindSkin(TailSkin));
+		if (!string.IsNullOrEmpty(HairBackSkin)) combinedSkin.AddSkin(skeletonData.FindSkin(HairBackSkin));
 	}
 
 	void UpdateCombinedSkin()
