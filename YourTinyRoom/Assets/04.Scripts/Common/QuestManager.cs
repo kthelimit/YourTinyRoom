@@ -38,14 +38,21 @@ public class QuestManager : MonoBehaviour
     public void CheckIsThereReward()
     {
         QuestItem[] questItems = scrollContents.GetComponentsInChildren<QuestItem>();
+        int checkReward = 0;
         foreach(QuestItem _quest in questItems)
         {
             if (_quest.isCompleted && !_quest.isTakeOut) 
             {
                 allReceiveBtn.interactable = true;
                 alarmImage.SetActive(true);
+                checkReward++;
             }            
         }
+        if(checkReward==0)
+        {
+            alarmImage.SetActive(false);
+        }
+        
     }
 
     public void AllReceiveClick()

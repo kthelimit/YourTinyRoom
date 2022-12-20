@@ -88,6 +88,8 @@ public class QuestItem : MonoBehaviour
         else if (questData.RewardItem2.name == "Exp")
             GameManager.gameManager.IncreaseExp(questData.RewardQuantity2);
         QuestManager.AllTakeOut -= this.TakeOut;
+
+        QuestManager.questManager.CheckIsThereReward();
     }
     //퀘스트가 달성되었는지 체크
     public void CheckComplete()

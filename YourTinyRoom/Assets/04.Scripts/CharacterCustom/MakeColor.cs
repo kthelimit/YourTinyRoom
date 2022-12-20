@@ -29,7 +29,7 @@ public class MakeColor : MonoBehaviour
         makeColor.a = 1f;
         Invoke("LoadColor", 0.1f);
     }
-    private void LoadColor()
+    public void LoadColor()
     {
         if (colorPart == ColorPartType.HAIR)
         {

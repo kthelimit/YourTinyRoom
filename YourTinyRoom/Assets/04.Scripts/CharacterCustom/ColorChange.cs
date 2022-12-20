@@ -36,6 +36,23 @@ public class ColorChange : MonoBehaviour
 
     }
 
+    public void RepeatUpdateColor()
+    {
+        StartCoroutine("UpdateColorRepeat");
+    }
+
+    IEnumerator UpdateColorRepeat()
+    {
+        float startTime = Time.time;
+        while (true)
+        {
+            yield return null;
+            UpdateColor();
+            if (Time.time - startTime < 0.01f)
+                break;
+        }
+    }
+
     public void UpdateColor()
     {
         hairBlock.SetColor(id, hairTintColor);

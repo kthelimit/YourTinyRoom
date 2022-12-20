@@ -18,7 +18,7 @@ public class CharacterCustomButton : MonoBehaviour
 		{
 			var button = GetComponent<Button>();
 			button.onClick.AddListener(
-				delegate { skinsSystem.Equip(itemSkin, itemType); }
+				delegate { skinsSystem.Equip(itemSkin, itemType);}
 			);
 		}
 	

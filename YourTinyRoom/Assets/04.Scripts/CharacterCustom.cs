@@ -43,6 +43,8 @@ public class CharacterCustom : MonoBehaviour
 	public Texture2D runtimeAtlas;
 
 	ColorChange colorChange;
+	public MakeColor lightColor;
+	public MakeColor darkColor;
 	void Awake()
 	{
 		skeletonAnimation = this.GetComponent<SkeletonAnimation>();
@@ -151,6 +153,7 @@ public class CharacterCustom : MonoBehaviour
 				break;
 		}
 		UpdateCombinedSkin();
+		colorChange.RepeatUpdateColor();
 	}
 
 	public void OptimizeSkin()
@@ -192,7 +195,7 @@ public class CharacterCustom : MonoBehaviour
 		characterSkin.AddSkin(skeletonData.FindSkin(eyelashSkins[activeEyelashIndex]));
 		characterSkin.AddSkin(skeletonData.FindSkin(hairSkins[activeHairIndex]));
 		characterSkin.AddSkin(skeletonData.FindSkin(clothSkins[activeClothIndex]));
-		
+
 	}
 
 	void AddEquipmentSkinsTo(Skin combinedSkin)
