@@ -70,10 +70,20 @@ public class ActionContoller : MonoBehaviour
             Transform tr2 = hit.transform;
             tr2.position = new Vector3(tr2.position.x, tr2.position.y-0.6f, tr2.position.z);
             ShowGetEffect(tr2, Exp.item, (int)crop.exp);
+            Building cropPlace = crop.GetComponent<Building>();
+            GridBuildingSystem.gbSystem.ClearArea(cropPlace.area);
         }
         else
-        {
+        {            
             crop.ShowLeftTime();
+            Building cropPlace= crop.GetComponent<Building>();
+            if(!cropPlace.Placed)
+            {
+                if (cropPlace.CanBePlaced())
+                {
+                    cropPlace.Place();
+                }
+            }
         }
     }
     private void GetItem(RaycastHit2D hit)

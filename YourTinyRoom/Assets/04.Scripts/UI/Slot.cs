@@ -27,6 +27,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         item = _item;
         itemCount = _count;
         itemImage.sprite = item.itemImage;
+        itemImage.type = 0;
+        itemImage.preserveAspect = true;
 
         if (item.itemType != Item.ItemType.COLLECT)
         {

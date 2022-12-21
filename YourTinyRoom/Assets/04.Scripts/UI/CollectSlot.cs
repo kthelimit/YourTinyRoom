@@ -23,6 +23,11 @@ public class CollectSlot : MonoBehaviour
         item = _item;
         itemNumber = item.ItemNumber;
         itemImage.sprite = item.itemImage;
+        Color color = itemImage.color;
+        color.a = 1f;
+        itemImage.color=color;
+        itemImage.type = 0;
+        itemImage.preserveAspect = true;
     }
 
     public void CheckCollected()
@@ -34,7 +39,6 @@ public class CollectSlot : MonoBehaviour
         }
         else
         {
-            itemImage.color = Color.grey;
             button.interactable = false;
         }
     }

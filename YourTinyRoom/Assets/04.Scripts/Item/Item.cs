@@ -7,9 +7,11 @@ public class Item : ScriptableObject
 {
     public enum ItemType //아이템 유형
     { 
-        USED,       //사용가능 아이템
+        USED,       //소비 아이템
         COLLECT,    //수집용 아이템
         INGREDIENT, //재료용 아이템
+        CUSTOM,     //커스텀용 아이템
+        FURNITURE,   //가구용 아이템
         GIFT        //선물용 아이템
     }  
     public enum ItemPriceType //아이템 구매자원 유형

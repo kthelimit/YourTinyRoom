@@ -20,6 +20,7 @@ public class Crop : MonoBehaviour
     public int quantityMax =8;
     public float exp = 10f;
     Inventory inventory;
+    Building place;
 
     void Start()
     {
@@ -33,9 +34,10 @@ public class Crop : MonoBehaviour
         inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
         canvasTimeBar = transform.GetChild(1).GetChild(0).GetComponent<CanvasGroup>();
         quantity = Random.Range(quantityMin, quantityMax);
-        StartCoroutine("Timer");
-
+        //StartCoroutine("Timer");
+        place = GetComponent<Building>();
     }
+
 
     IEnumerator Timer()
     {
@@ -68,6 +70,7 @@ public class Crop : MonoBehaviour
 
     public void ShowLeftTime()
     {
+        if (!place.Placed) return;
         timeTxt.enabled = !timeTxt.enabled;
     }
 

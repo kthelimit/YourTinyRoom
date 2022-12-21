@@ -22,6 +22,8 @@ public class ShowCollectInfo : MonoBehaviour
     {
         item = _item;
         itemImage.sprite = _item.itemImage;
+        itemImage.type = 0;
+        itemImage.preserveAspect = true;
         itemName.text = _item.ItemName;
         itemDesc.text = _item.ItemDesc;
     }

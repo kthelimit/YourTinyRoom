@@ -17,6 +17,9 @@ public class GridBuildingSystem : MonoBehaviour
     private Building temp;
     private Vector3 prevPos;
     private BoundsInt prevArea;
+    public Transform spawnPoint;
+
+    public bool isOnMouse = false;
 
     #region Unity Methods
 
@@ -42,16 +45,15 @@ public class GridBuildingSystem : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0))
         {
-            if(EventSystem.current.IsPointerOverGameObject(0))
-            {
-                return;
-            }
-            if(!temp.Placed)
+            //if(EventSystem.current.IsPointerOverGameObject(0))
+            //{
+            //    return;           
+            //}
+            if (!temp.Placed)
             {
                 Vector2 touchPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int cellPos = gridLayout.LocalToCell((Vector3)touchPos);
-
-                if(prevPos!=(Vector3)cellPos)
+                if (prevPos!=(Vector3)cellPos)
                 {
                     temp.transform.localPosition = gridLayout.CellToLocalInterpolated(cellPosition: (Vector3)cellPos + new Vector3(x: .5f, y: .5f, z: 0f));
                     prevPos = (Vector3)cellPos;
@@ -59,21 +61,21 @@ public class GridBuildingSystem : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Space))
+        else if(Input.GetMouseButtonDown(1))
         {
-            if(temp.CanBePlaced())
-            {
-                temp.Place();
-            }
-        }
-        else if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            ClearArea();
-            Destroy(temp.gameObject);
+            if (temp.Placed) return;
+            DeleteObject();
         }
     }
 
     #endregion
+
+    public void DeleteObject()
+    {
+        ClearArea();
+        Destroy(temp.gameObject);
+        isOnMouse = false;
+    }
 
 
 
@@ -118,8 +120,10 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<Building>();
+        if (isOnMouse) return;
+        temp = Instantiate(building, spawnPoint.position, Quaternion.identity).GetComponent<Building>();
         FollowBuilding();
+        isOnMouse = true;
     }
 
     private void ClearArea()
@@ -128,6 +132,15 @@ public class GridBuildingSystem : MonoBehaviour
         FillTiles(toClear, TileType.EMPTY);
         TempTileMap.SetTilesBlock(prevArea, toClear);
     }
+    public void ClearArea(BoundsInt area)
+    {
+        SetTilesBlock(area, TileType.WHITE, MainTileMap);
+        //TileBase[] toClear = new TileBase[area.size.x * area.size.y * area.size.z];
+        //FillTiles(toClear, TileType.EMPTY);
+        //TempTileMap.SetTilesBlock(area, toClear);
+    }
+
+
 
     private void FollowBuilding()
     {
