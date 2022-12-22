@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GameControl : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class GameControl : MonoBehaviour
     public RectTransform ShopMenu;
     public CanvasGroup CustomizeCG;
     public CanvasGroup QuestListCG;
+    public CanvasGroup GridBuildCG;
+    public CanvasGroup AllCanvasCG;
+    public Tilemap mainTileMap;
 
     void Awake()
     {        
@@ -102,5 +106,21 @@ public class GameControl : MonoBehaviour
         CustomizeCG.alpha = isopen ? 1.0f : 0.0f;
         CustomizeCG.blocksRaycasts = isopen;
         CustomizeCG.interactable = isopen;
+    }
+
+    public void OpenGridBuildSystem(bool isopen)
+    {
+        if (GridBuildCG.alpha == 1f)
+            isopen = false;
+        GridBuildCG.alpha = isopen ? 1.0f : 0.0f;
+        GridBuildCG.blocksRaycasts = isopen;
+        GridBuildCG.interactable = isopen;
+        Color _color = mainTileMap.color;
+        _color.a= isopen ? 0.3f : 0.0f;
+        mainTileMap.color = _color;
+        AllCanvasCG.alpha = isopen ? 0.0f : 1.0f;
+        AllCanvasCG.blocksRaycasts = !isopen;
+        AllCanvasCG.interactable = !isopen;
+
     }
 }

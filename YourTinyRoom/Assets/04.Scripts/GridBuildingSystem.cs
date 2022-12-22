@@ -120,6 +120,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
+        Debug.Log(isOnMouse);
         if (isOnMouse) return;
         temp = Instantiate(building, spawnPoint.position, Quaternion.identity).GetComponent<Building>();
         FollowBuilding();

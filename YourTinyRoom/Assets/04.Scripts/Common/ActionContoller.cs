@@ -18,6 +18,7 @@ public class ActionContoller : MonoBehaviour
     public ItemInfo Crystal;
     private readonly string hashItem = "ITEM";
     private readonly string hashCrop = "CROP";
+    private readonly string hashFurniture = "FURNITURE";
 
     void Start()
     {
@@ -52,6 +53,10 @@ public class ActionContoller : MonoBehaviour
         {
             GetCrop(hit);
 
+        }
+        else if(hit.collider.tag == hashFurniture)
+        {
+            GetFurniture(hit);
         }
 
     }
@@ -94,6 +99,24 @@ public class ActionContoller : MonoBehaviour
         Destroy(hit.transform.gameObject, 0.1f);
         ShowGetEffect(hit.transform, item);
     }
+
+    private void GetFurniture(RaycastHit2D hit)
+    {
+        Building furniture = hit.transform.GetComponent<Building>();
+        if(!furniture.Placed)
+        {
+            if (furniture.CanBePlaced())
+            {
+                furniture.PlaceFurniture();
+            }
+        }
+        //inventory.AcquireItem(item);
+        //collections.Collect(item);
+        //Destroy(hit.transform.gameObject, 0.1f);
+        //ShowGetEffect(hit.transform, item);
+    }
+
+
     private void ShowGetEffect(Transform tr, Item item, int quantity = 1)
     {
         GameObject obj = Instantiate(getEffectPrefab, tr.position, tr.rotation);

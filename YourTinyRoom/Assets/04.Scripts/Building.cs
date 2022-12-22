@@ -35,8 +35,21 @@ public class Building : MonoBehaviour
         GridBuildingSystem.gbSystem.TakeArea(areaTemp);
         GridBuildingSystem.gbSystem.isOnMouse = false;
         GetComponent<Crop>().StartCoroutine("Timer");
+       
     }
 
+    public void PlaceFurniture()
+    {
+        Vector3Int positionInt = GridBuildingSystem.gbSystem.gridLayout.LocalToCell(transform.position);
+        BoundsInt areaTemp = area;
+        areaTemp.position = positionInt;
+        Placed = true;
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        renderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);
+        GridBuildingSystem.gbSystem.TakeArea(areaTemp);
+        GridBuildingSystem.gbSystem.isOnMouse = false;
+      
+    }
 
 
     #endregion

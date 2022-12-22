@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 
 public class Inventory : MonoBehaviour
@@ -16,13 +17,19 @@ public class Inventory : MonoBehaviour
     private Item.ItemType itemCategory=Item.ItemType.USED;
     public Transform buttonsParent;
     public Button[] categoryBtns;
+    public float prevXPos;
+    public GameObject FSlotParent;
+    public Slot[] fSlots;
+
 
     void Awake()
     {
         slots = SlotsParent.GetComponentsInChildren<Slot>();
-        itemsInInventory=new List<ItemInInventory>();
+        fSlots= FSlotParent.GetComponentsInChildren<Slot>();
+        itemsInInventory =new List<ItemInInventory>();
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
-
+        prevXPos = categoryBtns[0].transform.position.x;
+        ChangeBtnPos(0);
     }
 
     public void AcquireItem(Item _item, int _count=1)
@@ -63,6 +70,7 @@ public class Inventory : MonoBehaviour
         obj.itemCount = _count;
         itemsInInventory.Add(obj);
         ShowItemList();
+        ShowFurnitureList();
     }
 
 
@@ -106,6 +114,24 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    public void ShowFurnitureList()
+    {
+        int slotIdx = 0;
+        
+        for (int i = 0; i < itemsInInventory.Count; i++)
+        {
+            if (itemsInInventory[i].item.itemType == Item.ItemType.FURNITURE)
+            {
+                Object furObj = AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Furniture/{itemsInInventory[i].item.ItemName}.prefab", typeof(GameObject));
+                GameObject _obj = (GameObject)furObj;
+                fSlots[slotIdx].AddItem(itemsInInventory[i].item, itemsInInventory[i].itemCount);
+                fSlots[slotIdx].GetComponentInChildren<Button>().onClick.AddListener(()=>GridBuildingSystem.gbSystem.InitializeWithBuilding(_obj));
+                slotIdx++;
+            }
+        }
+    }
+
     private void ClearSlot()
     {
         for (int i = 0; i < slots.Length; i++)
@@ -114,10 +140,45 @@ public class Inventory : MonoBehaviour
             slots[i].SetSlotCount(0);
         }
     }
+    private void ChangeBtnPos(int type)
+    {
+        foreach (Button _btn in categoryBtns)
+        {
+            Vector3 PrevPos= new Vector3(prevXPos,_btn.transform.position.y, _btn.transform.position.z);
+            _btn.transform.position = PrevPos;
+            _btn.interactable = true;
+        }
+        switch (type)
+        {
+            case 0:
+                categoryBtns[0].transform.position-= new Vector3(0.5f,0f,0f);
+                categoryBtns[0].interactable = false;
+                break;
+            case 1:
+                categoryBtns[4].transform.position -= new Vector3(0.5f, 0f, 0f);
+                categoryBtns[4].interactable = false;
+                break;
+            case 2:
+                categoryBtns[3].transform.position -= new Vector3(0.5f, 0f, 0f);
+                categoryBtns[3].interactable = false;
+                break;
+            case 3:
+                break;
+            case 4:
+                categoryBtns[1].transform.position -= new Vector3(0.5f, 0f, 0f);
+                categoryBtns[1].interactable = false;
+                break;
+            case 5:
+                categoryBtns[2].transform.position -= new Vector3(0.5f, 0f, 0f);
+                categoryBtns[2].interactable = false;
+                break;
+        }
+    }
 
     public void ChangeCategory(int type)
     {
-        switch(type)
+        ChangeBtnPos(type);
+        switch (type)
         {
             case 0:
                 itemCategory = Item.ItemType.USED;
@@ -140,5 +201,6 @@ public class Inventory : MonoBehaviour
         }
 
         ShowItemList();
+        ShowFurnitureList();
     }
 }
