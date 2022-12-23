@@ -838,6 +838,7 @@ MonoBehaviour:
   GridBuildCG: {fileID: 1887821970}
   AllCanvasCG: {fileID: 646606104}
   mainTileMap: {fileID: 73342776}
+  isEditable: 0
 --- !u!4 &42939798
 Transform:
   m_ObjectHideFlags: 0
@@ -4399,6 +4400,7 @@ MonoBehaviour:
   TempTileMap: {fileID: 1522075802}
   spawnPoint: {fileID: 2086521499}
   isOnMouse: 0
+  inventory: {fileID: 1064837780}
 --- !u!4 &169427380
 Transform:
   m_ObjectHideFlags: 0
@@ -12541,7 +12543,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 3b632ab64d6073841823e64550a2f7d0,
+      objectReference: {fileID: 11400000, guid: e6b2face65ed32849bafe72598bae530,
         type: 2}
     - target: {fileID: 5694562383901326963, guid: ec0ec9cf79be9544e8a30922b5f6b126,
         type: 3}
@@ -18016,11 +18018,12 @@ GameObject:
   - component: {fileID: 933680761}
   - component: {fileID: 933680760}
   - component: {fileID: 933680759}
-  - component: {fileID: 933680758}
   - component: {fileID: 933680757}
   - component: {fileID: 933680764}
   - component: {fileID: 933680762}
   - component: {fileID: 933680763}
+  - component: {fileID: 933680758}
+  - component: {fileID: 933680765}
   m_Layer: 0
   m_Name: character
   m_TagString: CHARACTER
@@ -18065,28 +18068,21 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   updateTiming: 1
   unscaledTime: 0
-  _animationName: Idle
-  loop: 1
+  _animationName: hello
+  loop: 0
   timeScale: 1
---- !u!95 &933680758
-Animator:
-  serializedVersion: 3
+--- !u!114 &933680758
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933680756}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3040a59db2f18f44dadbdd5d183344e1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c097f7ddf551d5d40b57c1b22726a934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &933680759
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18105,21 +18101,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
   - {fileID: 2100000, guid: 0621b159bcbf9314c97b404c7a316baf, type: 2}
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
-  - {fileID: 2100000, guid: 0621b159bcbf9314c97b404c7a316baf, type: 2}
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
-  - {fileID: 2100000, guid: 0621b159bcbf9314c97b404c7a316baf, type: 2}
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
-  - {fileID: 2100000, guid: 0621b159bcbf9314c97b404c7a316baf, type: 2}
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
-  - {fileID: 2100000, guid: 0621b159bcbf9314c97b404c7a316baf, type: 2}
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
-  - {fileID: 2100000, guid: 0621b159bcbf9314c97b404c7a316baf, type: 2}
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
-  - {fileID: 2100000, guid: 0621b159bcbf9314c97b404c7a316baf, type: 2}
-  - {fileID: 2100000, guid: 5b0ff414c304eea4abe718b994cae95e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18275,6 +18257,22 @@ MonoBehaviour:
   runtimeAtlas: {fileID: 0}
   lightColor: {fileID: 0}
   darkColor: {fileID: 0}
+--- !u!70 &933680765
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933680756}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.06767994, y: 1.2182046}
+  m_Size: {x: 1.7705002, y: 2.4434025}
+  m_Direction: 0
 --- !u!1 &942843981
 GameObject:
   m_ObjectHideFlags: 0
@@ -25458,6 +25456,7 @@ MonoBehaviour:
   Exp: {fileID: 5063800419050403337, guid: 30f68696065573d4ab3ce6e3f047a730, type: 3}
   Gold: {fileID: 617652818798033266, guid: 5de7851c6ebf16045862caf128eb9882, type: 3}
   Crystal: {fileID: 373771663737815093, guid: e99d7b12dd3d3034bb5ebff1bdfc7d8e, type: 3}
+  gameControl: {fileID: 42939797}
 --- !u!1 &1321968463
 GameObject:
   m_ObjectHideFlags: 0
@@ -31861,7 +31860,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1924224796}
   m_HandleRect: {fileID: 1924224795}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999998
   m_Size: 0.71297854
   m_NumberOfSteps: 0
   m_OnValueChanged:

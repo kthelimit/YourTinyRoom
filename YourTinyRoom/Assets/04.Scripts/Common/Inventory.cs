@@ -20,10 +20,11 @@ public class Inventory : MonoBehaviour
     public float prevXPos;
     public GameObject FSlotParent;
     public Slot[] fSlots;
-
+    GameObject furniturePrefab;
 
     void Awake()
     {
+        furniturePrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Furniture/furniture.prefab", typeof(GameObject));
         slots = SlotsParent.GetComponentsInChildren<Slot>();
         fSlots= FSlotParent.GetComponentsInChildren<Slot>();
         itemsInInventory =new List<ItemInInventory>();
@@ -51,6 +52,10 @@ public class Inventory : MonoBehaviour
                 if (itemsInInventory[i].item.ItemName == _item.ItemName)
                 {
                     itemsInInventory[i].itemCount += _count;
+                    if (_item.itemType != Item.ItemType.FURNITURE)
+                        ShowItemList();
+                    else
+                        ShowFurnitureList();
                     return;
                 }
             }
@@ -69,8 +74,10 @@ public class Inventory : MonoBehaviour
         obj.item = _item;
         obj.itemCount = _count;
         itemsInInventory.Add(obj);
-        ShowItemList();
-        ShowFurnitureList();
+        if(_item.itemType!=Item.ItemType.FURNITURE)
+            ShowItemList();
+        else
+            ShowFurnitureList();
     }
 
 
@@ -104,11 +111,11 @@ public class Inventory : MonoBehaviour
     public void ShowItemList()
     {
         int slotIdx=0;
-        ClearSlot();
+        ClearAllSlot();
         for (int i=0; i<itemsInInventory.Count;i++)
         {
-            if(itemsInInventory[i].item.itemType==itemCategory)
-            {
+            if (itemsInInventory[i].item.itemType == itemCategory && itemsInInventory[i].itemCount > 0) 
+            {              
                 slots[slotIdx].AddItem(itemsInInventory[i].item, itemsInInventory[i].itemCount);
                 slotIdx++;
             }
@@ -118,26 +125,35 @@ public class Inventory : MonoBehaviour
     public void ShowFurnitureList()
     {
         int slotIdx = 0;
-        
+        ClearAllFSlot();
         for (int i = 0; i < itemsInInventory.Count; i++)
         {
-            if (itemsInInventory[i].item.itemType == Item.ItemType.FURNITURE)
+            if (itemsInInventory[i].item.itemType == Item.ItemType.FURNITURE && itemsInInventory[i].itemCount > 0)
             {
-                Object furObj = AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Furniture/{itemsInInventory[i].item.ItemName}.prefab", typeof(GameObject));
-                GameObject _obj = (GameObject)furObj;
+                furniturePrefab.GetComponent<ItemInfo>().item = itemsInInventory[i].item;
                 fSlots[slotIdx].AddItem(itemsInInventory[i].item, itemsInInventory[i].itemCount);
-                fSlots[slotIdx].GetComponentInChildren<Button>().onClick.AddListener(()=>GridBuildingSystem.gbSystem.InitializeWithBuilding(_obj));
+                fSlots[slotIdx].GetComponentInChildren<Button>().onClick.AddListener(()=>GridBuildingSystem.gbSystem.InitializeWithBuilding(furniturePrefab));
                 slotIdx++;
             }
         }
     }
 
-    private void ClearSlot()
+    private void ClearAllSlot()
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].itemCount=0;
+            slots[i].itemCount = 0;
             slots[i].SetSlotCount(0);
+        }
+    }
+    private void ClearAllFSlot()
+    {
+        for (int i = 0; i < fSlots.Length; i++)
+        {
+
+            fSlots[i].itemCount = 0;
+            fSlots[i].SetSlotCount(0);
+            fSlots[i].GetComponentInChildren<Button>().onClick.RemoveAllListeners();
         }
     }
     private void ChangeBtnPos(int type)

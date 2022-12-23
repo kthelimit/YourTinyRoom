@@ -9,13 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40177c288328c3438e20f8f32cb0393, type: 3}
-  m_Name: Furniture
+  m_Script: {fileID: 11500000, guid: 51a37f6eb41b70a4a986fb7e66e6395e, type: 3}
+  m_Name: "Item003_\uD14C\uC774\uBE14"
   m_EditorClassIdentifier: 
   ItemName: "\uD14C\uC774\uBE14"
   itemType: 4
-  itemImage: {fileID: 21300000, guid: cb1faa58d44e8614c8575dcad7ff9716, type: 3}
-  ItemDesc: "\uD14C\uC774\uBE14"
-  ItemPrice: 5000
+  itemImage: {fileID: 21300000, guid: 4a0b1a6a8866c9141b12fec5b5f3390f, type: 3}
+  ItemDesc: "\uC2EC\uD50C\uD55C \uD14C\uC774\uBE14"
+  ItemPrice: 200
   itemPriceType: 0
-  ItemNumber: 8
+  ItemNumber: 3
+  area:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 2, y: 1, z: 1}

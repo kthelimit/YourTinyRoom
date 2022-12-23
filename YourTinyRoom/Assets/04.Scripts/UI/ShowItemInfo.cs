@@ -43,7 +43,7 @@ public class ShowItemInfo : MonoBehaviour
     }
     public void ShowInfo(Item _item, int _itemCount)
     {
-        if (_itemCount == 0) return;
+       // if (_itemCount == 0) CloseItemInfo();
         if (!isShowing)
         {
             ClosePanel.SetActive(true);
@@ -95,6 +95,9 @@ public class ShowItemInfo : MonoBehaviour
         curCount--;
         text_count.text = curCount.ToString();
         //효과 발휘하기(추후 추가)
+        if (curCount<=0)
+            CloseItemInfo();
+
     }
 
     public void OpenThrowDetail()
@@ -123,6 +126,8 @@ public class ShowItemInfo : MonoBehaviour
         curCount-=throwQuantity;
         text_count.text = curCount.ToString();
         tdPanel.SetActive(false);
+        if (curCount <= 0)
+            CloseItemInfo();
     }
 
 }

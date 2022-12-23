@@ -19,6 +19,9 @@ public class ActionContoller : MonoBehaviour
     private readonly string hashItem = "ITEM";
     private readonly string hashCrop = "CROP";
     private readonly string hashFurniture = "FURNITURE";
+    private readonly string hashChara = "CHARACTER";
+    public GameControl gameControl;
+    private CharacterCtrl characterCtrl;
 
     void Start()
     {
@@ -27,6 +30,7 @@ public class ActionContoller : MonoBehaviour
         getEffectPrefab = Resources.Load<GameObject>("GetEffect");
         inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
         collections = GameObject.Find("Collection").transform.GetComponent<Collections>();
+        characterCtrl = GameObject.FindWithTag(hashChara).transform.GetComponent<CharacterCtrl>();
     }
 
     void Update()
@@ -57,6 +61,10 @@ public class ActionContoller : MonoBehaviour
         else if(hit.collider.tag == hashFurniture)
         {
             GetFurniture(hit);
+        }
+        else if (hit.collider.tag == hashChara)
+        {
+            characterCtrl.StartCoroutine("Reaction");
         }
 
     }
@@ -110,6 +118,14 @@ public class ActionContoller : MonoBehaviour
                 furniture.PlaceFurniture();
             }
         }
+        else
+        {
+            if (gameControl.isEditable)
+            {
+                GridBuildingSystem.gbSystem.RearrangeBuilding(hit.transform.gameObject);
+            }
+
+        }    
         //inventory.AcquireItem(item);
         //collections.Collect(item);
         //Destroy(hit.transform.gameObject, 0.1f);

@@ -15,9 +15,10 @@ public class GameControl : MonoBehaviour
     public CanvasGroup GridBuildCG;
     public CanvasGroup AllCanvasCG;
     public Tilemap mainTileMap;
+    public bool isEditable = false;
 
     void Awake()
-    {        
+    {
         InventoryCG.alpha = 0;
         InventoryCG.blocksRaycasts = false;
         InventoryCG.interactable = false;
@@ -110,8 +111,10 @@ public class GameControl : MonoBehaviour
 
     public void OpenGridBuildSystem(bool isopen)
     {
+        if (GridBuildingSystem.gbSystem.isOnMouse) return;
         if (GridBuildCG.alpha == 1f)
             isopen = false;
+        isEditable = isopen;
         GridBuildCG.alpha = isopen ? 1.0f : 0.0f;
         GridBuildCG.blocksRaycasts = isopen;
         GridBuildCG.interactable = isopen;

@@ -8,6 +8,14 @@ public class Building : MonoBehaviour
     public BoundsInt area;
     private const int IsometricRangePerYUnit = 100;
 
+    private void Awake()
+    {
+        if (GetComponent<ItemInfo>().itemType == Item.ItemType.FURNITURE)
+        {
+            Furniture _item = (Furniture)GetComponent<ItemInfo>().item;
+            area = _item.area;
+        }
+    }
     #region Build methods
     public bool CanBePlaced()
     {
@@ -51,6 +59,13 @@ public class Building : MonoBehaviour
       
     }
 
+    public void Rearrange()
+    {
+        Placed = false;
+    }
 
     #endregion
+
+
+
 }

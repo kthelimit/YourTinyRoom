@@ -92,8 +92,9 @@ GameObject:
   - component: {fileID: 6000740525573221805}
   - component: {fileID: 4558627603026762208}
   - component: {fileID: 7946476740535057856}
+  - component: {fileID: 4176749793433599078}
   m_Layer: 0
-  m_Name: "\uD14C\uC774\uBE14"
+  m_Name: furniture
   m_TagString: FURNITURE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,3 +161,17 @@ PolygonCollider2D:
       - {x: -0.9761538, y: -0.52744985}
       - {x: 0.024650931, y: -1.0226198}
       - {x: 2.0190709, y: -0.011386931}
+--- !u!114 &4176749793433599078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8950751245785627581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e51b151166633408c05781514e726a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 482bb0434471b3d4193600dee846ee2c, type: 2}
+  quantity: 1

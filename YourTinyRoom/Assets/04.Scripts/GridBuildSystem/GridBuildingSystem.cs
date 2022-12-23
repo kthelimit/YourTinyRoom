@@ -15,11 +15,13 @@ public class GridBuildingSystem : MonoBehaviour
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
 
     private Building temp;
+    private Item tempItem;
     private Vector3 prevPos;
     private BoundsInt prevArea;
     public Transform spawnPoint;
 
     public bool isOnMouse = false;
+    public Inventory inventory;
 
     #region Unity Methods
 
@@ -64,7 +66,9 @@ public class GridBuildingSystem : MonoBehaviour
         else if(Input.GetMouseButtonDown(1))
         {
             if (temp.Placed) return;
+            inventory.AcquireItem(tempItem, 1);
             DeleteObject();
+
         }
     }
 
@@ -120,9 +124,21 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        Debug.Log(isOnMouse);
         if (isOnMouse) return;
         temp = Instantiate(building, spawnPoint.position, Quaternion.identity).GetComponent<Building>();
+        tempItem = temp.GetComponent<ItemInfo>().item;
+        FollowBuilding();
+        isOnMouse = true;
+        inventory.AcquireItem(tempItem, -1);
+    }
+
+    //재배치
+    public void RearrangeBuilding(GameObject building)
+    {
+        temp = building.GetComponent<Building>();
+        temp.Rearrange();
+        ClearArea(temp.area);
+        tempItem = temp.GetComponent<ItemInfo>().item;
         FollowBuilding();
         isOnMouse = true;
     }
@@ -133,15 +149,12 @@ public class GridBuildingSystem : MonoBehaviour
         FillTiles(toClear, TileType.EMPTY);
         TempTileMap.SetTilesBlock(prevArea, toClear);
     }
+
+    //재배치용 클리어에리어
     public void ClearArea(BoundsInt area)
     {
         SetTilesBlock(area, TileType.WHITE, MainTileMap);
-        //TileBase[] toClear = new TileBase[area.size.x * area.size.y * area.size.z];
-        //FillTiles(toClear, TileType.EMPTY);
-        //TempTileMap.SetTilesBlock(area, toClear);
     }
-
-
 
     private void FollowBuilding()
     {
