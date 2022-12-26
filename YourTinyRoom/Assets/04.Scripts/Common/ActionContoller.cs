@@ -64,6 +64,7 @@ public class ActionContoller : MonoBehaviour
         }
         else if (hit.collider.tag == hashChara)
         {
+            if (gameControl.isEditable) return;
             characterCtrl.StartCoroutine("Reaction");
         }
 
@@ -71,6 +72,7 @@ public class ActionContoller : MonoBehaviour
 
     private void GetCrop(RaycastHit2D hit)
     {
+        if (gameControl.isEditable) return;
         Crop crop = hit.collider.GetComponent<Crop>();
         if (crop.isComplete == true)
         {
@@ -101,6 +103,7 @@ public class ActionContoller : MonoBehaviour
     }
     private void GetItem(RaycastHit2D hit)
     {
+        if (gameControl.isEditable) return;
         Item item = hit.transform.GetComponent<ItemInfo>().item;
         inventory.AcquireItem(item);
         collections.Collect(item);
@@ -126,10 +129,6 @@ public class ActionContoller : MonoBehaviour
             }
 
         }    
-        //inventory.AcquireItem(item);
-        //collections.Collect(item);
-        //Destroy(hit.transform.gameObject, 0.1f);
-        //ShowGetEffect(hit.transform, item);
     }
 
 

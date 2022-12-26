@@ -19,11 +19,13 @@ public class QuestItem : MonoBehaviour
     public Text QuestAlarmPanelText;
     private bool isAlarmed = false;
     private Transform canvasUI;
-    
+    GameControl gameControl;
+
 
     private void Start()
     {
         canvasUI = GameObject.Find("Canvas-UI").transform;
+        gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         scrollContents = this.transform.parent;
         rewardButton = transform.GetChild(0).GetComponent<Button>();
@@ -57,12 +59,11 @@ public class QuestItem : MonoBehaviour
         QuestManager.AllTakeOut += this.TakeOut;
         QuestAlarmPanelText.text = "퀘스트 [" + questData.questName + "] 달성! 보상을 수령해주세요.";
         StartCoroutine("ShowQuestAlarmPanel");
-
-        //To do list : 화면에 퀘스트를 달성했다는 알림 주기 및 수령할 것이 있다는 것을 메뉴에 표시해주기.
     }
     IEnumerator ShowQuestAlarmPanel()
     {
         GameObject questAlarm = Instantiate(QuestAlarmPrefab, canvasUI);
+        questAlarm.GetComponent<Button>().onClick.AddListener(()=>gameControl.OpenQuestList(true));
         questAlarm.GetComponent<Animator>().SetTrigger("Down");
         isAlarmed = true;
         yield return new WaitForSeconds(3f);

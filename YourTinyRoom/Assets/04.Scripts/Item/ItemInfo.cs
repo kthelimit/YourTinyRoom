@@ -11,9 +11,12 @@ public class ItemInfo : MonoBehaviour
     {
         itemType = item.itemType;
         if (GetComponent<SpriteRenderer>() == null)
-        { 
+        {
             GetComponentInChildren<SpriteRenderer>().sprite = item.itemImage;
-        } 
-        GetComponent<SpriteRenderer>().sprite = item.itemImage;
+        }
+        else
+        { 
+            GetComponent<SpriteRenderer>().sprite = item.itemImage; 
+        }
     }
 }

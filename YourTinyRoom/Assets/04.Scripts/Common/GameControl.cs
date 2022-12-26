@@ -15,6 +15,10 @@ public class GameControl : MonoBehaviour
     public CanvasGroup GridBuildCG;
     public CanvasGroup AllCanvasCG;
     public Tilemap mainTileMap;
+    public GameObject CharacterVisit;
+    public GameObject CharacterVisitSub;
+    private bool isCharaVSubOpen = false;
+    private Vector3 charaVTarget=Vector3.zero;
     public bool isEditable = false;
 
     void Awake()
@@ -25,6 +29,7 @@ public class GameControl : MonoBehaviour
         CollectionCG.alpha = 0;
         CollectionCG.blocksRaycasts = false;
         CollectionCG.interactable = false;
+        charaVTarget = CharacterVisitSub.transform.position;
     }
 
     void Update()
@@ -119,11 +124,56 @@ public class GameControl : MonoBehaviour
         GridBuildCG.blocksRaycasts = isopen;
         GridBuildCG.interactable = isopen;
         Color _color = mainTileMap.color;
-        _color.a= isopen ? 0.3f : 0.0f;
+        _color.a = isopen ? 0.3f : 0.0f;
         mainTileMap.color = _color;
         AllCanvasCG.alpha = isopen ? 0.0f : 1.0f;
         AllCanvasCG.blocksRaycasts = !isopen;
         AllCanvasCG.interactable = !isopen;
+        if(isopen)
+        {
+            Camera.main.cullingMask = 1<<8;
+        }
+        else
+        {
+            Camera.main.cullingMask = ~(1 << 5);
+        }
 
+    }
+
+    public void OpenCharacterVisit(bool isopen)
+    {
+        CharacterVisit.SetActive(isopen);
+    }
+
+    public void OpenCharacterVisitSub()
+    {
+
+        if (!isCharaVSubOpen)
+        {
+            isCharaVSubOpen = true;
+            charaVTarget = new Vector3(-5.5f, 1.4f, 96.5f);
+            StartCoroutine("MoveCharaVisitSubPanel");
+
+        }
+        else
+        {
+            isCharaVSubOpen = false;
+            charaVTarget = new Vector3(-9.6f, 1.4f, 96.5f);
+            StartCoroutine("MoveCharaVisitSubPanel");
+        }
+    }
+
+    IEnumerator MoveCharaVisitSubPanel()
+    {
+        while (true)
+        {
+            yield return null;
+            CharacterVisitSub.transform.position=Vector3.MoveTowards(CharacterVisitSub.transform.position, charaVTarget, 0.1f);
+            if (Vector3.Distance(CharacterVisitSub.transform.position, charaVTarget) <= 0.1f)
+            {
+                CharacterVisitSub.transform.position = charaVTarget;
+                break; 
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7813695452602493609}
   - component: {fileID: 8247320869969530092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863387133997562474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0.113537066}
+  m_LocalPosition: {x: 0.5, y: 1, z: 0.113537066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6000740525573221805}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4558627603026762208}
   - component: {fileID: 7946476740535057856}
   - component: {fileID: 4176749793433599078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: furniture
   m_TagString: FURNITURE
   m_Icon: {fileID: 0}
@@ -173,5 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e51b151166633408c05781514e726a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 482bb0434471b3d4193600dee846ee2c, type: 2}
+  item: {fileID: 11400000, guid: e6b2face65ed32849bafe72598bae530, type: 2}
+  itemType: 0
   quantity: 1

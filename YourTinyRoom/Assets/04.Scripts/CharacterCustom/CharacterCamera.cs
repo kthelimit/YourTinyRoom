@@ -16,6 +16,15 @@ public class CharacterCamera : MonoBehaviour
 
     void LateUpdate()
     {
+        if (target.eulerAngles.y == 180f)
+        {
+            xCorrection = 0.2f;
+        }
+        else
+        {
+            xCorrection = -0.2f;
+        }
         camTr.position = new Vector3(target.position.x +xCorrection, target.position.y + yCorrection, -3.5f);
+
     }
 }
