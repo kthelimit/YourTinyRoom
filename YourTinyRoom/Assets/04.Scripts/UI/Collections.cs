@@ -13,6 +13,7 @@ public class Collections : MonoBehaviour
     [SerializeField]
     private Item[] Items;
     private List<Item> ItemList;
+    private List<CollectItem> CollectList;
     [SerializeField]
     private Item.ItemType itemCategory = Item.ItemType.USED;
     public Transform buttonsParent;
@@ -23,15 +24,21 @@ public class Collections : MonoBehaviour
         slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
         Items = Resources.LoadAll<Item>("Item");
         ItemList = new List<Item>();
+        CollectList = new List<CollectItem>();
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
         prevXPos = categoryBtns[0].transform.position.x;
-
-
         foreach (Item item in Items)
         {
-            if (item.itemType != Item.ItemType.USED)
+            if (item.ItemName != "Gold"&& item.ItemName != "Exp" && item.ItemName != "Crystal")
                 ItemList.Add(item);
         }    
+        foreach(Item item in ItemList)
+        {
+            CollectItem collectItem = new CollectItem();
+            collectItem.item = item;
+            CollectList.Add(collectItem);
+        }
+
         AssignSlot();
         CheckItem();
     }
@@ -40,11 +47,11 @@ public class Collections : MonoBehaviour
     {
         int slotIdx = 0;
         ClearSlot();
-        for (int i=0;i<ItemList.Count;i++)
+        for (int i=0;i< CollectList.Count;i++)
         {
-            if (ItemList[i].itemType == itemCategory)
+            if (CollectList[i].item.itemType == itemCategory)
             {
-                slots[slotIdx].SetItem(ItemList[i]);
+                slots[slotIdx].SetItem(CollectList[i]);
                 slotIdx++;
             }
         }
@@ -53,7 +60,7 @@ public class Collections : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].item = null;
+            slots[i].ClearSlot();
         }
     }
 
@@ -62,9 +69,10 @@ public class Collections : MonoBehaviour
         int num = _item.ItemNumber;
         for(int i=0; i<slots.Length;i++)
         {
-            if (slots[i].itemNumber == num)
+            if (CollectList[i].item.ItemNumber == num)
             {
-                slots[i].isCollected = true;
+                CollectList[i].isCollected = true;
+                AssignSlot();
                 CheckItem();
                 break;
             }

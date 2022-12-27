@@ -72,10 +72,11 @@ public class ActionContoller : MonoBehaviour
 
     private void GetCrop(RaycastHit2D hit)
     {
-        if (gameControl.isEditable) return;
+
         Crop crop = hit.collider.GetComponent<Crop>();
         if (crop.isComplete == true)
         {
+              if (gameControl.isEditable) return;
             Item item = hit.transform.GetComponent<ItemInfo>().item;
             inventory.AcquireItem(item, crop.quantity);
             collections.Collect(item);

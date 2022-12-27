@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e40177c288328c3438e20f8f32cb0393, type: 3}
-  m_Name: "Item002_\uD53C\uADDC\uC5B4"
+  m_Name: "Item004_\uB538\uAE30"
   m_EditorClassIdentifier: 
-  ItemName: "\uD53C\uADDC\uC5B4"
-  itemType: 1
-  itemImage: {fileID: 21300000, guid: 0dec7e9af732fd34d83031b51bcfafdf, type: 3}
-  ItemDesc: "\uC560\uB2C8\uBA54\uC774\uC158 \uCE90\uB9AD\uD130 \uD53C\uADDC\uC5B4"
-  ItemPrice: 15
-  itemPriceType: 1
-  ItemNumber: 2
+  ItemName: "\uB538\uAE30"
+  itemType: 2
+  itemImage: {fileID: 21300000, guid: c8eea35755e7fc34d85a0cfd910ce9c3, type: 3}
+  ItemDesc: "\uC0C8\uCF64\uB2EC\uCF64 \uB9DB\uC788\uB294 \uB538\uAE30"
+  ItemPrice: 50
+  itemPriceType: 0
+  ItemNumber: 4

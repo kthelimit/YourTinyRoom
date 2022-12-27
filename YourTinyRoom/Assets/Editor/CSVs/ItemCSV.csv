@@ -1,3 +1,6 @@
-1,인형,GIFT,멋진 인형,GOLD,300
-2,피규어,COLLECT,멋진 피규어,CRYSTAL,15
+1,치이로 인형,GIFT,강하고 멋진 치이로 인형. 말랑말랑하다.,GOLD,300
+2,피규어,COLLECT,애니메이션 캐릭터 피규어,CRYSTAL,15
 3,테이블,FURNITURE,심플한 테이블,GOLD,200,2,1,1
+4,딸기,INGREDIENT,새콤달콤 맛있는 딸기, GOLD,50
+5,토끼 인형,GIFT,폭신폭신 토끼인형,GOLD,150
+6,의자,FURNITURE,심플한 의자,GOLD,150,1,1,1

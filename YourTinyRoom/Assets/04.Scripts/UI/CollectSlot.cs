@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class CollectSlot : MonoBehaviour
 {
+    public CollectItem collectItem;
     public Item item;
     public Image itemImage;
     public int itemNumber;
     public Button button;
-    public bool isCollected=false; //수집한 적이 있는지 여부 등록
     public ShowCollectInfo showCInfo;
 
     private void Awake()
@@ -18,9 +18,10 @@ public class CollectSlot : MonoBehaviour
         showCInfo = GameObject.Find("Collection").transform.GetChild(2).GetComponent<ShowCollectInfo>();
     }
 
-    public void SetItem(Item _item)
+    public void SetItem(CollectItem _collectItem)
     {
-        item = _item;
+        collectItem = _collectItem;
+        item = collectItem.item;
         itemNumber = item.ItemNumber;
         itemImage.sprite = item.itemImage;
         Color color = itemImage.color;
@@ -28,17 +29,26 @@ public class CollectSlot : MonoBehaviour
         itemImage.color=color;
         itemImage.type = 0;
         itemImage.preserveAspect = true;
+        CheckCollected();
     }
 
     public void CheckCollected()
     {
-        if (isCollected)
+        if (collectItem != null && collectItem.isCollected) 
         {
             itemImage.color = Color.white;
             button.interactable = true;
         }
+        else if(collectItem == null)
+        {
+            Color color = itemImage.color;
+            color.a = 0f;
+            itemImage.color = color;
+
+        }
         else
         {
+            itemImage.color = Color.black;
             button.interactable = false;
         }
     }
@@ -48,6 +58,17 @@ public class CollectSlot : MonoBehaviour
         showCInfo.ShowInfo(item);
     }
 
+    public void ClearSlot()
+    {
+        collectItem = null;
+        item = null;
+        itemImage.sprite = null;
+        itemNumber = 0;
+        Color color = itemImage.color;
+        color.a = 0f;
+        itemImage.color = color;
+        button.interactable = false;
+    }
 
 
 }

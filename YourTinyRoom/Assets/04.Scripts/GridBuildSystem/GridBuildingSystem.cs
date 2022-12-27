@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class GridBuildingSystem : MonoBehaviour
 {
@@ -34,9 +35,9 @@ public class GridBuildingSystem : MonoBehaviour
     {
         //string tilePath = @"09.Tilemap\";
         tileBases.Add(TileType.EMPTY, null);
-        tileBases.Add(TileType.WHITE, Resources.Load<TileBase>("Tiles/white"));
-        tileBases.Add(TileType.GREEN, Resources.Load<TileBase>("Tiles/green"));
-        tileBases.Add(TileType.RED, Resources.Load<TileBase>("Tiles/red"));
+        tileBases.Add(TileType.WHITE, (TileBase)AssetDatabase.LoadAssetAtPath("Assets/09.Tilemap/white.asset", typeof(TileBase)));
+        tileBases.Add(TileType.GREEN, (TileBase)AssetDatabase.LoadAssetAtPath("Assets/09.Tilemap/green.asset", typeof(TileBase)));
+        tileBases.Add(TileType.RED, (TileBase)AssetDatabase.LoadAssetAtPath("Assets/09.Tilemap/red.asset", typeof(TileBase)));
     }
 
     private void Update()

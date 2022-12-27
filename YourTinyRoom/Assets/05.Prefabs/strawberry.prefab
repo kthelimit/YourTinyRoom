@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7739526695645455321}
   - component: {fileID: 8476623431230437973}
   - component: {fileID: -1189294668871028823}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: strawberry
   m_TagString: CROP
   m_Icon: {fileID: 0}
@@ -73,7 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e51b151166633408c05781514e726a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 44e60d7c8b527e741b48ee75c9ebc102, type: 2}
+  item: {fileID: 11400000, guid: 5232b8cba5ef2ff44b6417f0d7c76933, type: 2}
+  itemType: 2
   quantity: 1
 --- !u!61 &8476623431230437973
 BoxCollider2D:
@@ -127,7 +128,7 @@ GameObject:
   - component: {fileID: 7144096331913960365}
   - component: {fileID: 7144096331913960367}
   - component: {fileID: 7144096331913960364}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text-time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +208,7 @@ GameObject:
   - component: {fileID: 8750400608913351290}
   - component: {fileID: 8750400608913351269}
   - component: {fileID: 3918729060544041782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +317,7 @@ GameObject:
   - component: {fileID: 8750400608984027220}
   - component: {fileID: 8750400608984027223}
   - component: {fileID: 8750400608984027222}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +406,7 @@ GameObject:
   - component: {fileID: 8750400609566357325}
   - component: {fileID: 8750400609566357324}
   - component: {fileID: 7144096332587672401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Strawberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8750400609566357327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.019712571, z: 1.9018524}
+  m_LocalPosition: {x: 0, y: 0.8, z: 1.9018524}
   m_LocalScale: {x: 2.2134, y: 2.2134, z: 2.2134}
   m_Children: []
   m_Father: {fileID: 7144096331246697402}
@@ -505,7 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8750400609582673919}
   - component: {fileID: 8750400609582673916}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,7 +561,7 @@ GameObject:
   - component: {fileID: 8750400610039297636}
   - component: {fileID: 8750400610039297639}
   - component: {fileID: 8750400610039297638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.019712571}
+  m_AnchoredPosition: {x: 0, y: 0.83}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8750400610039297636
@@ -659,7 +660,7 @@ GameObject:
   - component: {fileID: 8750400610790151648}
   - component: {fileID: 8750400610790151654}
   - component: {fileID: 8750400610790151649}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +734,7 @@ GameObject:
   - component: {fileID: 8750400610905937185}
   - component: {fileID: 8750400610905937191}
   - component: {fileID: 8750400610905937190}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +808,7 @@ GameObject:
   - component: {fileID: 8750400611046846647}
   - component: {fileID: 8750400611046846645}
   - component: {fileID: 8750400611046846644}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TimeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

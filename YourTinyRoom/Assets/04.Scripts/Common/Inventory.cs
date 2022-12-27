@@ -133,7 +133,7 @@ public class Inventory : MonoBehaviour
             if (itemsInInventory[i].item.itemType == Item.ItemType.FURNITURE && itemsInInventory[i].itemCount > 0)
             {
                 furniturePrefab.GetComponent<ItemInfo>().item = itemsInInventory[i].item;
-                if(fSlots.Length==slotIdx+1)
+                if(fSlots.Length==slotIdx)
                 {
                     Instantiate(FslotPrefab, FSlotParent.transform);
                 }

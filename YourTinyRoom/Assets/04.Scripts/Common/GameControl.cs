@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -13,13 +14,24 @@ public class GameControl : MonoBehaviour
     public CanvasGroup CustomizeCG;
     public CanvasGroup QuestListCG;
     public CanvasGroup GridBuildCG;
+    public CanvasGroup CropCG;
     public CanvasGroup AllCanvasCG;
     public Tilemap mainTileMap;
+
+    //캐릭터 방문시 아이콘
     public GameObject CharacterVisit;
     public GameObject CharacterVisitSub;
     private bool isCharaVSubOpen = false;
     private Vector3 charaVTarget=Vector3.zero;
     public bool isEditable = false;
+
+    //장면 이동시
+    public GameObject GoFarmObject;
+    public GameObject GoRoomObject;
+    public GameObject InteriorObject;
+    public GameObject CropObject;
+    public bool isFarm=false;
+
 
     void Awake()
     {
@@ -30,6 +42,7 @@ public class GameControl : MonoBehaviour
         CollectionCG.blocksRaycasts = false;
         CollectionCG.interactable = false;
         charaVTarget = CharacterVisitSub.transform.position;
+        GoRoom();
     }
 
     void Update()
@@ -140,6 +153,33 @@ public class GameControl : MonoBehaviour
 
     }
 
+    public void OpenCropSystem(bool isopen)
+    {
+        if (GridBuildingSystem.gbSystem.isOnMouse) return;
+        if (CropCG.alpha == 1f)
+            isopen = false;
+        isEditable = isopen;
+        CropCG.alpha = isopen ? 1.0f : 0.0f;
+        CropCG.blocksRaycasts = isopen;
+        CropCG.interactable = isopen;
+        Color _color = mainTileMap.color;
+        _color.a = isopen ? 0.3f : 0.0f;
+        mainTileMap.color = _color;
+        AllCanvasCG.alpha = isopen ? 0.0f : 1.0f;
+        AllCanvasCG.blocksRaycasts = !isopen;
+        AllCanvasCG.interactable = !isopen;
+        if (isopen)
+        {
+            Camera.main.cullingMask = 1 << 8;
+        }
+        else
+        {
+            Camera.main.cullingMask = ~(1 << 5);
+        }
+
+    }
+
+
     public void OpenCharacterVisit(bool isopen)
     {
         CharacterVisit.SetActive(isopen);
@@ -176,4 +216,25 @@ public class GameControl : MonoBehaviour
             }
         }
     }
+
+
+    public void GoFarm()
+    {
+        isFarm = true;
+        GoFarmObject.SetActive(false);
+        GoRoomObject.SetActive(true);
+        CropObject.SetActive(true);
+        InteriorObject.SetActive(false);
+        
+    }
+
+    public void GoRoom()
+    {
+        isFarm = false;
+        GoFarmObject.SetActive(true);
+        GoRoomObject.SetActive(false);
+        CropObject.SetActive(false);
+        InteriorObject.SetActive(true);
+    }
+
 }
