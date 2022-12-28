@@ -36,6 +36,7 @@ public class Collections : MonoBehaviour
         {
             CollectItem collectItem = new CollectItem();
             collectItem.item = item;
+            collectItem.ItemNumber = item.ItemNumber;
             CollectList.Add(collectItem);
         }
 
@@ -67,9 +68,9 @@ public class Collections : MonoBehaviour
     public void Collect(Item _item)
     {
         int num = _item.ItemNumber;
-        for(int i=0; i<slots.Length;i++)
+        for(int i=0; i< CollectList.Count;i++)
         {
-            if (CollectList[i].item.ItemNumber == num)
+            if (CollectList[i].ItemNumber == num)
             {
                 CollectList[i].isCollected = true;
                 AssignSlot();

@@ -121,8 +121,8 @@ GameObject:
   - component: {fileID: 3667888870122104590}
   - component: {fileID: 6319764040837676116}
   - component: {fileID: 8137410082853834646}
-  - component: {fileID: 1900122414256582990}
   - component: {fileID: 1126663960512658035}
+  - component: {fileID: 1087308216268878369}
   m_Layer: 5
   m_Name: FSlot
   m_TagString: Untagged
@@ -187,23 +187,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2
---- !u!114 &1900122414256582990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5086863068140324223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ec1cf74f1931e4eb1e85ff36682b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  itemCount: 0
-  itemImage: {fileID: 1130945761965669721}
-  text_count: {fileID: 5962682265931344354}
-  go_CountImage: {fileID: 7993094724519118720}
 --- !u!114 &1126663960512658035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +211,24 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1087308216268878369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5086863068140324223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c04589ec5974e4b81a4076cc42e017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  itemCount: 0
+  itemImage: {fileID: 1130945761965669721}
+  text_count: {fileID: 5962682265931344354}
+  go_CountImage: {fileID: 7993094724519118720}
+  furniturePrefab: {fileID: 0}
 --- !u!1 &6796554487240938183
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +347,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1130945761965669721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1087308216268878369}
+        m_MethodName: ClickFslot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7993094724519118720
 GameObject:
   m_ObjectHideFlags: 0

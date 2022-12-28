@@ -9,6 +9,7 @@ TagManager:
   - CLOSE
   - CHARACTER
   - FURNITURE
+  - DUST
   layers:
   - Default
   - TransparentFX

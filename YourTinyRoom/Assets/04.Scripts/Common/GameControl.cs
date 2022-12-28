@@ -17,6 +17,9 @@ public class GameControl : MonoBehaviour
     public CanvasGroup CropCG;
     public CanvasGroup AllCanvasCG;
     public Tilemap mainTileMap;
+    public CapsuleCollider2D CharacterCollider;
+    public GameObject NameEditPanel;
+    public GameObject ClosePanel;
 
     //캐릭터 방문시 아이콘
     public GameObject CharacterVisit;
@@ -116,6 +119,7 @@ public class GameControl : MonoBehaviour
         CollectionCG.alpha = isopen ? 1.0f : 0.0f;
         CollectionCG.blocksRaycasts = isopen;
         CollectionCG.interactable = isopen;
+        CollectionCG.GetComponentInChildren<ShowCollectInfo>().ResetInfo();
     }
 
     public void OpenCustomize(bool isopen)
@@ -133,6 +137,7 @@ public class GameControl : MonoBehaviour
         if (GridBuildCG.alpha == 1f)
             isopen = false;
         isEditable = isopen;
+        CharacterCollider.enabled = !isopen;
         GridBuildCG.alpha = isopen ? 1.0f : 0.0f;
         GridBuildCG.blocksRaycasts = isopen;
         GridBuildCG.interactable = isopen;
@@ -191,14 +196,14 @@ public class GameControl : MonoBehaviour
         if (!isCharaVSubOpen)
         {
             isCharaVSubOpen = true;
-            charaVTarget = new Vector3(-5.5f, 1.4f, 96.5f);
+            charaVTarget = new Vector3(-5.5f, 1.9f, 96.5f);
             StartCoroutine("MoveCharaVisitSubPanel");
 
         }
         else
         {
             isCharaVSubOpen = false;
-            charaVTarget = new Vector3(-9.6f, 1.4f, 96.5f);
+            charaVTarget = new Vector3(-9.6f, 1.9f, 96.5f);
             StartCoroutine("MoveCharaVisitSubPanel");
         }
     }
@@ -237,4 +242,18 @@ public class GameControl : MonoBehaviour
         InteriorObject.SetActive(true);
     }
 
+
+    public void ShowNameEditPanel()
+    {
+        if (NameEditPanel.gameObject.activeInHierarchy == false)
+        {
+            NameEditPanel.SetActive(true);
+            ClosePanel.SetActive(true);
+        }
+        else
+        {
+            NameEditPanel.SetActive(false);
+            ClosePanel.SetActive(false);
+        }
+    }
 }

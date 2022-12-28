@@ -4,3 +4,10 @@
 4,딸기,INGREDIENT,새콤달콤 맛있는 딸기, GOLD,50
 5,토끼 인형,GIFT,폭신폭신 토끼인형,GOLD,150
 6,의자,FURNITURE,심플한 의자,GOLD,150,1,1,1
+7,빈 장식장,FURNITURE,비어있는 장식장,GOLD,150,1,2,1
+8,창문,FURNITURE,바깥 풍경을 볼 수 있는 창문,GOLD,150,2,1,1
+9,책장,FURNITURE,책이 잔뜩 꽂힌 책장,GOLD,150,1,2,1
+10,테이블,FURNITURE,심플한 테이블,GOLD,150,2,1,1
+11,침대,FURNITURE,심플한 침대. 푹신푹신하다,GOLD,150,3,2,1
+12,동그란 러그,FURNITURE,동그랗고 보드랍다,GOLD,150,3,3,1
+13,네모난 러그,FURNITURE,네모나고 폭신하다,GOLD,150,2,2,1

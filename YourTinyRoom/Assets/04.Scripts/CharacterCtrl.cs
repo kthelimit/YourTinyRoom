@@ -167,6 +167,9 @@ public class CharacterCtrl : MonoBehaviour
                 case 8:
                     Talk("간지러워~");
                     break;
+                case 10:
+                    Talk(GameManager.gameManager.playerName+"도 같이 놀고 싶어?");
+                    break;
             }
             yield return new WaitForSeconds(2f);
             textbubble.SetActive(false);

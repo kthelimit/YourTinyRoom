@@ -24,7 +24,10 @@ public class GameManager : MonoBehaviour
     public Text levelText;
     LevelSystem levelSystem;
 
-
+    public string playerName;
+    public Text playerNameText;
+    public InputField playerNameField;
+    public GameControl gameControl;
 
     void Awake()
     {
@@ -33,7 +36,7 @@ public class GameManager : MonoBehaviour
         else if (gameManager != this)
             Destroy(this.gameObject);
         DontDestroyOnLoad(this.gameObject);
-
+        playerName = "플레이어";
         levelSystem = transform.GetComponent<LevelSystem>();
     }
 
@@ -105,5 +108,12 @@ public class GameManager : MonoBehaviour
     public void UpdateLevelText(int _level)
     {
         levelText.text = "Lv " + _level.ToString();
+    }
+
+    public void ChangePlayerName()
+    {        
+        playerName= playerNameField.text;
+        playerNameText.text = playerName;
+        gameControl.ShowNameEditPanel();
     }
 }

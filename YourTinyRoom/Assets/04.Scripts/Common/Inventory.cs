@@ -19,16 +19,14 @@ public class Inventory : MonoBehaviour
     public Button[] categoryBtns;
     public float prevXPos;
     public GameObject FSlotParent;
-    public Slot[] fSlots;
+    public FSlot[] fSlots;
     GameObject FslotPrefab;
-    GameObject furniturePrefab;
 
     void Awake()
     {
         FslotPrefab= (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/FSlot.prefab", typeof(GameObject));
-        furniturePrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Furniture/furniture.prefab", typeof(GameObject));
         slots = SlotsParent.GetComponentsInChildren<Slot>();
-        fSlots= FSlotParent.GetComponentsInChildren<Slot>();
+        fSlots= FSlotParent.GetComponentsInChildren<FSlot>();
         itemsInInventory =new List<ItemInInventory>();
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
         prevXPos = categoryBtns[0].transform.position.x;
@@ -132,13 +130,7 @@ public class Inventory : MonoBehaviour
         {
             if (itemsInInventory[i].item.itemType == Item.ItemType.FURNITURE && itemsInInventory[i].itemCount > 0)
             {
-                furniturePrefab.GetComponent<ItemInfo>().item = itemsInInventory[i].item;
-                if(fSlots.Length==slotIdx)
-                {
-                    Instantiate(FslotPrefab, FSlotParent.transform);
-                }
                 fSlots[slotIdx].AddItem(itemsInInventory[i].item, itemsInInventory[i].itemCount);
-                fSlots[slotIdx].GetComponentInChildren<Button>().onClick.AddListener(()=>GridBuildingSystem.gbSystem.InitializeWithBuilding(furniturePrefab));
                 slotIdx++;
             }
         }
@@ -158,7 +150,6 @@ public class Inventory : MonoBehaviour
         {
             fSlots[i].itemCount = 0;
             fSlots[i].SetSlotCount(0);
-            fSlots[i].GetComponentInChildren<Button>().onClick.RemoveAllListeners();
         }
     }
     private void ChangeBtnPos(int type)

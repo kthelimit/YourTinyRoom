@@ -164,11 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1f1d68427d2e94189425cbfeeac8d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 8c28d30097e4c6c488536386d20fc90e, type: 2}
+  item: {fileID: 0}
   itemImage: {fileID: 7729775859577564327}
   itemNumber: 1
   button: {fileID: 7729775860347609039}
-  isCollected: 0
   showCInfo: {fileID: 0}
 --- !u!114 &7729775860185239426
 MonoBehaviour:

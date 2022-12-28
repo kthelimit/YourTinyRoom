@@ -18,8 +18,15 @@ public class ShopItem : MonoBehaviour
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         collections = GameObject.Find("Collection").GetComponent<Collections>();
+    }
+
+    public void SetItem(Item _item)
+    {
+        item = _item;
         itemName.text = item.ItemName;
         itemImage.sprite = item.itemImage;
+        itemImage.type = 0;
+        itemImage.preserveAspect = true;
         priceButton.GetComponentInChildren<Text>().text = item.ItemPrice.ToString();
 
         if (item.itemPriceType == Item.ItemPriceType.CRYSTAL)
@@ -27,6 +34,10 @@ public class ShopItem : MonoBehaviour
         else
             priceButton.transform.GetChild(0).GetComponent<Image>().sprite = Gold.itemImage;
         CheckPrice();
+    }
+    public void ClearSlot()
+    {
+        Destroy(this.gameObject);
     }
 
     private void CheckPrice()

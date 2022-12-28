@@ -20,6 +20,7 @@ public class ActionContoller : MonoBehaviour
     private readonly string hashCrop = "CROP";
     private readonly string hashFurniture = "FURNITURE";
     private readonly string hashChara = "CHARACTER";
+    private readonly string hashDust = "DUST";
     public GameControl gameControl;
     private CharacterCtrl characterCtrl;
 
@@ -67,6 +68,10 @@ public class ActionContoller : MonoBehaviour
             if (gameControl.isEditable) return;
             characterCtrl.StartCoroutine("Reaction");
         }
+        else if (hit.collider.tag == hashDust)
+        {
+            GetDust(hit);
+        }
 
     }
 
@@ -112,6 +117,14 @@ public class ActionContoller : MonoBehaviour
         ShowGetEffect(hit.transform, item);
     }
 
+    private void GetDust(RaycastHit2D hit)
+    {
+        if (gameControl.isEditable) return;
+        characterCtrl.GetComponent<Transform>().position = hit.transform.position;
+        characterCtrl.energyParameter -= 20f;
+        Destroy(hit.transform.gameObject, 0.1f);
+    }
+
     private void GetFurniture(RaycastHit2D hit)
     {
         Building furniture = hit.transform.GetComponent<Building>();
@@ -126,6 +139,7 @@ public class ActionContoller : MonoBehaviour
         {
             if (gameControl.isEditable)
             {
+                if (GridBuildingSystem.gbSystem.isOnMouse) return;
                 GridBuildingSystem.gbSystem.RearrangeBuilding(hit.transform.gameObject);
             }
 
