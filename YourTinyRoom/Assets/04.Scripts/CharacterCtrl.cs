@@ -33,35 +33,98 @@ public class CharacterCtrl : MonoBehaviour
     private float likingParameter=0f;
     private float likingMax=100f;
     public Image likeBar;
+    public Image likeBar2;
+    public Image likeBarOnHead;
+    public GameObject likeBarPanelOnHead;
+
     public float energyParameter=0f;
     private float energyMax = 50f;
     public Image energyBar;
+    public Image energyBarOnHead;
+    public GameObject energyBarPanelOnHead;
+
+    //머리 위 바의 위치 조정용
+    public Transform HeadOnBar;
+
     GameControl gameControl;
+    public bool IsVisited = false;
+    public Transform visit;
+    public Button InviteBtn;
 
     //대사용 말풍선
     public GameObject textbubble;
+    private Canvas textbubbleCanvas;
     private Text bubbletext;
 
     void Awake()
     {
         tr = GetComponent<Transform>();
         ani = GetComponent<SkeletonAnimation>();
-        ani.AnimationName = "Idle";
-        ani.loop = true;
-        StartCoroutine("ChooseAction");
+        ChangeAnimation("대기");
         characterRenderer = GetComponentInChildren<Renderer>();
+        textbubbleCanvas = textbubble.GetComponent<Canvas>();
         bubbletext = textbubble.GetComponentInChildren<Text>();
         textbubble.SetActive(false);
         energyParameter = energyMax;
         gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
         UpdateEnergyBar();
         UpdateLikeBar();
+        StartAtHome();
+    }
+
+    public void StartAtHome()
+    {
+        isHome = true;
+        tr.position = home.position;
+        IsVisited = false;
+        energyParameter = energyMax;
+        UpdateEnergyBar();
+        gameControl.OpenCharacterVisit(false);
+    }
+
+    public void Invite()
+    {
+        if (isHome == false)
+        {
+            Debug.Log("지금 방문 중이야.");
+            return;
+        }
+        else if (isHome && IsVisited)
+        {
+            Debug.Log("오늘은 이미 방문했어.");
+            return;
+        }
+        StartCoroutine("Visit");
+        InviteBtn.interactable = false;
+    }
+
+    IEnumerator Visit()
+    {
+        isReaction = true;
+        gameControl.OpenCharacterVisit(true);
+        gameControl.OpenCustomize(false);
+        isHome = false;
+        tr.position = visit.position;
+        IsVisited = true;
+        UpdateLikeBar(5f);
+        Camera.main.transform.position = tr.position + new Vector3(0f, 0f, -10f);
+        ChangeAnimation("안녕");
+        yield return new WaitForSeconds(2f);
+        Talk("놀러왔어~!!");
+        yield return new WaitForSeconds(2f);
+        Talk("초대해줘서 고마워!");
+        yield return new WaitForSeconds(2f);
+        ChangeAnimation("대기");
+        yield return new WaitForSeconds(3f);
+        isReaction = false;
+        StartCoroutine("ChooseAction");
     }
 
     void Update()
     {
         characterRenderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);
-        if(energyParameter<=0f&&!isHome)
+        textbubbleCanvas.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit)+1;
+        if (energyParameter<=0f&&!isHome)
         {
             StartCoroutine("ByeBye");
         }
@@ -76,11 +139,11 @@ public class CharacterCtrl : MonoBehaviour
             {
                 MakeMovePoint();
                 isMoving = true;
-                ani.AnimationName = "walk";
-                ani.loop = true;
+                ChangeAnimation("걷기");
                 while (isMoving&&!isReaction)
                 {
                     tr.position = Vector3.Lerp(tr.position, target, Time.deltaTime * moveSpeed);
+                    HeadOnBar.position = tr.position;
                     yield return null;
                     if (Vector2.Distance(tr.position, target) < 0.1f)
                     {
@@ -90,8 +153,7 @@ public class CharacterCtrl : MonoBehaviour
             }
             else
             {
-                ani.AnimationName = "Idle";
-                ani.loop = true;
+                ChangeAnimation("대기");
                 yield return new WaitForSeconds(Random.Range(1f, 5f));
             }
         }
@@ -122,9 +184,8 @@ public class CharacterCtrl : MonoBehaviour
         isReaction = true;
         if (idx%2==1)
         {
-            ani.AnimationName = "KKamchack";
-            ani.loop = false;
-            switch(idx)
+            ChangeAnimation("깜짝");
+            switch (idx)
             {
                 case 1:
                     Talk("우와앗!");
@@ -144,12 +205,10 @@ public class CharacterCtrl : MonoBehaviour
             }
 
             yield return new WaitForSeconds(2f);
-            textbubble.SetActive(false);
         }
         else
         {
-            ani.AnimationName = "hello";
-            ani.loop = false;
+            ChangeAnimation("안녕");
             switch (idx)
             {
                 case 0:
@@ -172,51 +231,141 @@ public class CharacterCtrl : MonoBehaviour
                     break;
             }
             yield return new WaitForSeconds(2f);
-            textbubble.SetActive(false);
         }
-        ani.AnimationName = "Idle";
-        ani.loop = true;
+        ChangeAnimation("대기");
         isReaction = false;
         StartCoroutine("ChooseAction");
     }
 
-    private void Talk(string message)
+    public void Talk(string message)
     {
-        textbubble.SetActive(true);
-        textbubble.transform.position = tr.position+new Vector3(-0.12f, 2.32f,0f);
-        bubbletext.text = message;
+        StartCoroutine(TalkBubble(message));
     }
 
+    IEnumerator TalkBubble(string message)
+    {
+        textbubble.SetActive(true);
+        textbubble.transform.position = tr.position + new Vector3(0f, 1.7f, 0f);
+        bubbletext.text = message;
+        yield return new WaitForSeconds(1f);
+        textbubble.SetActive(false);
+    }
     IEnumerator ByeBye()
     {
+        energyBarPanelOnHead.SetActive(false);
+        likeBarPanelOnHead.SetActive(false);
         isHome = true;
         isReaction = true;
+        isMoving = false;
+        Camera.main.transform.position = tr.position + new Vector3(0f, 0f, -10f);
         yield return new WaitForSeconds(1f);
         Talk("앗");
-        ani.AnimationName = "KKamchack";
-        ani.loop = false;
+        ChangeAnimation("깜짝");
         yield return new WaitForSeconds(2f);
         Talk("이제 가볼게!");
-        ani.AnimationName = "Idle";
-        ani.loop = true;
+        ChangeAnimation("대기");
         yield return new WaitForSeconds(2f);
         Talk("다음에 또 보자!");
-        ani.AnimationName = "hello";
-        ani.loop = false;
+        ChangeAnimation("안녕");
         yield return new WaitForSeconds(2f);
-        textbubble.SetActive(false);
         tr.position = home.position;
         isReaction = false;
         gameControl.OpenCharacterVisit(false);
+        ChangeAnimation("정지");
         StopCoroutine("ChooseAction");
     }
 
-    private void UpdateLikeBar()
+    public void ChangeAnimation(string str)
     {
-        likeBar.fillAmount = likingParameter / likingMax;
+        if (str == "대기")
+        {
+            ani.AnimationName = "Idle";
+            ani.loop = true;
+        }
+        else if (str == "깜짝")
+        {
+            ani.AnimationName = "KKamchack";
+            ani.loop = false;
+        }
+        else if (str == "안녕")
+        {
+            ani.AnimationName = "hello";
+            ani.loop = false;
+        }
+        else if (str == "걷기")
+        {
+            ani.AnimationName = "walk";
+            ani.loop = true;
+        }
+        else if(str=="정지")
+        {
+            ani.AnimationName = "Idle";
+            ani.loop = false;
+        }
     }
-    private void UpdateEnergyBar()
+    public void PlayAnimation(string str)
     {
-        energyBar.fillAmount = energyParameter / energyMax;
+        isReaction = true;
+        ChangeAnimation(str);
+        StartCoroutine("PlayAnimation");
     }
+
+    IEnumerator PlayAnimation()
+    {
+        StopCoroutine("ChooseAction");
+        yield return new WaitForSeconds(2f);
+        StartCoroutine("ChooseAction");
+        isReaction = false;
+    }
+    public void UpdateLikeBar(float num = 0f)
+    {
+        likingParameter += num;
+        StartCoroutine("LikeBarAnimation");
+    }
+
+    IEnumerator LikeBarAnimation()
+    {
+        HeadOnBar.position = tr.position;
+        likeBarPanelOnHead.SetActive(true);
+        while (true)
+        {
+            HeadOnBar.position = tr.position;
+            likeBar.fillAmount = Mathf.Lerp(likeBar.fillAmount, likingParameter / likingMax, 0.1f);
+            likeBar2.fillAmount = Mathf.Lerp(likeBar.fillAmount, likingParameter / likingMax, 0.1f);
+            likeBarOnHead.fillAmount = Mathf.Lerp(likeBar.fillAmount, likingParameter / likingMax, 0.1f);
+            yield return null;
+            if (Mathf.Abs(likingParameter / likingMax - likeBar.fillAmount) < 0.01f)
+                break;
+        }
+        likeBar.fillAmount = likeBar2.fillAmount = likeBarOnHead.fillAmount = likingParameter / likingMax;
+       yield return new WaitForSeconds(1f);
+        likeBarPanelOnHead.SetActive(false);
+
+    }
+
+    public void UpdateEnergyBar(float num = 0f)
+    {
+        energyParameter += num;
+        StartCoroutine("EnergyBarAnimation");
+    }
+
+    IEnumerator EnergyBarAnimation()
+    {
+        HeadOnBar.position = tr.position;
+        energyBarPanelOnHead.SetActive(true);
+
+        while (true)
+        {
+            HeadOnBar.position = tr.position;
+            energyBar.fillAmount = Mathf.Lerp(energyBar.fillAmount, energyParameter / energyMax, 0.1f);
+            energyBarOnHead.fillAmount = Mathf.Lerp(energyBar.fillAmount, energyParameter / energyMax, 0.1f);
+            yield return null;
+            if (Mathf.Abs(energyParameter / energyMax - energyBar.fillAmount) < 0.01f)
+                break;
+        }
+        energyBar.fillAmount = energyBarOnHead.fillAmount = energyParameter / energyMax;
+        yield return new WaitForSeconds(1f);
+        energyBarPanelOnHead.SetActive(false);
+    }
+
 }

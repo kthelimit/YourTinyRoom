@@ -20,6 +20,8 @@ public class GameControl : MonoBehaviour
     public CapsuleCollider2D CharacterCollider;
     public GameObject NameEditPanel;
     public GameObject ClosePanel;
+    public GameObject CNameEditPanel;
+    public GameObject CClosePanel;
 
     //캐릭터 방문시 아이콘
     public GameObject CharacterVisit;
@@ -254,6 +256,20 @@ public class GameControl : MonoBehaviour
         {
             NameEditPanel.SetActive(false);
             ClosePanel.SetActive(false);
+        }
+    }
+
+    public void ShowCNameEditPanel()
+    {
+        if (CNameEditPanel.gameObject.activeInHierarchy == false)
+        {
+            CNameEditPanel.SetActive(true);
+            CClosePanel.SetActive(true);
+        }
+        else
+        {
+            CNameEditPanel.SetActive(false);
+            CClosePanel.SetActive(false);
         }
     }
 }

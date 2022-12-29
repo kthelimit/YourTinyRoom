@@ -66,6 +66,7 @@ public class LevelSystem : MonoBehaviour
         beforeLevel = levelCount;
         totalGold = 0f;
         totalCrystal = 0f;
+
     }
 
     public void CloseLevelUpPanel()

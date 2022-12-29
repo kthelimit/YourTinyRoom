@@ -24,9 +24,17 @@ public class GameManager : MonoBehaviour
     public Text levelText;
     LevelSystem levelSystem;
 
+    //플레이어 이름
     public string playerName;
     public Text playerNameText;
     public InputField playerNameField;
+
+    //캐릭터 이름
+    public string characterName;
+    public Text characterNameText;
+    public Text characterNameText2;
+    public InputField characterNameField;
+
     public GameControl gameControl;
 
     void Awake()
@@ -37,6 +45,10 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         DontDestroyOnLoad(this.gameObject);
         playerName = "플레이어";
+        playerNameText.text = playerName;
+        characterName = "캐릭터";
+        characterNameText.text = characterName;
+        characterNameText2.text = characterName + " 방문중!";
         levelSystem = transform.GetComponent<LevelSystem>();
     }
 
@@ -94,10 +106,21 @@ public class GameManager : MonoBehaviour
     public void IncreaseExp(float amount)
     {
         curExp += amount;
-        expGauge.fillAmount = (curExp-minExp) / (maxExp-minExp);
         levelSystem.LevelUpCheck(curExp);
+        StartCoroutine("ExpBarAnimation");
     }
 
+    IEnumerator ExpBarAnimation()
+    {        
+        while (true)
+        {
+            expGauge.fillAmount = Mathf.Lerp(expGauge.fillAmount, (curExp - minExp) / (maxExp - minExp), 0.1f);
+            yield return null;
+            if (Mathf.Abs((curExp - minExp) / (maxExp - minExp) - expGauge.fillAmount) < 0.01f)
+                break;
+        }
+        expGauge.fillAmount = (curExp - minExp) / (maxExp - minExp);
+    }
     public void ChangeExpInterval(float MinExp, float MaxExp)
     {
         minExp = MinExp;
@@ -115,5 +138,13 @@ public class GameManager : MonoBehaviour
         playerName= playerNameField.text;
         playerNameText.text = playerName;
         gameControl.ShowNameEditPanel();
+    }
+
+    public void ChangeCharacterName()
+    {
+        characterName = characterNameField.text;
+        characterNameText.text = characterName;
+        characterNameText2.text = characterName+" 방문중!";
+        gameControl.ShowCNameEditPanel();
     }
 }

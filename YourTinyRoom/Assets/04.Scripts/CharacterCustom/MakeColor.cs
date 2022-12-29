@@ -22,11 +22,17 @@ public class MakeColor : MonoBehaviour
     public Slider gSlider;
     public Slider bSlider;
     public ColorChange colorChange;
+    public Button hairButton;
+    public Button eyeButton;
+    public Button clothButton;
+    public Color notSelectedColor;
+    public Color selectedColor;
 
     private void Start()
     {
         makeColor = new Color();
         makeColor.a = 1f;
+        hairButton.GetComponent<Image>().color = selectedColor;
         Invoke("LoadColor", 0.1f);
     }
     public void LoadColor()
@@ -157,16 +163,25 @@ public class MakeColor : MonoBehaviour
     public void ChangePartTypeH()
     {
         colorPart = ColorPartType.HAIR;
+        hairButton.GetComponent<Image>().color = selectedColor;
+        eyeButton.GetComponent<Image>().color =notSelectedColor;
+        clothButton.GetComponent<Image>().color = notSelectedColor;
         LoadColor();
     }
     public void ChangePartTypeP()
     {
         colorPart = ColorPartType.PUPIL;
+        eyeButton.GetComponent<Image>().color = selectedColor;
+        hairButton.GetComponent<Image>().color = notSelectedColor;
+        clothButton.GetComponent<Image>().color = notSelectedColor;
         LoadColor();
     }
     public void ChangePartTypeC()
     {
         colorPart = ColorPartType.CLOTH;
+        clothButton.GetComponent<Image>().color = selectedColor;
+        eyeButton.GetComponent<Image>().color = notSelectedColor;
+        hairButton.GetComponent<Image>().color = notSelectedColor;
         LoadColor();
     }
 }

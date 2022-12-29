@@ -16,6 +16,7 @@ public class ActionContoller : MonoBehaviour
     public ItemInfo Exp;
     public ItemInfo Gold;
     public ItemInfo Crystal;
+    public ItemInfo Energy;
     private readonly string hashItem = "ITEM";
     private readonly string hashCrop = "CROP";
     private readonly string hashFurniture = "FURNITURE";
@@ -23,6 +24,7 @@ public class ActionContoller : MonoBehaviour
     private readonly string hashDust = "DUST";
     public GameControl gameControl;
     private CharacterCtrl characterCtrl;
+    public float dustEnergy = 20f;
 
     void Start()
     {
@@ -66,11 +68,17 @@ public class ActionContoller : MonoBehaviour
         else if (hit.collider.tag == hashChara)
         {
             if (gameControl.isEditable) return;
+            if (characterCtrl.isReaction) return;
             characterCtrl.StartCoroutine("Reaction");
         }
         else if (hit.collider.tag == hashDust)
         {
-            GetDust(hit);
+            if (!gameControl.isEditable && !characterCtrl.isHome)
+            {
+                characterCtrl.StopCoroutine("ChooseAction");
+                GetDust(hit);
+              //  StartCoroutine(RemoveDust(hit));
+            }
         }
 
     }
@@ -87,10 +95,8 @@ public class ActionContoller : MonoBehaviour
             collections.Collect(item);
             GameManager.gameManager.IncreaseExp(crop.exp);
             Destroy(hit.transform.gameObject);
-            ShowGetEffect(hit.transform, item, crop.quantity);
-            Transform tr2 = hit.transform;
-            tr2.position = new Vector3(tr2.position.x, tr2.position.y-0.6f, tr2.position.z);
-            ShowGetEffect(tr2, Exp.item, (int)crop.exp);
+
+            ShowGetEffect(hit.transform, item, crop.quantity, Exp.item, (int)crop.exp);
             Building cropPlace = crop.GetComponent<Building>();
             GridBuildingSystem.gbSystem.ClearArea(cropPlace.area);
         }
@@ -119,10 +125,53 @@ public class ActionContoller : MonoBehaviour
 
     private void GetDust(RaycastHit2D hit)
     {
-        if (gameControl.isEditable) return;
-        characterCtrl.GetComponent<Transform>().position = hit.transform.position;
-        characterCtrl.energyParameter -= 20f;
-        Destroy(hit.transform.gameObject, 0.1f);
+        hit.transform.GetComponent<Dust>().ShowMenu(true);
+    }
+
+    public void PleaseRemoveDust(Transform _transform)
+    {
+        StartCoroutine(RemoveDust(_transform));
+    }
+
+    IEnumerator RemoveDust(Transform _transform)
+    {
+        characterCtrl.GetComponent<Transform>().position = _transform.position + Vector3.up * 0.1f + Vector3.right * 0.3f;
+        characterCtrl.isReaction = true;
+        int rand = Random.Range(0, 5);
+        if (rand == 0)
+        {
+            characterCtrl.ChangeAnimation("깜짝");
+            characterCtrl.Talk("세상에! 이 먼지 좀 봐!");
+        }
+        else if (rand == 1)
+        {
+            characterCtrl.ChangeAnimation("깜짝");
+            characterCtrl.Talk("조금만 기다려! 내가 금방 치워줄게~!");
+        }
+        else if (rand == 2)
+        {
+            characterCtrl.ChangeAnimation("안녕");
+            characterCtrl.Talk("이정도 쯤이야!");
+        }
+        else if (rand == 3)
+        {
+            characterCtrl.ChangeAnimation("안녕");
+            characterCtrl.Talk("영차영차");
+        }
+        else if (rand == 4)
+        {
+            characterCtrl.ChangeAnimation("안녕");
+            characterCtrl.Talk("즐거운 청소시간~!");
+        }
+        yield return new WaitForSeconds(2f);
+        characterCtrl.ChangeAnimation("대기");
+        Destroy(_transform.gameObject, 0.1f);
+        GameManager.gameManager.IncreaseExp(10);
+        ShowGetEffect(_transform, Energy.item, -20, Exp.item, 10);
+        characterCtrl.UpdateEnergyBar(-dustEnergy);
+        characterCtrl.isReaction = false;
+        characterCtrl.StartCoroutine("ChooseAction");
+
     }
 
     private void GetFurniture(RaycastHit2D hit)
@@ -151,5 +200,16 @@ public class ActionContoller : MonoBehaviour
     {
         GameObject obj = Instantiate(getEffectPrefab, tr.position, tr.rotation);
         obj.GetComponent<CsScore>().ChangeInfo(item, quantity);
+    }
+
+    private void ShowGetEffect(Transform tr, Item item, int quantity, Item item2, int quantity2)
+    {
+        GameObject obj = Instantiate(getEffectPrefab, tr.position, tr.rotation);
+        obj.GetComponent<CsScore>().ChangeInfo(item, quantity);
+
+        Transform tr2 = tr;
+        tr2.position = new Vector3(tr2.position.x, tr2.position.y - 0.6f, tr2.position.z);
+        GameObject obj2 = Instantiate(getEffectPrefab, tr2.position, tr2.rotation);
+        obj2.GetComponent<CsScore>().ChangeInfo(item2, quantity2);
     }
 }

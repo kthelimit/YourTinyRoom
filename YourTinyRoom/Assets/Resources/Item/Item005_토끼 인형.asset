@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40177c288328c3438e20f8f32cb0393, type: 3}
+  m_Script: {fileID: 11500000, guid: b9e0b0fcd197045418a9adeefd95435f, type: 3}
   m_Name: "Item005_\uD1A0\uB07C \uC778\uD615"
   m_EditorClassIdentifier: 
   ItemName: "\uD1A0\uB07C \uC778\uD615"
@@ -19,3 +19,5 @@ MonoBehaviour:
   ItemPrice: 150
   itemPriceType: 0
   ItemNumber: 5
+  itemEffectType: 0
+  ItemEffectValue: 2

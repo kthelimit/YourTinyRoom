@@ -25,6 +25,7 @@ public class ShowItemInfo : MonoBehaviour
     private int curCount;
     public int throwQuantity=1;
     public Slider throwSlider;
+    private CharacterCtrl characterCtrl;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class ShowItemInfo : MonoBehaviour
         cg.blocksRaycasts = false;
         inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
         tdPanel.SetActive(false);
+        characterCtrl = GameObject.FindWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
     }
     public void ShowInfo(Item _item, int _itemCount)
     {
@@ -94,7 +96,44 @@ public class ShowItemInfo : MonoBehaviour
         inventory.AcquireItem(item, -1);
         curCount--;
         text_count.text = curCount.ToString();
-        //효과 발휘하기(추후 추가)
+
+        if(item.itemType==Item.ItemType.GIFT)
+        {
+            if (characterCtrl.isHome) return;
+            GIFT gift = (GIFT)item;
+            if (gift.itemEffectType == GIFT.ItemEffectType.ENERGY)
+            {
+                characterCtrl.UpdateEnergyBar(gift.ItemEffectValue);
+                int rand = Random.Range(0,3);
+                if (rand == 0)
+                    characterCtrl.Talk("어쩐지 기운이 조금 나는 거 같아.");
+                else if (rand == 1)
+                    characterCtrl.Talk("힘이 솟는다!");
+                else if (rand==2)
+                    characterCtrl.Talk("조금 더 놀다갈 수 있겠다!");
+                else
+                    characterCtrl.Talk("오오! 고마워~!!");
+            }
+            else if(gift.itemEffectType == GIFT.ItemEffectType.LIKE)
+            {
+                characterCtrl.UpdateLikeBar(gift.ItemEffectValue);
+                int rand = Random.Range(0, 3);
+                if (rand == 0)
+                    characterCtrl.Talk("내가 이거 좋아하는 거 어떻게 알았어?");
+                else if (rand == 1)
+                    characterCtrl.Talk("기뻐~!!!");
+                else if (rand == 2)
+                    characterCtrl.Talk("이거 좋아~!! 고마워!");
+                else
+                    characterCtrl.Talk("헤헤, 소중히 할게!");
+            }
+            characterCtrl.PlayAnimation("안녕");
+        }
+        else if(item.itemType==Item.ItemType.USED)
+        {
+
+        }
+
         if (curCount<=0)
             CloseItemInfo();
 

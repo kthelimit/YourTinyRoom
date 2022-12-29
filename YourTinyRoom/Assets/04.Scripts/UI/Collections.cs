@@ -29,7 +29,7 @@ public class Collections : MonoBehaviour
         prevXPos = categoryBtns[0].transform.position.x;
         foreach (Item item in Items)
         {
-            if (item.ItemName != "Gold"&& item.ItemName != "Exp" && item.ItemName != "Crystal")
+            if (item.ItemNumber!=0)
                 ItemList.Add(item);
         }    
         foreach(Item item in ItemList)

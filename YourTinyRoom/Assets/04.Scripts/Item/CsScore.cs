@@ -45,6 +45,13 @@ public class CsScore : MonoBehaviour
 		getItemImage.sprite = item.itemImage;
 		getItemImage.type = 0;
 		getItemImage.preserveAspect = true;
-		getItemQuantity.text = "+"+ quantity.ToString();
+		if (quantity < 0)
+		{
+			getItemQuantity.text = quantity.ToString();
+		}
+		else
+		{
+			getItemQuantity.text = "+" + quantity.ToString();
+		}
 	}
 }

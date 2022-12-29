@@ -42,11 +42,7 @@ public class CSVtoSO
                     break;
                 }
             };
-            if (item.itemType != Item.ItemType.FURNITURE)
-            {//asset파일로 저장
-                AssetDatabase.CreateAsset(item, $"Assets/Resources/Item/Item{item.ItemNumber.ToString("000")}_{item.ItemName}.asset");
-            }
-            else
+            if (item.itemType == Item.ItemType.FURNITURE)
             {
                 Furniture furniture = ScriptableObject.CreateInstance<Furniture>();
                 furniture.ItemNumber = int.Parse(splitData[0]);
@@ -74,6 +70,41 @@ public class CSVtoSO
                 AssetDatabase.CreateAsset(furniture, $"Assets/Resources/Item/Item{item.ItemNumber.ToString("000")}_{item.ItemName}.asset");
 
             }
+            else if (item.itemType == Item.ItemType.GIFT)
+            {
+                GIFT gift = ScriptableObject.CreateInstance<GIFT>();
+                gift.ItemNumber = int.Parse(splitData[0]);
+                //아이템 이름
+                gift.ItemName = splitData[1];
+                //아이템 타입
+                gift.itemType = (Item.ItemType)Enum.Parse(typeof(Item.ItemType), splitData[2]);
+                //아이템 설명
+                gift.ItemDesc = splitData[3];
+                //아이템 가격을 지불할 자원
+                gift.itemPriceType = (Item.ItemPriceType)Enum.Parse(typeof(Item.ItemPriceType), splitData[4]);
+                //아이템 가격
+                gift.ItemPrice = float.Parse(splitData[5]);
+                //아이템 스프라이트
+                str = "Item" + item.ItemNumber.ToString("000");
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    if (sprites[i].name == str)
+                    {
+                        gift.itemImage = sprites[i];
+                        break;
+                    }
+                };
+                gift.itemEffectType= (GIFT.ItemEffectType)Enum.Parse(typeof(GIFT.ItemEffectType), splitData[6]);
+                gift.ItemEffectValue= float.Parse(splitData[7]);
+
+                AssetDatabase.CreateAsset(gift, $"Assets/Resources/Item/Item{item.ItemNumber.ToString("000")}_{item.ItemName}.asset");
+
+            }
+            else
+            {//asset파일로 저장
+                AssetDatabase.CreateAsset(item, $"Assets/Resources/Item/Item{item.ItemNumber.ToString("000")}_{item.ItemName}.asset");
+            }
+            
 
         }
         AssetDatabase.SaveAssets();
