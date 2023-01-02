@@ -1514,7 +1514,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectHairSkin
         m_Mode: 3
         m_Arguments:
@@ -6253,7 +6253,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectEyesSkin
         m_Mode: 3
         m_Arguments:
@@ -6361,7 +6361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 6b6ce597d8f10e5409d0c34afc10f463, type: 2}
-  skinsSystem: {fileID: 933680764}
+  skinsSystem: {fileID: 847270174}
   itemSkin: hair_back/short2
   itemType: 1
 --- !u!114 &279053653
@@ -6539,7 +6539,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectHairSkin
         m_Mode: 3
         m_Arguments:
@@ -8748,7 +8748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 6b6ce597d8f10e5409d0c34afc10f463, type: 2}
-  skinsSystem: {fileID: 933680764}
+  skinsSystem: {fileID: 847270174}
   itemSkin: hair_back/long
   itemType: 1
 --- !u!114 &379816589
@@ -13850,7 +13850,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601314480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 2, z: -3.5}
+  m_LocalPosition: {x: 0.17, y: 1.61, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13868,9 +13868,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8887e80b187814aa43cf950a78f450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 933680761}
-  xCorrection: -0.2
-  yCorrection: 1.8
+  target: {fileID: 847270169}
+  xCorrection: -0.1
+  yCorrection: 1.61
 --- !u!1 &603343323
 GameObject:
   m_ObjectHideFlags: 0
@@ -16862,7 +16862,7 @@ PrefabInstance:
         type: 3}
       propertyPath: colorChange
       value: 
-      objectReference: {fileID: 933680763}
+      objectReference: {fileID: 847270172}
     - target: {fileID: 8053154537464785912, guid: 2547ef5fd8da29e4ea003bd17487ad06,
         type: 3}
       propertyPath: selectedColor.a
@@ -18522,7 +18522,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectEyelashSkin
         m_Mode: 3
         m_Arguments:
@@ -19162,6 +19162,339 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826391586}
   m_CullTransparentMesh: 0
+--- !u!1 &847270165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 847270169}
+  - component: {fileID: 847270168}
+  - component: {fileID: 847270167}
+  - component: {fileID: 847270166}
+  - component: {fileID: 847270174}
+  - component: {fileID: 847270172}
+  - component: {fileID: 847270170}
+  - component: {fileID: 847270171}
+  - component: {fileID: 847270173}
+  m_Layer: 0
+  m_Name: character
+  m_TagString: CHARACTER
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &847270166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: a5b6ad4486dcd8a46949110d1b292157, type: 2}
+  initialSkinName: fullskin/naoto
+  fixPrefabOverrideViaMeshFilter: 2
+  initialFlipX: 0
+  initialFlipY: 0
+  updateWhenInvisible: 3
+  separatorSlotNames:
+  - hair
+  - hairback
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 1
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  updateTiming: 1
+  unscaledTime: 0
+  _animationName: Idle
+  loop: 1
+  timeScale: 1
+--- !u!23 &847270167
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: ffbae8c8d1f061345a5ca1546095d437, type: 2}
+  - {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - {fileID: 2100000, guid: ffbae8c8d1f061345a5ca1546095d437, type: 2}
+  - {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - {fileID: 2100000, guid: ffbae8c8d1f061345a5ca1546095d437, type: 2}
+  - {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - {fileID: 2100000, guid: ffbae8c8d1f061345a5ca1546095d437, type: 2}
+  - {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - {fileID: 2100000, guid: ffbae8c8d1f061345a5ca1546095d437, type: 2}
+  - {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - {fileID: 2100000, guid: ffbae8c8d1f061345a5ca1546095d437, type: 2}
+  - {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - {fileID: 2100000, guid: ffbae8c8d1f061345a5ca1546095d437, type: 2}
+  - {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &847270168
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Mesh: {fileID: 0}
+--- !u!4 &847270169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &847270170
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.06767994, y: 1.2182046}
+  m_Size: {x: 1.7705002, y: 2.4434025}
+  m_Direction: 0
+--- !u!114 &847270171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26947ae098a8447408d80c0c86e35b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonRenderer: {fileID: 847270166}
+  customSlotMaterials:
+  - overrideDisabled: 0
+    slotName: hair
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: haircut rear
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: hairback
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: haircut rear back
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: pony tail long
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: pony tail long back
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: twin tail l
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: twin tail r
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: twin tail l b
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: twin tail r b
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: pupil l
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: pupil r
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes arm l
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes arm r
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes body
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes leg l
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes leg r
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes arm l back
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes arm r back
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes body  back
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes leg l  back
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  - overrideDisabled: 0
+    slotName: clothes leg r  back
+    material: {fileID: 2100000, guid: dbd58e492a63c6f45b878158f786aba8, type: 2}
+  customMaterialOverrides:
+  - overrideDisabled: 1
+    originalMaterial: {fileID: 0}
+    replacementMaterial: {fileID: 0}
+--- !u!114 &847270172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e69737e970bb25418b0a1d74c9d137f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hairTintColor: {r: 1, g: 1, b: 1, a: 1}
+  hairDarkColor: {r: 0, g: 0, b: 0, a: 1}
+  pupilTintColor: {r: 1, g: 1, b: 1, a: 1}
+  pupilDarkColor: {r: 0, g: 0, b: 0, a: 1}
+  clothesTintColor: {r: 1, g: 1, b: 1, a: 1}
+  clothesDarkColor: {r: 0, g: 0, b: 0, a: 1}
+  skMecanim: {fileID: 0}
+--- !u!114 &847270173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c097f7ddf551d5d40b57c1b22726a934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hMax: 1
+  hMin: -1
+  vMax: 1
+  vMin: -1
+  moveSpeed: 1
+  isMoving: 0
+  isReaction: 0
+  isHome: 0
+  characterRenderer: {fileID: 0}
+  home: {fileID: 14878564}
+  likeBar: {fileID: 1358322511}
+  likeBar2: {fileID: 857405442}
+  likeBarOnHead: {fileID: 747271145}
+  likeBarPanelOnHead: {fileID: 1463538788}
+  energyParameter: 0
+  energyBar: {fileID: 1883267530}
+  energyBarOnHead: {fileID: 1005540098}
+  energyBarPanelOnHead: {fileID: 1517649213}
+  HeadOnBar: {fileID: 2053953416}
+  IsVisited: 0
+  visit: {fileID: 1466694035}
+  InviteBtn: {fileID: 1993736912}
+  textbubble: {fileID: 216433171}
+--- !u!114 &847270174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847270165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6679893ba1c7e2542a7ca95e28c48417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSkin: skin-base
+  hairSkins:
+  - hair_front/hairfront1
+  - hair_front/hairfront2
+  - hair_front/hairfront3
+  activeHairIndex: 0
+  eyesSkins:
+  - pupil/pupil1
+  - pupil/pupil2 cat
+  - pupil/pupil3 none
+  activeEyesIndex: 0
+  eyelashSkins:
+  - eyelash/eyelash high
+  - eyelash/eyelash normal
+  - eyelash/eyelash low
+  activeEyelashIndex: 0
+  clothSkins:
+  - clothes/suit
+  - clothes/clothes
+  activeClothIndex: 0
+  TailSkin: 
+  HairBackSkin: 
+  skeletonAnimation: {fileID: 0}
+  runtimeMaterial: {fileID: 0}
+  runtimeAtlas: {fileID: 0}
+  lightColor: {fileID: 0}
+  darkColor: {fileID: 0}
 --- !u!1 &847366626
 GameObject:
   m_ObjectHideFlags: 0
@@ -19248,7 +19581,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectClothSkin
         m_Mode: 3
         m_Arguments:
@@ -20571,7 +20904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &933680757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20619,7 +20952,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933680756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c097f7ddf551d5d40b57c1b22726a934, type: 3}
   m_Name: 
@@ -21297,7 +21630,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectClothSkin
         m_Mode: 3
         m_Arguments:
@@ -27342,7 +27675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 6b6ce597d8f10e5409d0c34afc10f463, type: 2}
-  skinsSystem: {fileID: 933680764}
+  skinsSystem: {fileID: 847270174}
   itemSkin: hair_back/short1
   itemType: 1
 --- !u!114 &1237813604
@@ -32534,7 +32867,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectEyelashSkin
         m_Mode: 3
         m_Arguments:
@@ -36881,7 +37214,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectEyesSkin
         m_Mode: 3
         m_Arguments:
@@ -37808,7 +38141,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectEyelashSkin
         m_Mode: 3
         m_Arguments:
@@ -38299,7 +38632,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectEyesSkin
         m_Mode: 3
         m_Arguments:
@@ -41364,7 +41697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 6b6ce597d8f10e5409d0c34afc10f463, type: 2}
-  skinsSystem: {fileID: 933680764}
+  skinsSystem: {fileID: 847270174}
   itemSkin: hair_back/semi
   itemType: 1
 --- !u!114 &1865772937
@@ -43214,9 +43547,9 @@ RectTransform:
   m_Father: {fileID: 1324729080787444856}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15, y: -10}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1934338902
@@ -44011,7 +44344,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1622722650}
   m_HandleRect: {fileID: 1622722649}
   m_Direction: 2
-  m_Value: 1.0000001
+  m_Value: 0.99999994
   m_Size: 0.4997121
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -45004,7 +45337,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680758}
+      - m_Target: {fileID: 847270173}
         m_MethodName: Invite
         m_Mode: 1
         m_Arguments:
@@ -47812,8 +48145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 6b6ce597d8f10e5409d0c34afc10f463, type: 2}
-  skinsSystem: {fileID: 933680764}
-  itemSkin: default
+  skinsSystem: {fileID: 847270174}
+  itemSkin: skin-base
   itemType: 1
 --- !u!114 &2132622475
 MonoBehaviour:
@@ -49278,9 +49611,9 @@ RectTransform:
   m_Father: {fileID: 1324729080787444856}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -10}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7758094574549207180
@@ -49363,7 +49696,7 @@ PrefabInstance:
         type: 3}
       propertyPath: colorChange
       value: 
-      objectReference: {fileID: 933680763}
+      objectReference: {fileID: 847270172}
     - target: {fileID: 8053154537464785912, guid: 2547ef5fd8da29e4ea003bd17487ad06,
         type: 3}
       propertyPath: selectedColor.a
@@ -49692,7 +50025,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 933680764}
+      - m_Target: {fileID: 847270174}
         m_MethodName: SelectHairSkin
         m_Mode: 3
         m_Arguments:

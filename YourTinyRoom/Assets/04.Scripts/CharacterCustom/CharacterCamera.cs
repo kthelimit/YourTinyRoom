@@ -18,11 +18,11 @@ public class CharacterCamera : MonoBehaviour
     {
         if (target.eulerAngles.y == 180f)
         {
-            xCorrection = 0.2f;
+            xCorrection = -Mathf.Abs(xCorrection);
         }
         else
         {
-            xCorrection = -0.2f;
+            xCorrection = Mathf.Abs(xCorrection);
         }
         camTr.position = new Vector3(target.position.x +xCorrection, target.position.y + yCorrection, -3.5f);
 
