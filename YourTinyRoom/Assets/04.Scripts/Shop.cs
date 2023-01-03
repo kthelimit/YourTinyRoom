@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     public Button[] categoryBtns;
     public Color selectedColor;
     public Color notSelectedColor;
-    private Item.ItemType itemCategory = Item.ItemType.USED;
+    private Item.ItemType itemCategory = Item.ItemType.GIFT;
 
     void Awake()
     {
@@ -56,7 +56,7 @@ public class Shop : MonoBehaviour
         switch (type)
         {
             case 0:
-                categoryBtns[0].GetComponent<Image>().color = selectedColor;
+                categoryBtns[3].GetComponent<Image>().color = selectedColor;
                 break;
             case 1:
                 //컬렉션
@@ -71,7 +71,7 @@ public class Shop : MonoBehaviour
                 categoryBtns[1].GetComponent<Image>().color = selectedColor;
                 break;
             case 5:
-                categoryBtns[3].GetComponent<Image>().color = selectedColor;
+                categoryBtns[0].GetComponent<Image>().color = selectedColor;
                 break;
         }
     }

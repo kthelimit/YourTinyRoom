@@ -77,6 +77,7 @@ public class CharacterCtrl : MonoBehaviour
         isHome = true;
         tr.position = home.position;
         IsVisited = false;
+        InviteBtn.interactable = true;
         energyParameter = energyMax;
         UpdateEnergyBar();
         gameControl.OpenCharacterVisit(false);
@@ -307,10 +308,10 @@ public class CharacterCtrl : MonoBehaviour
     {
         isReaction = true;
         ChangeAnimation(str);
-        StartCoroutine("PlayAnimation");
+        StartCoroutine("PlayAnimationI");
     }
 
-    IEnumerator PlayAnimation()
+    IEnumerator PlayAnimationI()
     {
         StopCoroutine("ChooseAction");
         yield return new WaitForSeconds(2f);
@@ -320,6 +321,7 @@ public class CharacterCtrl : MonoBehaviour
     public void UpdateLikeBar(float num = 0f)
     {
         likingParameter += num;
+        likingParameter = Mathf.Clamp(likingParameter, 0.0f, likingMax);
         StartCoroutine("LikeBarAnimation");
     }
 
@@ -346,6 +348,7 @@ public class CharacterCtrl : MonoBehaviour
     public void UpdateEnergyBar(float num = 0f)
     {
         energyParameter += num;
+        energyParameter = Mathf.Clamp(energyParameter, 0.0f, energyMax);
         StartCoroutine("EnergyBarAnimation");
     }
 

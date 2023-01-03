@@ -55,6 +55,7 @@ public class QuestItem : MonoBehaviour
     {
         if (isAlarmed) return;
         rewardButton.interactable = true;
+        this.transform.SetAsFirstSibling();
         QuestManager.questManager.CheckIsThereReward();
         QuestManager.AllTakeOut += this.TakeOut;
         QuestAlarmPanelText.text = "퀘스트 [" + questData.questName + "] 달성! 보상을 수령해주세요.";

@@ -11,13 +11,17 @@ public class ShopItem : MonoBehaviour
     public Item item;
     public Item Gold;
     public Item Crystal;
+    [SerializeField]
+    private GameObject getEffectPrefab;
 
     public Inventory inventory;
     public Collections collections;
+
     void Start()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         collections = GameObject.Find("Collection").GetComponent<Collections>();
+        getEffectPrefab = Resources.Load<GameObject>("GetEffectUI");
     }
 
     public void SetItem(Item _item)
@@ -67,10 +71,15 @@ public class ShopItem : MonoBehaviour
                 GameManager.gameManager.DecreaseGold(item.ItemPrice);
             }
             CheckPrice();
+            ShowGetEffect(priceButton.transform, item);
         }
         
     }
-
+    private void ShowGetEffect(Transform tr, Item item, int quantity = 1)
+    {
+        GameObject obj = Instantiate(getEffectPrefab, tr.position, tr.rotation);
+        obj.GetComponent<CsScore>().ChangeInfo(item, quantity);
+    }
 
 
 }

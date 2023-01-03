@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
@@ -21,13 +22,13 @@ public class GameControl : MonoBehaviour
     public GameObject NameEditPanel;
     public GameObject ClosePanel;
     public GameObject CNameEditPanel;
-    public GameObject CClosePanel;
+    public GameObject NextDayPanel;
 
     //캐릭터 방문시 아이콘
     public GameObject CharacterVisit;
     public GameObject CharacterVisitSub;
     private bool isCharaVSubOpen = false;
-    private Vector3 charaVTarget=Vector3.zero;
+    private Vector3 charaVTarget = Vector3.zero;
     public bool isEditable = false;
 
     //장면 이동시
@@ -35,7 +36,7 @@ public class GameControl : MonoBehaviour
     public GameObject GoRoomObject;
     public GameObject InteriorObject;
     public GameObject CropObject;
-    public bool isFarm=false;
+    public bool isFarm = false;
 
 
     void Awake()
@@ -52,7 +53,7 @@ public class GameControl : MonoBehaviour
 
     void Update()
     {
-        if (Application.platform==RuntimePlatform.WindowsEditor) //윈도우 버전에서만 ESC에 반응
+        if (Application.platform == RuntimePlatform.WindowsEditor) //윈도우 버전에서만 ESC에 반응
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 Pause();
@@ -61,7 +62,7 @@ public class GameControl : MonoBehaviour
 
     public void Pause()
     {
-        if(PauseImg.gameObject.activeInHierarchy==false)
+        if (PauseImg.gameObject.activeInHierarchy == false)
         {
             if (SettingMenu.gameObject.activeInHierarchy == false)
             {
@@ -96,10 +97,10 @@ public class GameControl : MonoBehaviour
 
     public void OpenInventory(bool isopen)
     {
-        if(InventoryCG.alpha==1f)
+        if (InventoryCG.alpha == 1f)
             isopen = false;
-        
-        InventoryCG.alpha = isopen?1.0f:0.0f;
+
+        InventoryCG.alpha = isopen ? 1.0f : 0.0f;
         InventoryCG.blocksRaycasts = isopen;
         InventoryCG.interactable = isopen;
     }
@@ -149,9 +150,9 @@ public class GameControl : MonoBehaviour
         AllCanvasCG.alpha = isopen ? 0.0f : 1.0f;
         AllCanvasCG.blocksRaycasts = !isopen;
         AllCanvasCG.interactable = !isopen;
-        if(isopen)
+        if (isopen)
         {
-            Camera.main.cullingMask = 1<<8;
+            Camera.main.cullingMask = 1 << 8;
         }
         else
         {
@@ -215,11 +216,11 @@ public class GameControl : MonoBehaviour
         while (true)
         {
             yield return null;
-            CharacterVisitSub.transform.position=Vector3.MoveTowards(CharacterVisitSub.transform.position, charaVTarget, 0.1f);
+            CharacterVisitSub.transform.position = Vector3.MoveTowards(CharacterVisitSub.transform.position, charaVTarget, 0.1f);
             if (Vector3.Distance(CharacterVisitSub.transform.position, charaVTarget) <= 0.1f)
             {
                 CharacterVisitSub.transform.position = charaVTarget;
-                break; 
+                break;
             }
         }
     }
@@ -232,7 +233,7 @@ public class GameControl : MonoBehaviour
         GoRoomObject.SetActive(true);
         CropObject.SetActive(true);
         InteriorObject.SetActive(false);
-        
+
     }
 
     public void GoRoom()
@@ -244,18 +245,34 @@ public class GameControl : MonoBehaviour
         InteriorObject.SetActive(true);
     }
 
-
+    public void GoNextDay()
+    {
+        if (NextDayPanel.gameObject.activeInHierarchy == false)
+        {
+            NextDayPanel.SetActive(true);
+            ClosePanel.SetActive(true);
+            ClosePanel.GetComponent<Button>().onClick.AddListener(GoNextDay);
+        }
+        else
+        {
+            NextDayPanel.SetActive(false);
+            ClosePanel.SetActive(false);
+            ClosePanel.GetComponent<Button>().onClick.RemoveListener(GoNextDay);
+        }
+    }
     public void ShowNameEditPanel()
     {
         if (NameEditPanel.gameObject.activeInHierarchy == false)
         {
             NameEditPanel.SetActive(true);
             ClosePanel.SetActive(true);
+            ClosePanel.GetComponent<Button>().onClick.AddListener(ShowNameEditPanel);
         }
         else
         {
             NameEditPanel.SetActive(false);
             ClosePanel.SetActive(false);
+            ClosePanel.GetComponent<Button>().onClick.RemoveListener(ShowNameEditPanel);
         }
     }
 
@@ -264,12 +281,14 @@ public class GameControl : MonoBehaviour
         if (CNameEditPanel.gameObject.activeInHierarchy == false)
         {
             CNameEditPanel.SetActive(true);
-            CClosePanel.SetActive(true);
+            ClosePanel.SetActive(true);
+            ClosePanel.GetComponent<Button>().onClick.AddListener(ShowCNameEditPanel);
         }
         else
         {
             CNameEditPanel.SetActive(false);
-            CClosePanel.SetActive(false);
+            ClosePanel.SetActive(false);
+            ClosePanel.GetComponent<Button>().onClick.RemoveListener(ShowCNameEditPanel);
         }
     }
 }

@@ -167,7 +167,7 @@ public class ActionContoller : MonoBehaviour
         characterCtrl.ChangeAnimation("대기");
         Destroy(_transform.gameObject, 0.1f);
         GameManager.gameManager.IncreaseExp(10);
-        ShowGetEffect(_transform, Energy.item, -20, Exp.item, 10);
+        ShowGetEffect(_transform, Energy.item, (int)-dustEnergy, Exp.item, 10);
         characterCtrl.UpdateEnergyBar(-dustEnergy);
         characterCtrl.isReaction = false;
         characterCtrl.StartCoroutine("ChooseAction");

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IPointerClickHandler
+public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item;
     public int itemCount;
@@ -65,6 +65,20 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         ShowItemInfo.showItemInfo.ShowInfo(item, itemCount);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            MiniItemInfo.miniItemInfo.ShowInfo(item);
+            MiniItemInfo.miniItemInfo.transform.position = this.transform.position + Vector3.up * -1.5f+Vector3.right*0.8f;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        MiniItemInfo.miniItemInfo.CloseItemInfo();
     }
 }
 

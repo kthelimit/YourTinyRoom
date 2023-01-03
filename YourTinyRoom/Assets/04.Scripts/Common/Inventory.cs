@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
             //}
             for (int i = 0; i < itemsInInventory.Count; i++)
             {
-                if (itemsInInventory[i].item.ItemName == _item.ItemName)
+                if (itemsInInventory[i].item.ItemName == _item.ItemName&& itemsInInventory[i].item.ItemNumber == _item.ItemNumber)
                 {
                     itemsInInventory[i].itemCount += _count;
                     if (_item.itemType != Item.ItemType.FURNITURE)
@@ -154,6 +154,10 @@ public class Inventory : MonoBehaviour
     }
     private void ChangeBtnPos(int type)
     {
+        if (itemCategory != Item.ItemType.USED)
+            prevXPos = categoryBtns[0].transform.position.x;
+        else
+            prevXPos = categoryBtns[1].transform.position.x;
         foreach (Button _btn in categoryBtns)
         {
             Vector3 PrevPos= new Vector3(prevXPos,_btn.transform.position.y, _btn.transform.position.z);

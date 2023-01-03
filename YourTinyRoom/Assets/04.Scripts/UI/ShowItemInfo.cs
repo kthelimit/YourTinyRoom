@@ -49,6 +49,7 @@ public class ShowItemInfo : MonoBehaviour
         if (!isShowing)
         {
             ClosePanel.SetActive(true);
+            ClosePanel.GetComponent<Button>().onClick.AddListener(CloseItemInfo);
             isShowing = true;
             cg.alpha = 1;
             cg.interactable = true;
@@ -66,6 +67,20 @@ public class ShowItemInfo : MonoBehaviour
                 text_count.text = curCount.ToString();
                 UseBtn.interactable = true;
                 ThrowBtn.interactable = true;
+                if (item.itemType == Item.ItemType.GIFT)
+                { 
+                    UseBtn.GetComponentInChildren<Text>().text = "선물하기";
+                }
+                else if (item.itemType == Item.ItemType.FURNITURE)
+                {
+                    UseBtn.interactable = false;
+                    UseBtn.GetComponentInChildren<Text>().text = "-";
+                }
+                else
+                {
+                    UseBtn.GetComponentInChildren<Text>().text = "사용하기";
+                }
+
             }
             else
             {
@@ -85,6 +100,7 @@ public class ShowItemInfo : MonoBehaviour
     public void CloseItemInfo()
     {
         ClosePanel.SetActive(false);
+        ClosePanel.GetComponent<Button>().onClick.RemoveListener(CloseItemInfo);
         isShowing = false;
         cg.alpha = 0;
         cg.interactable = false;

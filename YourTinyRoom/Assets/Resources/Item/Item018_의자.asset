@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a37f6eb41b70a4a986fb7e66e6395e, type: 3}
+  m_Name: "Item018_\uC758\uC790"
+  m_EditorClassIdentifier: 
+  ItemName: "\uC758\uC790"
+  itemType: 4
+  itemImage: {fileID: 21300000, guid: 21a2e97feee7eb2459362af93703d12a, type: 3}
+  ItemDesc: "\uC2EC\uD50C\uD55C \uC758\uC790"
+  ItemPrice: 150
+  itemPriceType: 0
+  ItemNumber: 18
+  area:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 1, y: 1, z: 1}

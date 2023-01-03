@@ -19,6 +19,7 @@ public class Collections : MonoBehaviour
     public Transform buttonsParent;
     public Button[] categoryBtns;
     public float prevXPos;
+    private GameObject slotPrefab;
     void Awake()
     {
         slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
@@ -27,6 +28,7 @@ public class Collections : MonoBehaviour
         CollectList = new List<CollectItem>();
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
         prevXPos = categoryBtns[0].transform.position.x;
+        slotPrefab= (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/CollectionSlot.prefab", typeof(GameObject));
         foreach (Item item in Items)
         {
             if (item.ItemNumber!=0)
@@ -40,7 +42,8 @@ public class Collections : MonoBehaviour
             CollectList.Add(collectItem);
         }
 
-        AssignSlot();
+        ChangeCategory(0);
+        //AssignSlot();
         CheckItem();
     }
 
@@ -52,6 +55,11 @@ public class Collections : MonoBehaviour
         {
             if (CollectList[i].item.itemType == itemCategory)
             {
+                if(slots.Length==slotIdx)
+                {
+                    Instantiate(slotPrefab, SlotsParent.transform);
+                    slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
+                }
                 slots[slotIdx].SetItem(CollectList[i]);
                 slotIdx++;
             }
@@ -59,10 +67,19 @@ public class Collections : MonoBehaviour
     }
     void ClearSlot()
     {
+        slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].ClearSlot();
         }
+        if (slots.Length > 9)
+        {
+            for (int i = 9; i < slots.Length; i++)
+            {
+                Destroy(slots[i].gameObject);
+            }
+        }
+        slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
     }
 
     public void Collect(Item _item)
@@ -70,7 +87,7 @@ public class Collections : MonoBehaviour
         int num = _item.ItemNumber;
         for(int i=0; i< CollectList.Count;i++)
         {
-            if (CollectList[i].ItemNumber == num)
+            if (CollectList[i].ItemNumber == num&& CollectList[i].item.ItemName==_item.ItemName)
             {
                 CollectList[i].isCollected = true;
                 AssignSlot();
@@ -90,6 +107,10 @@ public class Collections : MonoBehaviour
 
     private void ChangeBtnPos(int type)
     {
+        if(itemCategory!= Item.ItemType.USED)
+            prevXPos = categoryBtns[0].transform.position.x;
+        else
+            prevXPos = categoryBtns[1].transform.position.x;
         foreach (Button _btn in categoryBtns)
         {
             Vector3 PrevPos = new Vector3(prevXPos, _btn.transform.position.y, _btn.transform.position.z);

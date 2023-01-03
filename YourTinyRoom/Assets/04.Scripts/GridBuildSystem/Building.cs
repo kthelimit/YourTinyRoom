@@ -53,7 +53,7 @@ public class Building : MonoBehaviour
         areaTemp.position = positionInt;
         Placed = true;
         Renderer renderer = GetComponentInChildren<Renderer>();
-        renderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);
+        renderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit)-(int)(transform.position.x);
         GridBuildingSystem.gbSystem.TakeArea(areaTemp);
         GridBuildingSystem.gbSystem.isOnMouse = false;
       

@@ -15,7 +15,7 @@ MonoBehaviour:
   questID: 1
   questName: "\uC778\uD615 \uC90D\uAE30!2"
   questDesc: "\uCE58\uC774\uB85C \uC778\uD615\uC744 \uC90D\uC790!"
-  questItem: {fileID: 11400000, guid: ec30130f885b00f45a1b96cb0afd487e, type: 2}
+  questItem: {fileID: 11400000, guid: 916470a54de11a94fb780f46e0650f7a, type: 2}
   questItemQuantity: 3
   RewardItem1: {fileID: 11400000, guid: 776ad3551ad8a344c8f6aa15b399ff79, type: 2}
   RewardQuantity1: 200

@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;//싱글턴
 
     //자원관리
-    private float gold =10000f;
+    private float gold =2000f;
     public Text goldText;
-    private float crystal =100f;
+    private float crystal =10f;
     public Text crystalText;
     //날짜
     private float dayCount =0;
     public Text dayCountText;
+
     //경험치. 추후 레벨 테이블 구성 및 단계 구현하기
     private float curExp = 0f;
     private float minExp = 0f;
@@ -35,6 +36,10 @@ public class GameManager : MonoBehaviour
     public Text characterNameText2;
     public InputField characterNameField;
 
+    //먼지 생성
+    private GameObject dustPrefab;
+
+    private CharacterCtrl characterCtrl;
     public GameControl gameControl;
 
     void Awake()
@@ -46,10 +51,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         playerName = "플레이어";
         playerNameText.text = playerName;
+        characterCtrl = GameObject.FindGameObjectWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
         characterName = "캐릭터";
         characterNameText.text = characterName;
         characterNameText2.text = characterName + " 방문중!";
         levelSystem = transform.GetComponent<LevelSystem>();
+        dustPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
     }
 
 
@@ -146,5 +153,28 @@ public class GameManager : MonoBehaviour
         characterNameText.text = characterName;
         characterNameText2.text = characterName+" 방문중!";
         gameControl.ShowCNameEditPanel();
+    }
+
+    public void GoNextDay()
+    {
+        dayCount++;
+        dayCountText.text = dayCount.ToString();
+        characterCtrl.StartAtHome();
+        gameControl.GoNextDay();
+        //먼지가 랜덤한 위치에 하나 생기는 코드
+        float dustPosX = Random.Range(-5.3f, 5.3f);
+        float dustPosY = Random.Range(-1.8f, 3.5f);
+        if(Mathf.Abs(dustPosX)+ Mathf.Abs(dustPosY) >= 5.3f)
+        {
+            if (dustPosY <= 0)
+            {
+                dustPosY = -5.3f + Mathf.Abs(dustPosX);
+            }
+            else
+            {
+                dustPosY = 5.3f - Mathf.Abs(dustPosX);
+            }
+        }
+        Instantiate(dustPrefab, new Vector3(dustPosX, dustPosY, 0f),Quaternion.identity);
     }
 }
