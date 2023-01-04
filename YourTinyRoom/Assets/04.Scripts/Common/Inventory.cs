@@ -37,16 +37,6 @@ public class Inventory : MonoBehaviour
     {
         if (Item.ItemType.COLLECT != _item.itemType && Item.ItemType.CUSTOM != _item.itemType) 
         {
-            //for(int i=0;i<slots.Length;i++)
-            //{
-            //    if (slots[i].item == null)
-            //        break;
-            //    if (slots[i].item.ItemName==_item.ItemName)
-            //    {
-            //        slots[i].SetSlotCount(_count);
-            //        return;
-            //    }
-            //}
             for (int i = 0; i < itemsInInventory.Count; i++)
             {
                 if (itemsInInventory[i].item.ItemName == _item.ItemName&& itemsInInventory[i].item.ItemNumber == _item.ItemNumber)
@@ -60,15 +50,17 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-
-        //for(int i =0; i<slots.Length;i++)
-        //{
-        //    if(slots[i].item==null)
-        //    {
-        //        slots[i].AddItem(_item, _count);
-        //        return;
-        //    }
-        //}
+        if(Item.ItemType.COLLECT == _item.itemType)
+        {
+            for (int i = 0; i < itemsInInventory.Count; i++)
+            {
+                if (itemsInInventory[i].item.ItemName == _item.ItemName && itemsInInventory[i].item.ItemNumber == _item.ItemNumber)
+                {
+                    GameManager.gameManager.IncreaseCrystal(_item.ItemPrice);
+                    return;
+                }
+            }
+        }
 
         ItemInInventory obj = new ItemInInventory();
         obj.item = _item;

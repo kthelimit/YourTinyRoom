@@ -25,7 +25,14 @@ public class ShowItemInfo : MonoBehaviour
     private int curCount;
     public int throwQuantity=1;
     public Slider throwSlider;
+
+    //랜덤뽑기
+    public GameObject GatchaPanel;
+    public Image GatchaItemImage;
+    public Text GatchaTextTitle;
+
     private CharacterCtrl characterCtrl;
+    Collections collections;
 
     private void Awake()
     {
@@ -42,6 +49,7 @@ public class ShowItemInfo : MonoBehaviour
         inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
         tdPanel.SetActive(false);
         characterCtrl = GameObject.FindWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
+        collections = GameObject.Find("Collection").transform.GetComponent<Collections>();
     }
     public void ShowInfo(Item _item, int _itemCount)
     {
@@ -147,12 +155,36 @@ public class ShowItemInfo : MonoBehaviour
         }
         else if(item.itemType==Item.ItemType.USED)
         {
-
+            if (item.ItemNumber==999)
+            {
+                int randitemNum = Random.Range(1, 100);
+                if (randitemNum >= 70)
+                {
+                    randitemNum = Random.Range(36, 43);
+                }
+                else
+                {
+                    randitemNum = Random.Range(24, 31);
+                }
+                Item randItem = Resources.Load<Item>($"Item/Item0{randitemNum}_토끼 마스코트 상품");
+                GatchaPanel.SetActive(true);
+                GatchaItemImage.sprite = randItem.itemImage;
+                GatchaItemImage.type = 0;
+                GatchaItemImage.preserveAspect = true;
+                GatchaTextTitle.text = randItem.ItemName + " 획득!";               
+                collections.Collect(randItem);
+                inventory.AcquireItem(randItem);
+            }
         }
 
         if (curCount<=0)
             CloseItemInfo();
 
+    }
+
+    public void CloseGatchaPanel()
+    {
+        GatchaPanel.SetActive(false);
     }
 
     public void OpenThrowDetail()

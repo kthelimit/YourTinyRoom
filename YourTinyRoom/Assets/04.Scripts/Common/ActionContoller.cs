@@ -116,11 +116,11 @@ public class ActionContoller : MonoBehaviour
     private void GetItem(RaycastHit2D hit)
     {
         if (gameControl.isEditable) return;
-        Item item = hit.transform.GetComponent<ItemInfo>().item;
-        inventory.AcquireItem(item);
-        collections.Collect(item);
+        ItemInfo iteminfo = hit.transform.GetComponent<ItemInfo>();
+        inventory.AcquireItem(iteminfo.item,iteminfo.quantity);
+        collections.Collect(iteminfo.item);
         Destroy(hit.transform.gameObject, 0.1f);
-        ShowGetEffect(hit.transform, item);
+        ShowGetEffect(hit.transform, iteminfo.item, iteminfo.quantity);
     }
 
     private void GetDust(RaycastHit2D hit)

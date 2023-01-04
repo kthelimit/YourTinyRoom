@@ -64,7 +64,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        ShowItemInfo.showItemInfo.ShowInfo(item, itemCount);
+        if (item != null)
+        {
+            ShowItemInfo.showItemInfo.ShowInfo(item, itemCount);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
