@@ -9,7 +9,11 @@ public class Shop : MonoBehaviour
     public GameObject SlotsParent;
     private ShopItem[] shopItems;
     private GameObject ShopItemPrefab;
-    public Item[] itemList;
+    public Item[] Items;
+    public List<Item> itemList;
+    public List<Item> itemListFirst;
+    public List<Item> itemListSecond;
+    //public Item[] itemList;
     public Transform buttonsParent;
     public Button[] categoryBtns;
     public Color selectedColor;
@@ -18,15 +22,37 @@ public class Shop : MonoBehaviour
 
     void Awake()
     {
+        itemList = new List<Item>();
+        itemListFirst = new List<Item>();
+        itemListSecond = new List<Item>();
+        Items = Resources.LoadAll<Item>("Item");
+        MakeItemList();
+        AddItemList(itemListFirst);
         shopItems = SlotsParent.GetComponentsInChildren<ShopItem>();
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
         ShopItemPrefab=(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/ShopItem.prefab", typeof(GameObject));
         AssignSlot();
     }
+
+    void MakeItemList()
+    {
+        for(int i=0; i<Items.Length;i++)
+        { 
+            if(Items[i].ItemNumber>=1&& Items[i].ItemNumber<=15)
+                itemListFirst.Add(Items[i]);
+            else if(Items[i].ItemNumber >= 16 && Items[i].ItemNumber <= 23)
+                itemListSecond.Add(Items[i]);
+            else if(Items[i].ItemNumber >= 32 && Items[i].ItemNumber <= 33)
+                itemListSecond.Add(Items[i]);
+            else if (Items[i].ItemNumber >= 34 && Items[i].ItemNumber <= 35)
+                itemListFirst.Add(Items[i]);
+        }     
+
+    }
     void AssignSlot() // 컬렉션 내의 슬롯에 아이템 번호대로 아이템 인포를 배정함
     {
         ClearSlot();
-        for (int i = 0; i < itemList.Length; i++)
+        for (int i = 0; i < itemList.Count; i++)
         {
             if (itemList[i].itemType == itemCategory)
             {
@@ -102,5 +128,13 @@ public class Shop : MonoBehaviour
         ChangeBtnColor(type);
         AssignSlot();
 
+    }
+
+    public void AddItemList(List<Item> _item)
+    {
+        for(int i=0;i<_item.Count;i++)
+        {
+            itemList.Add(_item[i]);
+        }
     }
 }

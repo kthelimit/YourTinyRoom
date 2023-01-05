@@ -24,7 +24,6 @@ public class ActionContoller : MonoBehaviour
     private readonly string hashDust = "DUST";
     public GameControl gameControl;
     private CharacterCtrl characterCtrl;
-    public float dustEnergy = 20f;
 
     void Start()
     {
@@ -135,7 +134,7 @@ public class ActionContoller : MonoBehaviour
 
     IEnumerator RemoveDust(Transform _transform)
     {
-        characterCtrl.GetComponent<Transform>().position = _transform.position + Vector3.up * 0.1f + Vector3.right * 0.3f;
+        characterCtrl.GetComponent<Transform>().position = _transform.position + Vector3.up * 0.01f + Vector3.right * 0.3f;
         characterCtrl.isReaction = true;
         int rand = Random.Range(0, 5);
         if (rand == 0)
@@ -165,10 +164,11 @@ public class ActionContoller : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
         characterCtrl.ChangeAnimation("대기");
+        Dust dust = _transform.GetComponent<Dust>();
         Destroy(_transform.gameObject, 0.1f);
-        GameManager.gameManager.IncreaseExp(10);
-        ShowGetEffect(_transform, Energy.item, (int)-dustEnergy, Exp.item, 10);
-        characterCtrl.UpdateEnergyBar(-dustEnergy);
+        GameManager.gameManager.IncreaseExp(dust.Exp);
+        ShowGetEffect(_transform, Energy.item, (int)-dust.Energy, Exp.item, (int)dust.Exp);
+        characterCtrl.UpdateEnergyBar(-dust.Energy);
         characterCtrl.isReaction = false;
         characterCtrl.StartCoroutine("ChooseAction");
 

@@ -7,6 +7,8 @@ public class Dust : MonoBehaviour
     Transform tr;
     GameObject dustMenu;
     ActionContoller actionContoller;
+    public float Energy = 20f;
+    public float Exp = 10f;
     void Awake()
     {
         tr = GetComponent<Transform>();

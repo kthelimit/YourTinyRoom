@@ -11,18 +11,21 @@ public class GameControl : MonoBehaviour
     public RectTransform SettingMenu;
     public CanvasGroup InventoryCG;
     public CanvasGroup CollectionCG;
-    public RectTransform ShopMenu;
+    public CanvasGroup ShopCG;
     public CanvasGroup CustomizeCG;
     public CanvasGroup QuestListCG;
     public CanvasGroup GridBuildCG;
     public CanvasGroup CropCG;
     public CanvasGroup AllCanvasCG;
+    public CanvasGroup PhoneCG;
     public Tilemap mainTileMap;
     public CapsuleCollider2D CharacterCollider;
     public GameObject NameEditPanel;
     public GameObject ClosePanel;
     public GameObject CNameEditPanel;
     public GameObject NextDayPanel;
+    public GameObject AlarmPanel;
+
 
     //캐릭터 방문시 아이콘
     public GameObject CharacterVisit;
@@ -80,18 +83,14 @@ public class GameControl : MonoBehaviour
     }
 
 
-    public void Shop()
+    public void Shop(bool isopen)
     {
-        if (ShopMenu.gameObject.activeInHierarchy == false)
-        {
-            ShopMenu.gameObject.SetActive(true);
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            ShopMenu.gameObject.SetActive(false);
-            Time.timeScale = 1f;
-        }
+        if (ShopCG.alpha == 1f)
+            isopen = false;
+
+        ShopCG.alpha = isopen ? 1.0f : 0.0f;
+        ShopCG.blocksRaycasts = isopen;
+        ShopCG.interactable = isopen;
     }
 
 
@@ -291,4 +290,31 @@ public class GameControl : MonoBehaviour
             ClosePanel.GetComponent<Button>().onClick.RemoveListener(ShowCNameEditPanel);
         }
     }
+
+    public void OpenPhone(bool isopen)
+    {
+        if (PhoneCG.alpha == 1f)
+            isopen = false;
+        PhoneCG.alpha = isopen ? 1.0f : 0.0f;
+        PhoneCG.blocksRaycasts = isopen;
+        PhoneCG.interactable = isopen;
+        Time.timeScale = isopen ? 0.0f : 1.0f;
+    }
+
+    public void ShowAlarmPanel()
+    {
+        if (AlarmPanel.gameObject.activeInHierarchy == false)
+        {
+            AlarmPanel.SetActive(true);
+            ClosePanel.SetActive(true);
+            ClosePanel.GetComponent<Button>().onClick.AddListener(ShowAlarmPanel);
+        }
+        else
+        {
+            AlarmPanel.SetActive(false);
+            ClosePanel.SetActive(false);
+            ClosePanel.GetComponent<Button>().onClick.RemoveListener(ShowAlarmPanel);
+        }
+    }
+
 }

@@ -14,6 +14,7 @@ public class LevelSystem : MonoBehaviour
     private int beforeLevel = 1;
     private float totalGold = 0;
     private float totalCrystal = 0;
+    public Shop shop;
     private struct Level
     {
         public int level;
@@ -25,6 +26,8 @@ public class LevelSystem : MonoBehaviour
     List<Level> levelTable;
     private static string LevelCSVPath = "/Editor/CSVs/LevelCSV.csv";
     private int levelCount=1;
+    private bool isAdded = false;
+
     private void Awake()
     {
         LevelDataLoad();
@@ -63,6 +66,12 @@ public class LevelSystem : MonoBehaviour
             GameManager.gameManager.IncreaseGold(levelTable[levelCount].rewardGold);
             GameManager.gameManager.IncreaseCrystal(levelTable[levelCount].rewardCrystal);
         }
+        if (levelCount == 5 && !isAdded)
+        {            
+            shop.AddItemList(shop.itemListSecond);
+            isAdded = true;
+        }
+
         beforeLevel = levelCount;
         totalGold = 0f;
         totalCrystal = 0f;

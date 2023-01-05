@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
     private RectTransform Tr;
     private CanvasGroup canvasGroup;
     public Camera uiCamera;
     public float height = -90f; //위치 이동할때 기준이 될 부분
-
+    public int nIndex;
     public Canvas parentCanvas;
     Vector3 Offset = Vector3.zero;
 
@@ -21,6 +21,10 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         uiCamera = GameObject.Find("UICamera").GetComponent<Camera>();
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Tr.SetAsLastSibling();
+    }
 
     //드래그 시작했을때
     public void OnBeginDrag(PointerEventData eventData)
@@ -49,4 +53,5 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         canvasGroup.blocksRaycasts = true;        
     }
+
 }

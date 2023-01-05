@@ -7,9 +7,11 @@ public class Building : MonoBehaviour
     public bool Placed { get; private set; }
     public BoundsInt area;
     private const int IsometricRangePerYUnit = 100;
+    private Transform furnitureFolder;
 
     private void Awake()
     {
+        furnitureFolder = GameObject.Find("FurnitureFolder").transform;
         if (GetComponent<ItemInfo>().itemType == Item.ItemType.FURNITURE)
         {
             Furniture _item = (Furniture)GetComponent<ItemInfo>().item;
@@ -53,9 +55,11 @@ public class Building : MonoBehaviour
         areaTemp.position = positionInt;
         Placed = true;
         Renderer renderer = GetComponentInChildren<Renderer>();
-        renderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit)-(int)(transform.position.x);
+        renderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);//-(int)(transform.position.x);
         GridBuildingSystem.gbSystem.TakeArea(areaTemp);
         GridBuildingSystem.gbSystem.isOnMouse = false;
+        this.transform.SetParent(furnitureFolder);
+        this.transform.SetAsLastSibling();
       
     }
 

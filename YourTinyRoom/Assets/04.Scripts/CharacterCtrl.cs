@@ -56,6 +56,9 @@ public class CharacterCtrl : MonoBehaviour
     private Canvas textbubbleCanvas;
     private Text bubbletext;
 
+    public Phone phone;
+    public GameObject ImageAlarm;
+    public GameObject phoneMessageButton;
     void Awake()
     {
         tr = GetComponent<Transform>();
@@ -75,12 +78,14 @@ public class CharacterCtrl : MonoBehaviour
     public void StartAtHome()
     {
         isHome = true;
+        phoneMessageButton.SetActive(true);
         tr.position = home.position;
         IsVisited = false;
         InviteBtn.interactable = true;
         energyParameter = energyMax;
         UpdateEnergyBar();
         gameControl.OpenCharacterVisit(false);
+        Invoke("SendMessage", Random.Range(5f,30f));
     }
 
     public void Invite()
@@ -96,7 +101,37 @@ public class CharacterCtrl : MonoBehaviour
             return;
         }
         StartCoroutine("Visit");
+        phoneMessageButton.SetActive(false);
         InviteBtn.interactable = false;
+    }
+
+    private void SendMessage()
+    {
+        if (IsVisited) return;
+        int randNum = Random.Range(0, 2);
+        if (randNum == 0)
+        {
+            phone.Talk(100);
+        }
+        else if (randNum == 1)
+        {
+            phone.Talk(110);
+        }
+        else if (randNum == 2)
+        {
+            phone.Talk(120);
+        }
+        //else if (randNum == 3) 
+        //{
+        //    phone.Talk(130);
+        //}
+        //else if (randNum == 4)
+        //{
+        //    phone.Talk(140);
+        //}
+        gameControl.ShowAlarmPanel();
+        ImageAlarm.SetActive(true);
+
     }
 
     IEnumerator Visit()
@@ -135,12 +170,20 @@ public class CharacterCtrl : MonoBehaviour
     {
         while (true)
         {
-            randomAction = Random.Range(0, 3);
+            randomAction = Random.Range(0, 4);
             if (randomAction == 0)
             {
                 MakeMovePoint();
                 isMoving = true;
-                ChangeAnimation("걷기");
+
+                if (target.y < tr.position.y)
+                {
+                    ChangeAnimation("걷기");
+                }
+                else
+                {
+                    ChangeAnimation("뒤로걷기");
+                }
                 while (isMoving&&!isReaction)
                 {
                     tr.position = Vector3.Lerp(tr.position, target, Time.deltaTime * moveSpeed);
@@ -169,11 +212,17 @@ public class CharacterCtrl : MonoBehaviour
 
         if (target.x < tr.position.x)
         {
-            tr.eulerAngles=new Vector3(0f, 0f, 0f);
+            if(target.y < tr.position.y)
+                tr.eulerAngles=new Vector3(0f, 0f, 0f);
+            else
+                tr.eulerAngles = new Vector3(0f, 180f, 0f);
         }
         else
         {
-            tr.eulerAngles = new Vector3(0f, 180f, 0f);
+            if (target.y < tr.position.y)
+                tr.eulerAngles = new Vector3(0f, 180f, 0f);
+            else
+                tr.eulerAngles = new Vector3(0f, 0f, 0f);
         }
     }
 
@@ -298,10 +347,15 @@ public class CharacterCtrl : MonoBehaviour
             ani.AnimationName = "walk";
             ani.loop = true;
         }
-        else if(str=="정지")
+        else if (str == "정지")
         {
             ani.AnimationName = "Idle";
             ani.loop = false;
+        }
+        else if (str=="뒤로걷기")
+        {
+            ani.AnimationName = "walk back";
+            ani.loop = true;
         }
     }
     public void PlayAnimation(string str)
