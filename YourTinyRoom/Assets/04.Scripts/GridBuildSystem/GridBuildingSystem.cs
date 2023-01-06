@@ -15,7 +15,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
 
-    private Building temp;
+    public Building temp;
     private Item tempItem;
     private Vector3 prevPos;
     private BoundsInt prevArea;
@@ -56,21 +56,27 @@ public class GridBuildingSystem : MonoBehaviour
             {
                 Vector2 touchPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int cellPos = gridLayout.LocalToCell((Vector3)touchPos);
-                if (prevPos!=(Vector3)cellPos)
+                if (prevPos!=(Vector3)cellPos&&!temp.isShow)
                 {
                     temp.transform.localPosition = gridLayout.CellToLocalInterpolated(cellPosition: (Vector3)cellPos + new Vector3(x: .5f, y: .5f, z: 0f));
                     prevPos = (Vector3)cellPos;
                     FollowBuilding();
+                    temp.CanBePlaced();
                 }
             }
         }
         else if(Input.GetMouseButtonDown(1))
         {
             if (temp.Placed) return;
-            inventory.AcquireItem(tempItem, 1);
-            DeleteObject();
+            ReturnToInventory();
 
         }
+    }
+
+    public void ReturnToInventory()
+    {
+        inventory.AcquireItem(tempItem, 1);
+        DeleteObject();
     }
 
     #endregion

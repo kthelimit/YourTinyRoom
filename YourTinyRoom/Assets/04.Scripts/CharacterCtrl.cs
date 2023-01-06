@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class CharacterCtrl : MonoBehaviour
 {
@@ -56,11 +57,19 @@ public class CharacterCtrl : MonoBehaviour
     private Canvas textbubbleCanvas;
     private Text bubbletext;
 
+    //폰에 메세지 보낼용도
     public Phone phone;
     public GameObject ImageAlarm;
     public GameObject phoneMessageButton;
+
+    //돌아갈때 남기고 갈 선물
+    public GameObject GiftPrefab;
+
+    private ColorChange colorChange;
     void Awake()
     {
+        colorChange = GetComponent<ColorChange>();
+        GiftPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Gift.prefab", typeof(GameObject));
         tr = GetComponent<Transform>();
         ani = GetComponent<SkeletonAnimation>();
         ChangeAnimation("대기");
@@ -108,7 +117,7 @@ public class CharacterCtrl : MonoBehaviour
     private void SendMessage()
     {
         if (IsVisited) return;
-        int randNum = Random.Range(0, 2);
+        int randNum = Random.Range(0, 3);
         if (randNum == 0)
         {
             phone.Talk(100);
@@ -121,10 +130,10 @@ public class CharacterCtrl : MonoBehaviour
         {
             phone.Talk(120);
         }
-        //else if (randNum == 3) 
-        //{
-        //    phone.Talk(130);
-        //}
+        else if (randNum == 3)
+        {
+            phone.Talk(130);
+        }
         //else if (randNum == 4)
         //{
         //    phone.Talk(140);
@@ -179,10 +188,12 @@ public class CharacterCtrl : MonoBehaviour
                 if (target.y < tr.position.y)
                 {
                     ChangeAnimation("걷기");
+                    colorChange.RepeatUpdateColor();
                 }
                 else
                 {
                     ChangeAnimation("뒤로걷기");
+                   
                 }
                 while (isMoving&&!isReaction)
                 {
@@ -318,6 +329,7 @@ public class CharacterCtrl : MonoBehaviour
         Talk("다음에 또 보자!");
         ChangeAnimation("안녕");
         yield return new WaitForSeconds(2f);
+        Instantiate(GiftPrefab, tr.position, Quaternion.identity);
         tr.position = home.position;
         isReaction = false;
         gameControl.OpenCharacterVisit(false);

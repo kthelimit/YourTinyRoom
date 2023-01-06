@@ -49,6 +49,12 @@ public class LevelSystem : MonoBehaviour
         }
     }
 
+    public void LoadLevel(int _level)
+    {
+        levelCount = _level;
+        GameManager.gameManager.UpdateLevelText(levelCount);
+    }
+
     public void LevelUpCheck(float exp)
     {
         while(exp>=levelTable[levelCount].expLimit)

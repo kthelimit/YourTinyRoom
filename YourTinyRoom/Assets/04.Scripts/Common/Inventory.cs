@@ -33,6 +33,11 @@ public class Inventory : MonoBehaviour
         ChangeBtnPos(0);
     }
 
+    public void LoadInventory(List<ItemInInventory> _list)
+    {
+        itemsInInventory = _list;
+    }
+
     public void AcquireItem(Item _item, int _count=1)
     {
         if (Item.ItemType.COLLECT != _item.itemType && Item.ItemType.CUSTOM != _item.itemType) 
@@ -77,17 +82,6 @@ public class Inventory : MonoBehaviour
 
     public bool CheckItem(Item _item, int quantity)
     {
-        //for (int i = 0; i < slots.Length; i++)
-        //{
-        //    if (slots[i].item == null)
-        //        break;
-        //    if (slots[i].item.ItemName == _item.ItemName)
-        //    {
-        //        if (slots[i].itemCount >= quantity)
-        //            return true;
-        //    }
-        //}
-
         for (int i = 0; i < itemsInInventory.Count; i++)
         {
             if (itemsInInventory[i].item.ItemName == _item.ItemName)
@@ -99,6 +93,19 @@ public class Inventory : MonoBehaviour
 
         return false;
     }
+
+    public int CheckItemCount(Item _item)
+    {
+        for (int i = 0; i < itemsInInventory.Count; i++)
+        {
+            if (itemsInInventory[i].item.ItemName == _item.ItemName&& itemsInInventory[i].item.ItemNumber == _item.ItemNumber)
+            {
+                return itemsInInventory[i].itemCount;
+            }
+        }
+        return 0;
+    }
+
 
     public void ShowItemList()
     {

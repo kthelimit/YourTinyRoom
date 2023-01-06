@@ -58,7 +58,6 @@ public class ActionContoller : MonoBehaviour
         else if (hit.collider.tag == hashCrop)
         {
             GetCrop(hit);
-
         }
         else if(hit.collider.tag == hashFurniture)
         {
@@ -177,22 +176,34 @@ public class ActionContoller : MonoBehaviour
     private void GetFurniture(RaycastHit2D hit)
     {
         Building furniture = hit.transform.GetComponent<Building>();
-        if(!furniture.Placed)
+        if (gameControl.isEditable)
         {
-            if (furniture.CanBePlaced())
+            if (GridBuildingSystem.gbSystem.isOnMouse && GridBuildingSystem.gbSystem.temp == furniture)
             {
-                furniture.PlaceFurniture();
+                furniture.ShowControlPanel(true);
+            }
+            else if(!GridBuildingSystem.gbSystem.isOnMouse)
+            {
+                furniture.ShowControlPanel(true);
             }
         }
-        else
-        {
-            if (gameControl.isEditable)
-            {
-                if (GridBuildingSystem.gbSystem.isOnMouse) return;
-                GridBuildingSystem.gbSystem.RearrangeBuilding(hit.transform.gameObject);
-            }
+        //if(furniture.Placed)
+        //{
+        //    furniture.ShowControlPanel(true);
+        //    //if (furniture.CanBePlaced())
+        //    //{
+        //    //    furniture.PlaceFurniture();
+        //    //}
+        //}
+        //else
+        //{
+        //    if (gameControl.isEditable)
+        //    {
+        //        if (GridBuildingSystem.gbSystem.isOnMouse) return;
+        //       // GridBuildingSystem.gbSystem.RearrangeBuilding(hit.transform.gameObject);
+        //    }
 
-        }    
+        //}    
     }
 
 

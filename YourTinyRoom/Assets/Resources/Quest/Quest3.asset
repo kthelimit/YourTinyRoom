@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0650848b139c76344b93e1a0eb0261b0, type: 3}
   m_Name: Quest3
   m_EditorClassIdentifier: 
-  questID: 1
-  questName: "\uC778\uD615 \uC90D\uAE30!2"
-  questDesc: "\uCE58\uC774\uB85C \uC778\uD615\uC744 \uC90D\uC790!"
+  questID: 3
+  questName: "\uC778\uD615 \uD68D\uB4DD\uD558\uAE302"
+  questDesc: "\uCE58\uC774\uB85C \uC778\uD615\uC744 \uB354 \uB9CE\uC774 \uD68D\uB4DD\uD558\uC790!"
   questItem: {fileID: 11400000, guid: 916470a54de11a94fb780f46e0650f7a, type: 2}
   questItemQuantity: 3
   RewardItem1: {fileID: 11400000, guid: 776ad3551ad8a344c8f6aa15b399ff79, type: 2}
-  RewardQuantity1: 200
+  RewardQuantity1: 400
   RewardItem2: {fileID: 11400000, guid: 50522d1f806bfc648bf2c68f2d1f63cc, type: 2}
-  RewardQuantity2: 100
+  RewardQuantity2: 200

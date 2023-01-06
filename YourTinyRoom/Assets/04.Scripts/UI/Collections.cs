@@ -47,6 +47,10 @@ public class Collections : MonoBehaviour
         CheckItem();
     }
 
+    public void LoadCollections(List<CollectItem> _list)
+    {
+        CollectList = _list;
+    }
     void AssignSlot() // 컬렉션 내의 슬롯에 아이템 번호대로 아이템 인포를 배정함
     {
         int slotIdx = 0;

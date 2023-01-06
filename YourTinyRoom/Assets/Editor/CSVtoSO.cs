@@ -134,7 +134,7 @@ public class CSVtoSO
             //퀘스트에 필요한 아이템
             for(int i=0;i<itemlist.Length;i++)
             {
-                if (splitData[3] == itemlist[i].ItemName)
+                if (int.Parse(splitData[3]) == itemlist[i].ItemNumber)
                 {
                     quest.questItem = itemlist[i];
                     break;

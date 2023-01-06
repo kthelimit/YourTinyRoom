@@ -9,6 +9,8 @@ public class MiniItemInfo : MonoBehaviour
     public Item item = null;
     private Text itemName;
     private Text itemDesc;
+
+    private Quest quest = null;
     private CanvasGroup cg; 
     private void Awake()
     {
@@ -23,6 +25,15 @@ public class MiniItemInfo : MonoBehaviour
             item = _item;
             itemName.text = _item.ItemName;
             itemDesc.text = _item.ItemDesc;
+
+    }
+
+    public void ShowQuestInfo(Quest _quest, int _questItemCount)
+    {
+        cg.alpha = 1;
+        quest = _quest;
+        itemName.text = _quest.questItem.ItemName;
+        itemDesc.text = "("+ _questItemCount + "/"+_quest.questItemQuantity+")";
 
     }
     public void CloseItemInfo()

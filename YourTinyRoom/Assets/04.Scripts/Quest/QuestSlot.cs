@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEditor;
 
-public class QuestItem : MonoBehaviour
+public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Quest questData;
     [SerializeField]
@@ -16,24 +18,49 @@ public class QuestItem : MonoBehaviour
     public Text questDesc;
     Inventory inventory;
     public GameObject QuestAlarmPrefab;
+    public GameObject rewardPrefab;
     public Text QuestAlarmPanelText;
     private bool isAlarmed = false;
     private Transform canvasUI;
+    public int questItemCount;
+    Transform rewardPanel;
     GameControl gameControl;
 
-
-    private void Start()
+    private void Awake()
     {
+        rewardPanel = transform.GetChild(3);
+        QuestAlarmPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/QuestAlarm.prefab", typeof(GameObject));
+        QuestAlarmPanelText = QuestAlarmPrefab.transform.GetChild(0).GetComponent<Text>();
+        rewardPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/RewardItem.prefab", typeof(GameObject));
         canvasUI = GameObject.Find("Canvas-UI").transform;
         gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         scrollContents = this.transform.parent;
         rewardButton = transform.GetChild(0).GetComponent<Button>();
         rewardButton.interactable = false;
+    }
+    public void SetQuest(QuestInList _quest)
+    {
+        questData = _quest.quest;
         questTitle.text = questData.questName;
         questDesc.text = questData.questDesc;
-        QuestAlarmPanelText = QuestAlarmPrefab.transform.GetChild(0).GetComponent<Text>();
+        isTakeOut = _quest.isTakeOut;
+        isCompleted = _quest.isCompleted;
+        isAlarmed = _quest.isAlarmed;
+        SetReward();
         StartCoroutine("UpdateCheck");
+    }
+
+    public void SetReward()
+    {
+        GameObject reward1 = Instantiate(rewardPrefab, rewardPanel);
+        reward1.GetComponentInChildren<Image>().sprite = questData.RewardItem1.itemImage;
+        reward1.GetComponentInChildren<Text>().text = $"{questData.RewardQuantity1}";
+       
+        GameObject reward2 = Instantiate(rewardPrefab, rewardPanel);
+        reward2.GetComponentInChildren<Image>().sprite = questData.RewardItem2.itemImage;
+        reward2.GetComponentInChildren<Text>().text = $"{questData.RewardQuantity2}";
+
     }
 
     IEnumerator UpdateCheck()
@@ -97,5 +124,18 @@ public class QuestItem : MonoBehaviour
     public void CheckComplete()
     {
         isCompleted=inventory.CheckItem(questData.questItem, questData.questItemQuantity);
+        questItemCount = inventory.CheckItemCount(questData.questItem);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (isCompleted) return;
+        MiniItemInfo.miniItemInfo.ShowQuestInfo(questData, questItemCount);
+        MiniItemInfo.miniItemInfo.transform.position = this.transform.position + Vector3.up * 0.5f + Vector3.right * 1f;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        MiniItemInfo.miniItemInfo.CloseItemInfo();
     }
 }

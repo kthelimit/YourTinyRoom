@@ -91,6 +91,8 @@ public class GameControl : MonoBehaviour
         ShopCG.alpha = isopen ? 1.0f : 0.0f;
         ShopCG.blocksRaycasts = isopen;
         ShopCG.interactable = isopen;
+        if(isopen)
+            ShopCG.transform.SetAsLastSibling();
     }
 
 
@@ -102,6 +104,8 @@ public class GameControl : MonoBehaviour
         InventoryCG.alpha = isopen ? 1.0f : 0.0f;
         InventoryCG.blocksRaycasts = isopen;
         InventoryCG.interactable = isopen;
+        if (isopen)
+            InventoryCG.transform.SetAsLastSibling();
     }
 
     public void OpenQuestList(bool isopen)
@@ -112,6 +116,8 @@ public class GameControl : MonoBehaviour
         QuestListCG.alpha = isopen ? 1.0f : 0.0f;
         QuestListCG.blocksRaycasts = isopen;
         QuestListCG.interactable = isopen;
+        if (isopen)
+            QuestListCG.transform.SetAsLastSibling();
     }
 
     public void OpenCollection(bool isopen)
@@ -122,6 +128,8 @@ public class GameControl : MonoBehaviour
         CollectionCG.blocksRaycasts = isopen;
         CollectionCG.interactable = isopen;
         CollectionCG.GetComponentInChildren<ShowCollectInfo>().ResetInfo();
+        if (isopen)
+            CollectionCG.transform.SetAsLastSibling();
     }
 
     public void OpenCustomize(bool isopen)
@@ -131,6 +139,8 @@ public class GameControl : MonoBehaviour
         CustomizeCG.alpha = isopen ? 1.0f : 0.0f;
         CustomizeCG.blocksRaycasts = isopen;
         CustomizeCG.interactable = isopen;
+        if (isopen)
+            CustomizeCG.transform.SetAsLastSibling();
     }
 
     public void OpenGridBuildSystem(bool isopen)
@@ -157,7 +167,6 @@ public class GameControl : MonoBehaviour
         {
             Camera.main.cullingMask = ~(1 << 5);
         }
-
     }
 
     public void OpenCropSystem(bool isopen)
@@ -298,7 +307,10 @@ public class GameControl : MonoBehaviour
         PhoneCG.alpha = isopen ? 1.0f : 0.0f;
         PhoneCG.blocksRaycasts = isopen;
         PhoneCG.interactable = isopen;
+        if (isopen)
+            PhoneCG.transform.SetAsLastSibling();
         Time.timeScale = isopen ? 0.0f : 1.0f;
+
     }
 
     public void ShowAlarmPanel()

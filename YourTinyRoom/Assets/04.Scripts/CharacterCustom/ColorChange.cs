@@ -64,7 +64,7 @@ public class ColorChange : MonoBehaviour
         clothesBlock.SetColor(id, clothesTintColor);
         clothesBlock.SetColor(idBlack, clothesDarkColor);
 
-        if(meshRenderer.materials.Length%2==0)
+        if(meshRenderer.materials.Length==14)
         {
             meshRenderer.SetPropertyBlock(hairBlock, 13);
             meshRenderer.SetPropertyBlock(clothesBlock, 1);
@@ -74,7 +74,7 @@ public class ColorChange : MonoBehaviour
             meshRenderer.SetPropertyBlock(clothesBlock, 9);
             meshRenderer.SetPropertyBlock(pupilBlock, 11);
         }
-        else
+        else if(meshRenderer.materials.Length == 15)
         {
             meshRenderer.SetPropertyBlock(hairBlock, 0);
             meshRenderer.SetPropertyBlock(hairBlock, 14);
@@ -86,7 +86,16 @@ public class ColorChange : MonoBehaviour
             meshRenderer.SetPropertyBlock(pupilBlock, 12);
 
         }
-
+        else if(meshRenderer.materials.Length==13)
+        {
+            meshRenderer.SetPropertyBlock(hairBlock, 12);
+            meshRenderer.SetPropertyBlock(clothesBlock, 11);
+            meshRenderer.SetPropertyBlock(clothesBlock, 2);
+            meshRenderer.SetPropertyBlock(clothesBlock, 4);
+            meshRenderer.SetPropertyBlock(clothesBlock, 6);
+            meshRenderer.SetPropertyBlock(clothesBlock, 8);
+            meshRenderer.SetPropertyBlock(clothesBlock, 10);
+        }
 
 
     }

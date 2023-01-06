@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
-
+using DataInfo;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;//싱글턴
@@ -35,13 +35,20 @@ public class GameManager : MonoBehaviour
     public Text characterNameText;
     public Text characterNameText2;
     public InputField characterNameField;
+    public Text characterNameText3;
 
     //먼지 생성
     private GameObject dustPrefab;
-
     private CharacterCtrl characterCtrl;
     public GameControl gameControl;
 
+    //데이터 매니저
+    public DataManager dataManager;
+    public Inventory Inventory;
+    public Collections collections;
+    public QuestManager questManager;
+
+    public GameDataObject gameData;
     void Awake()
     {
         if (gameManager == null)
@@ -49,6 +56,9 @@ public class GameManager : MonoBehaviour
         else if (gameManager != this)
             Destroy(this.gameObject);
         DontDestroyOnLoad(this.gameObject);
+        Inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        collections = GameObject.Find("Collection").GetComponent<Collections>();
+        questManager = GetComponent<QuestManager>();
         playerName = "플레이어";
         playerNameText.text = playerName;
         characterCtrl = GameObject.FindGameObjectWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
@@ -57,8 +67,30 @@ public class GameManager : MonoBehaviour
         characterNameText2.text = characterName + " 방문중!";
         levelSystem = transform.GetComponent<LevelSystem>();
         dustPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
+
+        LoadGameData();
+    }
+    void LoadGameData()
+    {
+        Debug.Log("데이터 로드중");
+        GameData data = dataManager.Load();
+        playerName = data.PlayerName;
+        characterName = data.CharacterName;
+        curExp = data.Exp;
+        gold = data.Gold;
+        crystal = data.Crystal;
+        Inventory.LoadInventory(data.ItemInInventories);
+        collections.LoadCollections(data.CollectItems);
+        levelSystem.LoadLevel(data.Level);
+        questManager.LoadQuestList(data.questInLists);
+        Debug.Log("데이터 로드완료");
     }
 
+    public void SaveGameData()
+    {
+        Debug.Log("데이터 저장중");
+
+    }
 
     void Start()
     {
@@ -151,6 +183,7 @@ public class GameManager : MonoBehaviour
     {
         characterName = characterNameField.text;
         characterNameText.text = characterName;
+        characterNameText3.text = characterName;
         characterNameText2.text = characterName+" 방문중!";
         gameControl.ShowCNameEditPanel();
     }

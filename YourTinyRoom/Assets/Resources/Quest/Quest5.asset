@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0650848b139c76344b93e1a0eb0261b0, type: 3}
-  m_Name: Quest2
+  m_Name: Quest5
   m_EditorClassIdentifier: 
-  questID: 2
-  questName: "\uC5D0\uB108\uC9C0 \uB4DC\uB9C1\uD06C \uD68D\uB4DD\uD558\uAE30"
-  questDesc: "\uC5D0\uB108\uC9C0 \uB4DC\uB9C1\uD06C\uB97C \uD68D\uB4DD\uD558\uC790."
-  questItem: {fileID: 11400000, guid: efa60b8a068571d4288b3400556db3c0, type: 2}
-  questItemQuantity: 1
+  questID: 5
+  questName: "\uB538\uAE30 \uC7AC\uBC30\uD558\uAE30"
+  questDesc: "\uC0C8\uCF64\uB2EC\uCF64\uD55C \uB538\uAE30\uB97C \uC7AC\uBC30\uD558\uC790!"
+  questItem: {fileID: 11400000, guid: 5232b8cba5ef2ff44b6417f0d7c76933, type: 2}
+  questItemQuantity: 3
   RewardItem1: {fileID: 11400000, guid: 776ad3551ad8a344c8f6aa15b399ff79, type: 2}
-  RewardQuantity1: 150
+  RewardQuantity1: 200
   RewardItem2: {fileID: 11400000, guid: 50522d1f806bfc648bf2c68f2d1f63cc, type: 2}
-  RewardQuantity2: 150
+  RewardQuantity2: 100
