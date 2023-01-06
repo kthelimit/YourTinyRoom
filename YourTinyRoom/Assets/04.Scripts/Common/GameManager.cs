@@ -73,22 +73,31 @@ public class GameManager : MonoBehaviour
     void LoadGameData()
     {
         Debug.Log("데이터 로드중");
-        GameData data = dataManager.Load();
-        playerName = data.PlayerName;
-        characterName = data.CharacterName;
-        curExp = data.Exp;
-        gold = data.Gold;
-        crystal = data.Crystal;
-        Inventory.LoadInventory(data.ItemInInventories);
-        collections.LoadCollections(data.CollectItems);
-        levelSystem.LoadLevel(data.Level);
-        questManager.LoadQuestList(data.questInLists);
+        playerName = gameData.PlayerName;
+        playerNameText.text = playerName;
+
+        characterName = gameData.CharacterName;
+        characterNameText.text = characterName;
+        characterNameText3.text = characterName;
+        characterNameText2.text = characterName + " 방문중!";
+
+        curExp = gameData.Exp;
+        gold = gameData.Gold;
+        crystal = gameData.Crystal;
+
+        Inventory.LoadInventory(gameData.ItemInInventories);
+        collections.LoadCollections(gameData.CollectItems);
+        levelSystem.LoadLevel(gameData.Level);
+        questManager.LoadQuestList(gameData.questInLists);
         Debug.Log("데이터 로드완료");
     }
 
     public void SaveGameData()
     {
+        gameData.PlayerName = playerName;
+        gameData.CharacterName = characterName;
         Debug.Log("데이터 저장중");
+        UnityEditor.EditorUtility.SetDirty(gameData);
 
     }
 
