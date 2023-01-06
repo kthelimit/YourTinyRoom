@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
-
+using DataInfo;
 public class Collections : MonoBehaviour
 {
 
@@ -24,32 +24,38 @@ public class Collections : MonoBehaviour
     {
         slots = SlotsParent.GetComponentsInChildren<CollectSlot>();
         Items = Resources.LoadAll<Item>("Item");
-        ItemList = new List<Item>();
-        CollectList = new List<CollectItem>();
+        ItemList = new List<Item>();        
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
         prevXPos = categoryBtns[0].transform.position.x;
         slotPrefab= (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/CollectionSlot.prefab", typeof(GameObject));
         foreach (Item item in Items)
         {
-            if (item.ItemNumber!=0)
+            if (item.ItemNumber != 0)
                 ItemList.Add(item);
-        }    
-        foreach(Item item in ItemList)
+        }
+        CollectList = new List<CollectItem>();
+        foreach (Item item in ItemList)
         {
             CollectItem collectItem = new CollectItem();
             collectItem.item = item;
             collectItem.ItemNumber = item.ItemNumber;
             CollectList.Add(collectItem);
         }
-
         ChangeCategory(0);
-        //AssignSlot();
         CheckItem();
     }
 
     public void LoadCollections(List<CollectItem> _list)
     {
-        CollectList = _list;
+        for (int i = 0; i < CollectList.Count; i++)
+        {
+            CollectList[i].isCollected = _list[i].isCollected;
+        }
+    }
+
+    public List<CollectItem> SaveCollections()
+    {
+        return CollectList;
     }
     void AssignSlot() // 컬렉션 내의 슬롯에 아이템 번호대로 아이템 인포를 배정함
     {

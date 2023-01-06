@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
-
+using DataInfo;
 
 public class Inventory : MonoBehaviour
 {
@@ -26,8 +26,7 @@ public class Inventory : MonoBehaviour
     {
         FslotPrefab= (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/FSlot.prefab", typeof(GameObject));
         slots = SlotsParent.GetComponentsInChildren<Slot>();
-        fSlots= FSlotParent.GetComponentsInChildren<FSlot>();
-        itemsInInventory =new List<ItemInInventory>();
+        fSlots= FSlotParent.GetComponentsInChildren<FSlot>();        
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
         prevXPos = categoryBtns[0].transform.position.x;
         ChangeBtnPos(0);
@@ -35,7 +34,19 @@ public class Inventory : MonoBehaviour
 
     public void LoadInventory(List<ItemInInventory> _list)
     {
-        itemsInInventory = _list;
+        itemsInInventory = new List<ItemInInventory>();
+        if (_list.Count!=0)
+        {
+            for (int i=0; i < _list.Count;i++)
+            {
+                AcquireItem(_list[i].item, _list[i].itemCount);
+            }
+        }      
+    }
+
+    public List<ItemInInventory> SaveInventory()
+    {
+        return itemsInInventory;
     }
 
     public void AcquireItem(Item _item, int _count=1)
@@ -47,6 +58,10 @@ public class Inventory : MonoBehaviour
                 if (itemsInInventory[i].item.ItemName == _item.ItemName&& itemsInInventory[i].item.ItemNumber == _item.ItemNumber)
                 {
                     itemsInInventory[i].itemCount += _count;
+                    if (itemsInInventory[i].itemCount == 0)
+                    {
+                        itemsInInventory.Remove(itemsInInventory[i]);
+                    }
                     if (_item.itemType != Item.ItemType.FURNITURE)
                         ShowItemList();
                     else

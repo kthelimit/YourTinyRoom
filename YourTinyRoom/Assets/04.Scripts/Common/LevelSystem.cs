@@ -54,6 +54,10 @@ public class LevelSystem : MonoBehaviour
         levelCount = _level;
         GameManager.gameManager.UpdateLevelText(levelCount);
     }
+    public int SaveLevel()
+    {
+        return levelCount;
+    }
 
     public void LevelUpCheck(float exp)
     {

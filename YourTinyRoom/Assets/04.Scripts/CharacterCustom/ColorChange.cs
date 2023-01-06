@@ -36,6 +36,11 @@ public class ColorChange : MonoBehaviour
 
     }
 
+    public void LoadColorData()
+    {
+
+    }
+
     public void RepeatUpdateColor()
     {
         StartCoroutine("UpdateColorRepeat");

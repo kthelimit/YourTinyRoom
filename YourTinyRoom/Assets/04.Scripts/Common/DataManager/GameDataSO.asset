@@ -14,7 +14,164 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: "\uD50C\uB808\uC774\uC5B4"
   CharacterName: "\uCE90\uB9AD\uD130"
-  Gold: 1000
-  Crystal: 10
-  Level: 1
-  Exp: 0
+  Gold: 15400
+  Crystal: 30
+  Level: 5
+  Exp: 800
+  ItemInInventories:
+  - item: {fileID: 11400000, guid: 916470a54de11a94fb780f46e0650f7a, type: 2}
+    itemCount: 1
+  CollectItems:
+  - item: {fileID: 11400000, guid: e33b08dc781e3384a9f9263e300d68e1, type: 2}
+    ItemNumber: 999
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 916470a54de11a94fb780f46e0650f7a, type: 2}
+    ItemNumber: 1
+    isCollected: 1
+  - item: {fileID: 11400000, guid: cef504fee87760e44b06df0ba4fc397c, type: 2}
+    ItemNumber: 2
+    isCollected: 0
+  - item: {fileID: 11400000, guid: efa60b8a068571d4288b3400556db3c0, type: 2}
+    ItemNumber: 3
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 5232b8cba5ef2ff44b6417f0d7c76933, type: 2}
+    ItemNumber: 4
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 47abaf8e646cb3a47a690b3813307c8b, type: 2}
+    ItemNumber: 5
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 699cd3ae3dc8c0549a63dc1b233ba7c8, type: 2}
+    ItemNumber: 6
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 8d12dab471c0374478ad1f6d1c2a49d0, type: 2}
+    ItemNumber: 7
+    isCollected: 0
+  - item: {fileID: 11400000, guid: e7d2b015d560451418a657fe56b1de46, type: 2}
+    ItemNumber: 8
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 17f763e5ed5e15541bccb01da0a39aa2, type: 2}
+    ItemNumber: 9
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 2fb676d207a154c4295b29a96a8d7573, type: 2}
+    ItemNumber: 10
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 6e1d69934918cc947a43926f6c92758b, type: 2}
+    ItemNumber: 11
+    isCollected: 0
+  - item: {fileID: 11400000, guid: c58f159e8e50d1f4f970eec6cd8112ba, type: 2}
+    ItemNumber: 12
+    isCollected: 0
+  - item: {fileID: 11400000, guid: eb0921ba14432c249a2348e79a6f09c6, type: 2}
+    ItemNumber: 13
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 9bb26d98a669ace46ae71d9debafe4be, type: 2}
+    ItemNumber: 14
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 39f05245e52a7d14d8b539df2df28735, type: 2}
+    ItemNumber: 15
+    isCollected: 0
+  - item: {fileID: 11400000, guid: cb000f0d82aab554cb3b17c21fde4eb8, type: 2}
+    ItemNumber: 16
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 13f40eaa57f811c4fb132f6b52d9e70f, type: 2}
+    ItemNumber: 17
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 796e60fbbcf699649b808bec757e4adb, type: 2}
+    ItemNumber: 18
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 65e94fdfad7753f4e9ac75142a62e3ec, type: 2}
+    ItemNumber: 19
+    isCollected: 0
+  - item: {fileID: 11400000, guid: b8a4efb3b6ae6784091e1dc264df811d, type: 2}
+    ItemNumber: 20
+    isCollected: 0
+  - item: {fileID: 11400000, guid: ad9776b41e0446d4d88d5e4f74921d82, type: 2}
+    ItemNumber: 21
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 40e6636d25edf5e4a9d06274dd365202, type: 2}
+    ItemNumber: 22
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 0965fb37b30a04c4ba3abe0ae58c32a1, type: 2}
+    ItemNumber: 23
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 0c409ec5740d07243927a8a77e9ab464, type: 2}
+    ItemNumber: 24
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 0b5dc545069b0da45b56af9529aed3fa, type: 2}
+    ItemNumber: 25
+    isCollected: 0
+  - item: {fileID: 11400000, guid: c6425536303bbb7428a93389b5037b53, type: 2}
+    ItemNumber: 26
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 541fe380b51a30d44920d841a9648c6d, type: 2}
+    ItemNumber: 27
+    isCollected: 0
+  - item: {fileID: 11400000, guid: ac71dfba767153f48ab8bc9790475df3, type: 2}
+    ItemNumber: 28
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 893390e5471d7cc4b8f775c0c82eaa00, type: 2}
+    ItemNumber: 29
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 233d2ed0e4a118e449a8c0873e6b66c1, type: 2}
+    ItemNumber: 30
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 151590cea7ffe2848b48bd10ca6d139b, type: 2}
+    ItemNumber: 31
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 80e65a06427cd0c4785f45f1bd45a748, type: 2}
+    ItemNumber: 32
+    isCollected: 0
+  - item: {fileID: 11400000, guid: b63510e88b424334abb4929d4019ca61, type: 2}
+    ItemNumber: 33
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 8159d66ade387484d8b0fb412859e75b, type: 2}
+    ItemNumber: 34
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 82fdc9b45606a46419b163103a1304fc, type: 2}
+    ItemNumber: 35
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 44797acf470982f4cb0e16d5d499389c, type: 2}
+    ItemNumber: 36
+    isCollected: 0
+  - item: {fileID: 11400000, guid: ad046ecb6909fc646ad1ffdc31952a7e, type: 2}
+    ItemNumber: 37
+    isCollected: 0
+  - item: {fileID: 11400000, guid: a0205564fe71ef54690c5f7d80785359, type: 2}
+    ItemNumber: 38
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 1b5799d3376fe80438ed1ea2d32060a9, type: 2}
+    ItemNumber: 39
+    isCollected: 0
+  - item: {fileID: 11400000, guid: f6ac346107926ab42b1700625a262f4e, type: 2}
+    ItemNumber: 40
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 56fd03f2b46f9e54b93c2e119a2a3d52, type: 2}
+    ItemNumber: 41
+    isCollected: 0
+  - item: {fileID: 11400000, guid: 7c2cf196b9574fe41b1870aadfa10c4b, type: 2}
+    ItemNumber: 42
+    isCollected: 0
+  - item: {fileID: 11400000, guid: c4e66fc2fb8126741b5dc6ab8db3c8c7, type: 2}
+    ItemNumber: 43
+    isCollected: 0
+  questInLists:
+  - quest: {fileID: 11400000, guid: 992c76df220b1fe47872800ab1f8d18f, type: 2}
+    isCompleted: 1
+    isTakeOut: 1
+    isAlarmed: 1
+  - quest: {fileID: 11400000, guid: b83aa60ff47569d41b51bc66cffa8206, type: 2}
+    isCompleted: 0
+    isTakeOut: 0
+    isAlarmed: 0
+  - quest: {fileID: 11400000, guid: aa54dcc800d816d43bac26c33f75401f, type: 2}
+    isCompleted: 0
+    isTakeOut: 0
+    isAlarmed: 0
+  - quest: {fileID: 11400000, guid: 93fa8efca14b75f4e9b1dbde8217ffb2, type: 2}
+    isCompleted: 0
+    isTakeOut: 0
+    isAlarmed: 0
+  - quest: {fileID: 11400000, guid: 66e55d69985fd24488dff9814e9e4b26, type: 2}
+    isCompleted: 0
+    isTakeOut: 0
+    isAlarmed: 0

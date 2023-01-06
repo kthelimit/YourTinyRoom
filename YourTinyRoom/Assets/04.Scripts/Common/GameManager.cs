@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public Inventory Inventory;
     public Collections collections;
     public QuestManager questManager;
-
+    public ColorChange colorChange;
     public GameDataObject gameData;
     void Awake()
     {
@@ -68,34 +68,52 @@ public class GameManager : MonoBehaviour
         levelSystem = transform.GetComponent<LevelSystem>();
         dustPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
 
-        LoadGameData();
+
     }
     void LoadGameData()
     {
-        Debug.Log("데이터 로드중");
+        //플레이어 이름
         playerName = gameData.PlayerName;
         playerNameText.text = playerName;
 
+        //캐릭터 이름
         characterName = gameData.CharacterName;
         characterNameText.text = characterName;
         characterNameText3.text = characterName;
         characterNameText2.text = characterName + " 방문중!";
 
+        //경험치, 골드, 크리스탈
         curExp = gameData.Exp;
         gold = gameData.Gold;
         crystal = gameData.Crystal;
 
+        //인벤토리
         Inventory.LoadInventory(gameData.ItemInInventories);
+        //콜렉션
         collections.LoadCollections(gameData.CollectItems);
+        //레벨
         levelSystem.LoadLevel(gameData.Level);
+        //퀘스트리스트
         questManager.LoadQuestList(gameData.questInLists);
-        Debug.Log("데이터 로드완료");
+
+        //캐릭터 커스텀
+
+
+
+
     }
 
     public void SaveGameData()
     {
         gameData.PlayerName = playerName;
         gameData.CharacterName = characterName;
+        gameData.Exp = curExp;
+        gameData.Gold = gold;
+        gameData.Crystal = crystal;
+        gameData.ItemInInventories = Inventory.SaveInventory();
+        gameData.CollectItems = collections.SaveCollections();
+        gameData.Level = levelSystem.SaveLevel();
+        gameData.questInLists = questManager.SaveQuestList();
         Debug.Log("데이터 저장중");
         UnityEditor.EditorUtility.SetDirty(gameData);
 
@@ -103,6 +121,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        LoadGameData();
         goldText.text = gold.ToString("#,###");
         crystalText.text = crystal.ToString("#,###");
         dayCountText.text = dayCount.ToString();

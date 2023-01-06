@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using DataInfo;
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager questManager;
@@ -20,35 +21,56 @@ public class QuestManager : MonoBehaviour
 
     void Awake()
     {
-        if(questManager==null)
+        if (questManager == null)
             questManager = this;
         quests = Resources.LoadAll<Quest>("Quest");
         questInLists = new List<QuestInList>();
 
-        foreach(Quest quest in quests)
-        {
-            QuestInList questInList = new QuestInList();
-            questInList.quest = quest;
-            questInList.isTakeOut = false;
-            questInList.isCompleted = false;
-            questInList.isAlarmed = false;
-            questInLists.Add(questInList);
-        }
 
-        foreach (QuestInList questIL in questInLists)
-        {
-            GameObject _questItem=Instantiate(questItem, scrollContents);
-            _questItem.GetComponent<QuestSlot>().SetQuest(questIL);
-        }
+
 
         CheckIsThereReward();
     }
 
     public void LoadQuestList(List <QuestInList> _list)
     {
-        questInLists = _list;
+        if(_list.Count==0)
+        {
+            foreach (Quest quest in quests)
+            {
+                QuestInList questInList = new QuestInList();
+                questInList.quest = quest;
+                questInList.isTakeOut = false;
+                questInList.isCompleted = false;
+                questInList.isAlarmed = false;
+                questInLists.Add(questInList);
+            }
+        }
+        else if (_list.Count != 0)
+        {
+            foreach (QuestInList QIL in _list)
+            {
+                QuestInList questInList = new QuestInList();
+                questInList.quest = QIL.quest;
+                questInList.isTakeOut = QIL.isTakeOut;
+                questInList.isCompleted = QIL.isCompleted;
+                questInList.isAlarmed = QIL.isAlarmed;
+                questInLists.Add(questInList);
+            }
+        }
+
+        foreach (QuestInList questIL in questInLists)
+        {
+            GameObject _questItem = Instantiate(questItem, scrollContents);
+            _questItem.GetComponent<QuestSlot>().SetQuest(questIL);
+        }
+
     }
 
+    public List<QuestInList> SaveQuestList()
+    {        
+        return questInLists;
+    }
 
 
     public void CheckIsThereReward()
@@ -57,6 +79,17 @@ public class QuestManager : MonoBehaviour
         int checkReward = 0;
         foreach(QuestSlot _quest in questItems)
         {
+
+            for (int i = 0; i < questInLists.Count; i++)
+            {
+                if (_quest.questData == questInLists[i].quest)
+                {
+                    questInLists[i].isTakeOut = _quest.isTakeOut;
+                    questInLists[i].isAlarmed = _quest.isAlarmed;
+                    questInLists[i].isCompleted = _quest.isCompleted;
+                }
+            }
+
             if (_quest.isCompleted && !_quest.isTakeOut) 
             {
                 allReceiveBtn.interactable = true;

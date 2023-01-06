@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEditor;
-
+using DataInfo;
 public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Quest questData;
@@ -20,7 +20,7 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public GameObject QuestAlarmPrefab;
     public GameObject rewardPrefab;
     public Text QuestAlarmPanelText;
-    private bool isAlarmed = false;
+    public bool isAlarmed = false;
     private Transform canvasUI;
     public int questItemCount;
     Transform rewardPanel;
@@ -48,6 +48,14 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         isCompleted = _quest.isCompleted;
         isAlarmed = _quest.isAlarmed;
         SetReward();
+        if(isTakeOut)
+        {
+            ChangeFinished();
+        }
+        else
+        {
+            this.transform.SetAsFirstSibling();
+        }
         StartCoroutine("UpdateCheck");
     }
 
@@ -103,13 +111,12 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void TakeOut()
     {
         isTakeOut = true;
-        finishImg.SetActive(true);
-        this.transform.SetAsLastSibling();
-        
+        ChangeFinished();
+
         //리워드 지급
         if (questData.RewardItem1.name == "Gold")
             GameManager.gameManager.IncreaseGold(questData.RewardQuantity1);
-        else if(questData.RewardItem1.name == "Exp")
+        else if (questData.RewardItem1.name == "Exp")
             GameManager.gameManager.IncreaseExp(questData.RewardQuantity1);
 
         if (questData.RewardItem2.name == "Gold")
@@ -120,6 +127,13 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         QuestManager.questManager.CheckIsThereReward();
     }
+
+    private void ChangeFinished()
+    {
+        finishImg.SetActive(true);
+        this.transform.SetAsLastSibling();
+    }
+
     //퀘스트가 달성되었는지 체크
     public void CheckComplete()
     {
