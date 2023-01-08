@@ -68,13 +68,15 @@ public class GridBuildingSystem : MonoBehaviour
         else if(Input.GetMouseButtonDown(1))
         {
             if (temp.Placed) return;
-            ReturnToInventory();
+            ReturnToInventory(temp);
 
         }
     }
 
-    public void ReturnToInventory()
+    public void ReturnToInventory(Building _building)
     {
+        temp = _building;
+        tempItem = temp.GetComponent<ItemInfo>().item;
         inventory.AcquireItem(tempItem, 1);
         DeleteObject();
     }

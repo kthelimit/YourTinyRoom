@@ -36,9 +36,14 @@ public class ColorChange : MonoBehaviour
 
     }
 
-    public void LoadColorData()
+    public void LoadColorData(Color _hairTintColor, Color _hairDarkColor, Color _pupilTintColor, Color _pupilDarkColor, Color _clothesTintColor, Color _clothesDarkColor)
     {
-
+        hairTintColor = _hairTintColor;
+        hairDarkColor = _hairDarkColor;
+        pupilTintColor = _pupilTintColor;
+        pupilDarkColor = _pupilDarkColor;
+        clothesTintColor = _clothesTintColor;
+        clothesDarkColor = _clothesDarkColor;
     }
 
     public void RepeatUpdateColor()

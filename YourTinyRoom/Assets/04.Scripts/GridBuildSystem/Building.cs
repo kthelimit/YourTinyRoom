@@ -17,9 +17,11 @@ public class Building : MonoBehaviour
     private Button ReturnButton;
     private Button ReflectButton;
     private bool IsCrop = true;
+    AudioClip TookSFX;
 
     private void Awake()
     {
+        TookSFX = Resources.Load<AudioClip>("SFX/collision_wood_soft_01");
         furnitureFolder = GameObject.Find("FurnitureFolder").transform;
         if (GetComponent<ItemInfo>().itemType == Item.ItemType.FURNITURE)
         {
@@ -84,6 +86,7 @@ public class Building : MonoBehaviour
         BoundsInt areaTemp = area;
         areaTemp.position = positionInt;
         Placed = true;
+        SoundManager.soundManager.PlaySfx(this.transform.position, TookSFX);
         Renderer renderer = GetComponentInChildren<Renderer>();
         renderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);//-(int)(transform.position.x);
         GridBuildingSystem.gbSystem.TakeArea(areaTemp);
@@ -100,7 +103,7 @@ public class Building : MonoBehaviour
 
     public void ReturnToInventory()
     {
-        GridBuildingSystem.gbSystem.ReturnToInventory();
+        GridBuildingSystem.gbSystem.ReturnToInventory(this);
     }
 
     public void Rearrange()

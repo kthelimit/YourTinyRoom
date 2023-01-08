@@ -65,9 +65,14 @@ public class CharacterCtrl : MonoBehaviour
     //돌아갈때 남기고 갈 선물
     public GameObject GiftPrefab;
 
+    AudioClip PhoneAlarmSFX;
+    AudioClip InviteSFX;
+
     private ColorChange colorChange;
     void Awake()
     {
+        PhoneAlarmSFX = Resources.Load<AudioClip>("SFX/achievment_03");
+        InviteSFX = Resources.Load<AudioClip>("SFX/slots_win_001");
         colorChange = GetComponent<ColorChange>();
         GiftPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Gift.prefab", typeof(GameObject));
         tr = GetComponent<Transform>();
@@ -111,6 +116,7 @@ public class CharacterCtrl : MonoBehaviour
         }
         StartCoroutine("Visit");
         phoneMessageButton.SetActive(false);
+        SoundManager.soundManager.PlaySfx(this.transform.position, InviteSFX);
         InviteBtn.interactable = false;
     }
 
@@ -139,6 +145,7 @@ public class CharacterCtrl : MonoBehaviour
         //    phone.Talk(140);
         //}
         gameControl.ShowAlarmPanel();
+        SoundManager.soundManager.PlaySfx(this.transform.position,PhoneAlarmSFX);
         ImageAlarm.SetActive(true);
 
     }

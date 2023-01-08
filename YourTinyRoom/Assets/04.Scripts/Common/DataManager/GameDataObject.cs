@@ -15,6 +15,7 @@ public class GameDataObject : ScriptableObject
     public float Crystal = 10f;
     public int Level = 1;
     public float Exp = 0f;
+    public float DayCount=0f;
 
     //인벤토리
     public List<ItemInInventory> ItemInInventories = new List<ItemInInventory>();
@@ -26,11 +27,11 @@ public class GameDataObject : ScriptableObject
     public List<QuestInList> questInLists = new List<QuestInList>();
 
     //캐릭터 커스텀
-    public Color hairTintColor;
+    public Color hairTintColor=Color.white;
     public Color hairDarkColor;
-    public Color pupilTintColor;
+    public Color pupilTintColor = Color.white;
     public Color pupilDarkColor;
-    public Color clothesTintColor;
+    public Color clothesTintColor = Color.white;
     public Color clothesDarkColor;
 
     public int activeHairIndex = 0;
@@ -40,5 +41,12 @@ public class GameDataObject : ScriptableObject
 
     public string TailSkin = "";
     public string HairBackSkin = "";
+
+    //사운드
+    public float BGMVolume = 1f;
+    public float SFXVolume = 1f;
+
+    //맵
+    public List<PlacedObject> PlacedObjectsInMap;
 
 }

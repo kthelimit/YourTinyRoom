@@ -30,12 +30,18 @@ public class ShowItemInfo : MonoBehaviour
     public GameObject GatchaPanel;
     public Image GatchaItemImage;
     public Text GatchaTextTitle;
+    AudioClip OpenSFX;
+    AudioClip HealSFX;
+    AudioClip LikeUpSFX;
 
     private CharacterCtrl characterCtrl;
     Collections collections;
 
     private void Awake()
     {
+        LikeUpSFX = Resources.Load<AudioClip>("SFX/Select_Item_01");
+        OpenSFX = Resources.Load<AudioClip>("SFX/Treasure_chest_03");
+        HealSFX = Resources.Load<AudioClip>("SFX/S4_Cute_Heal_1");
         itemImage = transform.GetChild(0).GetComponent<Image>();
         itemName = transform.GetChild(1).GetComponent<Text>();
         itemDesc = transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Text>();
@@ -127,6 +133,7 @@ public class ShowItemInfo : MonoBehaviour
             GIFT gift = (GIFT)item;
             if (gift.itemEffectType == GIFT.ItemEffectType.ENERGY)
             {
+                SoundManager.soundManager.PlaySfx(this.transform.position, HealSFX);
                 characterCtrl.UpdateEnergyBar(gift.ItemEffectValue);
                 int rand = Random.Range(0,3);
                 if (rand == 0)
@@ -140,6 +147,7 @@ public class ShowItemInfo : MonoBehaviour
             }
             else if(gift.itemEffectType == GIFT.ItemEffectType.LIKE)
             {
+                SoundManager.soundManager.PlaySfx(this.transform.position, LikeUpSFX);
                 characterCtrl.UpdateLikeBar(gift.ItemEffectValue);
                 int rand = Random.Range(0, 3);
                 if (rand == 0)
@@ -167,6 +175,7 @@ public class ShowItemInfo : MonoBehaviour
                     randitemNum = Random.Range(24, 31);
                 }
                 Item randItem = Resources.Load<Item>($"Item/Item0{randitemNum}_토끼 마스코트 상품");
+                SoundManager.soundManager.PlaySfx(this.transform.position, OpenSFX);
                 GatchaPanel.SetActive(true);
                 GatchaItemImage.sprite = randItem.itemImage;
                 GatchaItemImage.type = 0;

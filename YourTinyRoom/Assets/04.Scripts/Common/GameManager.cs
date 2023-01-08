@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     public QuestManager questManager;
     public ColorChange colorChange;
     public GameDataObject gameData;
+    public CharacterCustom characterCustom;
+    public Transform FurnitureFolder;
     void Awake()
     {
         if (gameManager == null)
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         Inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         collections = GameObject.Find("Collection").GetComponent<Collections>();
         questManager = GetComponent<QuestManager>();
+        FurnitureFolder = GameObject.Find("FurnitureFolder").transform;
         playerName = "플레이어";
         playerNameText.text = playerName;
         characterCtrl = GameObject.FindGameObjectWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
@@ -66,8 +69,9 @@ public class GameManager : MonoBehaviour
         characterNameText.text = characterName;
         characterNameText2.text = characterName + " 방문중!";
         levelSystem = transform.GetComponent<LevelSystem>();
+        colorChange = characterCtrl.GetComponent<ColorChange>();
         dustPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
-
+        characterCustom = characterCtrl.GetComponent<CharacterCustom>();
 
     }
     void LoadGameData()
@@ -86,6 +90,7 @@ public class GameManager : MonoBehaviour
         curExp = gameData.Exp;
         gold = gameData.Gold;
         crystal = gameData.Crystal;
+        dayCount = gameData.DayCount;
 
         //인벤토리
         Inventory.LoadInventory(gameData.ItemInInventories);
@@ -97,10 +102,25 @@ public class GameManager : MonoBehaviour
         questManager.LoadQuestList(gameData.questInLists);
 
         //캐릭터 커스텀
+        colorChange.LoadColorData(gameData.hairTintColor, gameData.hairDarkColor, gameData.pupilTintColor, gameData.pupilDarkColor, gameData.clothesTintColor, gameData.clothesDarkColor);
+        characterCustom.LoadSkinData(gameData.activeHairIndex, gameData.activeEyesIndex, gameData.activeEyelashIndex, gameData.activeClothIndex, gameData.TailSkin, gameData.HairBackSkin);
 
+        //사운드
+        SoundManager.soundManager.LoadVolume(gameData.SFXVolume, gameData.BGMVolume);
+        Camera.main.transform.GetComponent<AudioSource>().volume = gameData.BGMVolume;
 
-
-
+        foreach(PlacedObject placedObj in gameData.PlacedObjectsInMap)
+        {
+           GameObject obj= Instantiate(placedObj.placedObject, FurnitureFolder);
+           obj.transform.position = placedObj.pos;
+            if(obj.tag=="FURNITURE")
+            {
+                Building _building = obj.transform.GetComponent<Building>();
+                GridBuildingSystem.gbSystem.ClearArea(_building.area);
+                
+            }
+                
+        }
     }
 
     public void SaveGameData()
@@ -110,10 +130,50 @@ public class GameManager : MonoBehaviour
         gameData.Exp = curExp;
         gameData.Gold = gold;
         gameData.Crystal = crystal;
+        gameData.DayCount = dayCount;
         gameData.ItemInInventories = Inventory.SaveInventory();
         gameData.CollectItems = collections.SaveCollections();
         gameData.Level = levelSystem.SaveLevel();
         gameData.questInLists = questManager.SaveQuestList();
+
+        gameData.hairTintColor = colorChange.hairTintColor;
+        gameData.hairDarkColor = colorChange.hairDarkColor;
+        gameData.pupilTintColor = colorChange.pupilTintColor;
+        gameData.pupilDarkColor = colorChange.pupilDarkColor;
+        gameData.clothesTintColor = colorChange.clothesTintColor;
+        gameData.clothesDarkColor = colorChange.clothesDarkColor;
+
+        gameData.activeHairIndex = characterCustom.activeHairIndex;
+        gameData.activeEyesIndex = characterCustom.activeEyesIndex;
+        gameData.activeEyelashIndex = characterCustom.activeEyelashIndex;
+        gameData.activeClothIndex = characterCustom.activeClothIndex;
+        gameData.TailSkin = characterCustom.TailSkin;
+        gameData.HairBackSkin = characterCustom.HairBackSkin;
+
+        gameData.SFXVolume= SoundManager.soundManager.sfxVolume;
+        gameData.BGMVolume = Camera.main.transform.GetComponent<AudioSource>().volume;
+
+        //맵 내의 가구 리스트 저장
+        Building[] furnitureList = FurnitureFolder.GetComponentsInChildren<Building>();
+        gameData.PlacedObjectsInMap = null;
+        gameData.PlacedObjectsInMap = new List<PlacedObject>();
+        for(int i=0; i< furnitureList.Length;i++)
+        {
+            PlacedObject placedObject = new PlacedObject();
+            placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/05.Prefabs/Furniture/Item{furnitureList[i].GetComponent<ItemInfo>().item.ItemNumber.ToString("000")}.prefab", typeof(GameObject));
+            placedObject.pos = furnitureList[i].transform.position;
+            gameData.PlacedObjectsInMap.Add(placedObject);
+        }
+        //맵 내의 먼지 리스트 저장
+        Dust[] DustList = FurnitureFolder.GetComponentsInChildren<Dust>();
+        for(int i=0;i<DustList.Length;i++)
+        {
+            PlacedObject placedObject = new PlacedObject();
+            placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
+            placedObject.pos = furnitureList[i].transform.position;
+            gameData.PlacedObjectsInMap.Add(placedObject);
+        }
+
         Debug.Log("데이터 저장중");
         UnityEditor.EditorUtility.SetDirty(gameData);
 

@@ -61,6 +61,12 @@ namespace DataInfo
         public bool isTakeOut;
         public bool isAlarmed;
     }
+    [System.Serializable]
+    public class PlacedObject
+    {
+        public GameObject placedObject;
+        public Vector3 pos;           
+    }
 
 
 }

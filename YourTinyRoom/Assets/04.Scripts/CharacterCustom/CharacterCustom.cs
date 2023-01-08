@@ -51,6 +51,19 @@ public class CharacterCustom : MonoBehaviour
 		colorChange = this.GetComponent<ColorChange>();
 	}
 
+
+	public void LoadSkinData(int a, int b, int c, int d, string str, string str2)
+    {
+		SelectHairSkin(a);
+		SelectEyesSkin(b);
+		SelectEyelashSkin(c);
+		SelectClothSkin(d);
+
+		Equip(str, ItemType.Tail);
+		Equip(str2, ItemType.HairBack);
+	}
+
+
 	void Start()
 	{
 		UpdateCharacterSkin();

@@ -24,10 +24,12 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Transform canvasUI;
     public int questItemCount;
     Transform rewardPanel;
+    AudioClip QuestCompleteSFX;
     GameControl gameControl;
 
     private void Awake()
     {
+        QuestCompleteSFX = Resources.Load<AudioClip>("SFX/Task_Complete_02");
         rewardPanel = transform.GetChild(3);
         QuestAlarmPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/QuestAlarm.prefab", typeof(GameObject));
         QuestAlarmPanelText = QuestAlarmPrefab.transform.GetChild(0).GetComponent<Text>();
@@ -98,6 +100,7 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
     IEnumerator ShowQuestAlarmPanel()
     {
+        SoundManager.soundManager.PlaySfx(this.transform.position, QuestCompleteSFX);
         GameObject questAlarm = Instantiate(QuestAlarmPrefab, canvasUI);
         questAlarm.GetComponent<Button>().onClick.AddListener(()=>gameControl.OpenQuestList(true));
         questAlarm.GetComponent<Animator>().SetTrigger("Down");

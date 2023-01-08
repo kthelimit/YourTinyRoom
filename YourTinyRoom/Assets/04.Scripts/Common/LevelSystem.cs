@@ -14,6 +14,7 @@ public class LevelSystem : MonoBehaviour
     private int beforeLevel = 1;
     private float totalGold = 0;
     private float totalCrystal = 0;
+    AudioClip LevelUpSFX;
     public Shop shop;
     private struct Level
     {
@@ -30,6 +31,7 @@ public class LevelSystem : MonoBehaviour
 
     private void Awake()
     {
+        LevelUpSFX = Resources.Load<AudioClip>("SFX/Complete_Level_01");
         LevelDataLoad();
     }
     private void LevelDataLoad()
@@ -65,6 +67,7 @@ public class LevelSystem : MonoBehaviour
         {
             levelCount++;
             levelUpPanel.SetActive(true);
+            SoundManager.soundManager.PlaySfx(this.transform.position, LevelUpSFX);
             levelText.text = beforeLevel.ToString() + '→' + levelCount.ToString();
             totalGold += levelTable[levelCount - 1].rewardGold;
             GoldText.text = totalGold.ToString();

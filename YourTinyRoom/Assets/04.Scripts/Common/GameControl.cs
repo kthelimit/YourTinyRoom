@@ -150,6 +150,11 @@ public class GameControl : MonoBehaviour
             isopen = false;
         isEditable = isopen;
         CharacterCollider.enabled = !isopen;
+        GameObject[] Dusts = GameObject.FindGameObjectsWithTag("DUST");
+        foreach(GameObject obj in Dusts)
+        {
+            obj.GetComponent<BoxCollider2D>().enabled= !isopen;
+        }
         GridBuildCG.alpha = isopen ? 1.0f : 0.0f;
         GridBuildCG.blocksRaycasts = isopen;
         GridBuildCG.interactable = isopen;

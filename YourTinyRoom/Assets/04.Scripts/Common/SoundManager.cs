@@ -8,7 +8,8 @@ public class SoundManager : MonoBehaviour
     public float sfxVolume = 1.0f; // 효과음 볼륨
     public bool isSfxMute = false; //뮤트여부
     public static SoundManager soundManager;//싱글턴
-    public Slider audioslider;
+    public Slider sfxSlider;
+    public Slider bgmSlider;
 
     void Awake()
     {
@@ -32,6 +33,14 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
         Destroy(soundobj, sfx.length);
     }
+
+    public void LoadVolume(float _sfxVolume, float _bgmVolume)
+    {
+        sfxVolume = _sfxVolume;
+        sfxSlider.value = _sfxVolume;
+        bgmSlider.value = _bgmVolume;
+    }
+
 
     public void SetSfxVolume(float sliderValue)
     {

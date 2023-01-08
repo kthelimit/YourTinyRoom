@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameDataSO
   m_EditorClassIdentifier: 
   PlayerName: "\uD50C\uB808\uC774\uC5B4"
-  CharacterName: "\uCE90\uB9AD\uD130"
-  Gold: 15400
+  CharacterName: "\uB098\uC624\uD1A0"
+  Gold: 14500
   Crystal: 30
   Level: 5
   Exp: 800
@@ -42,13 +42,13 @@ MonoBehaviour:
     isCollected: 0
   - item: {fileID: 11400000, guid: 699cd3ae3dc8c0549a63dc1b233ba7c8, type: 2}
     ItemNumber: 6
-    isCollected: 0
+    isCollected: 1
   - item: {fileID: 11400000, guid: 8d12dab471c0374478ad1f6d1c2a49d0, type: 2}
     ItemNumber: 7
-    isCollected: 0
+    isCollected: 1
   - item: {fileID: 11400000, guid: e7d2b015d560451418a657fe56b1de46, type: 2}
     ItemNumber: 8
-    isCollected: 0
+    isCollected: 1
   - item: {fileID: 11400000, guid: 17f763e5ed5e15541bccb01da0a39aa2, type: 2}
     ItemNumber: 9
     isCollected: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
     isCollected: 0
   - item: {fileID: 11400000, guid: 8159d66ade387484d8b0fb412859e75b, type: 2}
     ItemNumber: 34
-    isCollected: 0
+    isCollected: 1
   - item: {fileID: 11400000, guid: 82fdc9b45606a46419b163103a1304fc, type: 2}
     ItemNumber: 35
     isCollected: 0
@@ -168,10 +168,37 @@ MonoBehaviour:
     isTakeOut: 0
     isAlarmed: 0
   - quest: {fileID: 11400000, guid: 93fa8efca14b75f4e9b1dbde8217ffb2, type: 2}
-    isCompleted: 0
+    isCompleted: 1
     isTakeOut: 0
     isAlarmed: 0
   - quest: {fileID: 11400000, guid: 66e55d69985fd24488dff9814e9e4b26, type: 2}
     isCompleted: 0
     isTakeOut: 0
     isAlarmed: 0
+  hairTintColor: {r: 0.8784314, g: 0.7607843, b: 0.7529412, a: 1}
+  hairDarkColor: {r: 0, g: 0, b: 0, a: 1}
+  pupilTintColor: {r: 0.6784314, g: 0.654902, b: 0.64705884, a: 1}
+  pupilDarkColor: {r: 0, g: 0, b: 0, a: 1}
+  clothesTintColor: {r: 1, g: 0.92941177, b: 0.8784314, a: 1}
+  clothesDarkColor: {r: 0, g: 0, b: 0, a: 1}
+  activeHairIndex: 0
+  activeEyesIndex: 0
+  activeEyelashIndex: 0
+  activeClothIndex: 0
+  TailSkin: 
+  HairBackSkin: 
+  BGMVolume: 0.37510198
+  SFXVolume: 0.56244886
+  PlacedObjectsInMap:
+  - placedObject: {fileID: 8959607329825804227, guid: 89b1fdb34cfbd514186a5c598dd5b501,
+      type: 3}
+    pos: {x: -3, y: 2, z: 0}
+  - placedObject: {fileID: 7691180083802775639, guid: 23076d51eb6c71d478ccd46023b61f23,
+      type: 3}
+    pos: {x: -2, y: 1.5, z: 0}
+  - placedObject: {fileID: 7826734866460530553, guid: 8a553b364f476ad4cb2561d30d954355,
+      type: 3}
+    pos: {x: 2, y: 2.5, z: 0}
+  - placedObject: {fileID: 1502402594785371736, guid: a397031e743f3504f95373c7cd785eb9,
+      type: 3}
+    pos: {x: -3, y: 2, z: 0}

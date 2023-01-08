@@ -21,11 +21,15 @@ public class Phone : MonoBehaviour
     public ScrollRect scrollRect;
     public GameObject ImageAlarm;
     public GameObject phoneHelp;
+
+    public AudioClip talkSfx;
+
     CharacterCtrl characterCtrl;
     GameControl gameControl;
 
     void Awake()
     {
+        talkSfx = Resources.Load<AudioClip>("SFX/Power_Up_Bar_01");
         gameControl = GameObject.Find("GameControl").transform.GetComponent<GameControl>();
         characterCtrl = GameObject.FindWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
         talkData = new Dictionary<int, string[]>();
@@ -73,6 +77,7 @@ public class Phone : MonoBehaviour
     {
         if (!isAction) return;
         Talk(currentEventId);
+        
     }
 
     public void Talk(int id)
@@ -86,6 +91,7 @@ public class Phone : MonoBehaviour
             talkIndex = 0;
             return;
         }
+        SoundManager.soundManager.PlaySfx(this.transform.position, talkSfx);
         string talkText = tData.Split(':')[0];
         int talkWho = int.Parse(tData.Split(':')[1]);
         if (talkWho == 0)

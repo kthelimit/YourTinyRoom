@@ -11,14 +11,15 @@ public class ShopItem : MonoBehaviour
     public Item item;
     public Item Gold;
     public Item Crystal;
-    [SerializeField]
     private GameObject getEffectPrefab;
+    public AudioClip cashSFX;
 
     public Inventory inventory;
     public Collections collections;
 
     void Start()
     {
+        cashSFX = Resources.Load<AudioClip>("SFX/buy_cashregister_01");
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         collections = GameObject.Find("Collection").GetComponent<Collections>();
         getEffectPrefab = Resources.Load<GameObject>("GetEffectUI");
@@ -73,7 +74,7 @@ public class ShopItem : MonoBehaviour
             CheckPrice();
             ShowGetEffect(priceButton.transform, item);
         }
-        
+        SoundManager.soundManager.PlaySfx(this.transform.position, cashSFX);
     }
     private void ShowGetEffect(Transform tr, Item item, int quantity = 1)
     {

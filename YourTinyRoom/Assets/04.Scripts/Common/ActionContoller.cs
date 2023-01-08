@@ -22,11 +22,13 @@ public class ActionContoller : MonoBehaviour
     private readonly string hashFurniture = "FURNITURE";
     private readonly string hashChara = "CHARACTER";
     private readonly string hashDust = "DUST";
+    AudioClip dustRemoveSFX;
     public GameControl gameControl;
     private CharacterCtrl characterCtrl;
 
     void Start()
     {
+        dustRemoveSFX = Resources.Load<AudioClip>("SFX/broom-sweeping-03");
         canvasUI = GameObject.Find("Canvas-UI").transform;
         cam = GetComponent<Camera>();
         getEffectPrefab = Resources.Load<GameObject>("GetEffect");
@@ -161,6 +163,7 @@ public class ActionContoller : MonoBehaviour
             characterCtrl.ChangeAnimation("안녕");
             characterCtrl.Talk("즐거운 청소시간~!");
         }
+        SoundManager.soundManager.PlaySfx(this.transform.position, dustRemoveSFX);
         yield return new WaitForSeconds(2f);
         characterCtrl.ChangeAnimation("대기");
         Dust dust = _transform.GetComponent<Dust>();
