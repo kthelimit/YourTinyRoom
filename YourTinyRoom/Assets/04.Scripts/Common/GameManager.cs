@@ -7,7 +7,7 @@ using DataInfo;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;//싱글턴
-
+    public Camera mainCam;
     //자원관리
     private float gold =2000f;
     public Text goldText;
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     private GameObject dustPrefab;
     private CharacterCtrl characterCtrl;
     public GameControl gameControl;
+    public int DustRemoveCount=0;
 
     //데이터 매니저
     public DataManager dataManager;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
     public GameDataObject gameData;
     public CharacterCustom characterCustom;
     public Transform FurnitureFolder;
+
     void Awake()
     {
         if (gameManager == null)
@@ -72,9 +74,9 @@ public class GameManager : MonoBehaviour
         colorChange = characterCtrl.GetComponent<ColorChange>();
         dustPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
         characterCustom = characterCtrl.GetComponent<CharacterCustom>();
-
+        gameData = GameObject.Find("SceneManager").GetComponent<StartSceneManager>().currentGameData;
     }
-    void LoadGameData()
+    public void LoadGameData()
     {
         //플레이어 이름
         playerName = gameData.PlayerName;
@@ -86,12 +88,17 @@ public class GameManager : MonoBehaviour
         characterNameText3.text = characterName;
         characterNameText2.text = characterName + " 방문중!";
 
-        //경험치, 골드, 크리스탈
+        //경험치, 골드, 크리스탈, 날짜, 호감도
         curExp = gameData.Exp;
         gold = gameData.Gold;
         crystal = gameData.Crystal;
         dayCount = gameData.DayCount;
+        characterCtrl.LoadData(gameData.Like, gameData.Energy);
 
+        goldText.text = gold.ToString("#,###");
+        crystalText.text = crystal.ToString("#,###");
+        dayCountText.text = dayCount.ToString();
+        expGauge.fillAmount = curExp / maxExp;
         //인벤토리
         Inventory.LoadInventory(gameData.ItemInInventories);
         //콜렉션
@@ -107,8 +114,9 @@ public class GameManager : MonoBehaviour
 
         //사운드
         SoundManager.soundManager.LoadVolume(gameData.SFXVolume, gameData.BGMVolume);
-        Camera.main.transform.GetComponent<AudioSource>().volume = gameData.BGMVolume;
-
+        mainCam.GetComponent<AudioSource>().volume = gameData.BGMVolume;
+        
+        //맵데이터
         foreach(PlacedObject placedObj in gameData.PlacedObjectsInMap)
         {
            GameObject obj= Instantiate(placedObj.placedObject, FurnitureFolder);
@@ -116,10 +124,9 @@ public class GameManager : MonoBehaviour
             if(obj.tag=="FURNITURE")
             {
                 Building _building = obj.transform.GetComponent<Building>();
-                GridBuildingSystem.gbSystem.ClearArea(_building.area);
-                
-            }
-                
+                _building.UpdateSortingOrder();     
+               
+            }                
         }
     }
 
@@ -135,6 +142,8 @@ public class GameManager : MonoBehaviour
         gameData.CollectItems = collections.SaveCollections();
         gameData.Level = levelSystem.SaveLevel();
         gameData.questInLists = questManager.SaveQuestList();
+        gameData.Like = characterCtrl.SaveData(1);
+        gameData.Energy = characterCtrl.SaveData(2);
 
         gameData.hairTintColor = colorChange.hairTintColor;
         gameData.hairDarkColor = colorChange.hairDarkColor;
@@ -171,8 +180,10 @@ public class GameManager : MonoBehaviour
             PlacedObject placedObject = new PlacedObject();
             placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
             placedObject.pos = furnitureList[i].transform.position;
+            Debug.Log(placedObject.pos);
             gameData.PlacedObjectsInMap.Add(placedObject);
         }
+
 
         Debug.Log("데이터 저장중");
         UnityEditor.EditorUtility.SetDirty(gameData);
@@ -182,10 +193,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LoadGameData();
-        goldText.text = gold.ToString("#,###");
-        crystalText.text = crystal.ToString("#,###");
-        dayCountText.text = dayCount.ToString();
-        expGauge.fillAmount = curExp / maxExp;
+
     }
 
     public bool IsBuyable(float price, int priceType)
@@ -282,10 +290,16 @@ public class GameManager : MonoBehaviour
         dayCountText.text = dayCount.ToString();
         characterCtrl.StartAtHome();
         gameControl.GoNextDay();
-        //먼지가 랜덤한 위치에 하나 생기는 코드
+        
+        MakeDust();
+    }
+
+    //먼지가 랜덤한 위치에 하나 생기는 코드
+    public void MakeDust()
+    {
         float dustPosX = Random.Range(-5.3f, 5.3f);
         float dustPosY = Random.Range(-1.8f, 3.5f);
-        if(Mathf.Abs(dustPosX)+ Mathf.Abs(dustPosY) >= 5.3f)
+        if (Mathf.Abs(dustPosX) + Mathf.Abs(dustPosY) >= 5.3f)
         {
             if (dustPosY <= 0)
             {
@@ -296,6 +310,11 @@ public class GameManager : MonoBehaviour
                 dustPosY = 5.3f - Mathf.Abs(dustPosX);
             }
         }
-        Instantiate(dustPrefab, new Vector3(dustPosX, dustPosY, 0f),Quaternion.identity);
+        Instantiate(dustPrefab, new Vector3(dustPosX, dustPosY, 0f), Quaternion.identity);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

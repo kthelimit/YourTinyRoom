@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
-    public bool Placed { get; private set; }
+    public bool Placed { get; set; }
     public BoundsInt area;
     private const int IsometricRangePerYUnit = 100;
     private Transform furnitureFolder;
@@ -95,6 +95,12 @@ public class Building : MonoBehaviour
         this.transform.SetAsLastSibling();
         ShowControlPanel(false);
     }
+    public void UpdateSortingOrder()
+    {
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        renderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);//-(int)(transform.position.x);
+        this.transform.SetAsLastSibling();
+    }
 
     public void ClickRearrange()
     {
@@ -114,16 +120,23 @@ public class Building : MonoBehaviour
 
     public void Reflect()
     {
-        Transform SpriteTr= this.transform.GetChild(0).transform;
-        if (SpriteTr.eulerAngles.y == 180f)
+        BoundsInt tempArea= new BoundsInt(area.x, area.y, area.z, area.size.y, area.size.x, 1);
+        area = tempArea;
+        //GridBuildingSystem.gbSystem.RearrangeBuilding(this.gameObject);
+
+        Transform UITr= this.transform.GetChild(1).GetComponent<RectTransform>();
+        SpriteRenderer spriteRenderer = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        if (transform.eulerAngles.y == 180f)
         {
-            SpriteTr.eulerAngles = new Vector3(0f, 0f, 0f);
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            UITr.Rotate(new Vector3(0, 180, 0), Space.Self);
         }
         else
         {
-            SpriteTr.eulerAngles = new Vector3(0f, 180f, 0f);
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            UITr.Rotate(new Vector3(0, 180, 0), Space.Self);
         }
-      
+
     }
 
 

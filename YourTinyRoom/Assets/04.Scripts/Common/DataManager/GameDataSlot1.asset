@@ -10,17 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b571270ebb3ea4bb56b5cf7a26d194, type: 3}
-  m_Name: GameDataSO
+  m_Name: GameDataSlot1
   m_EditorClassIdentifier: 
-  PlayerName: "\uD50C\uB808\uC774\uC5B4"
-  CharacterName: "\uB098\uC624\uD1A0"
-  Gold: 14500
-  Crystal: 30
-  Level: 5
-  Exp: 800
+  IsStarted: 1
+  PlayerName: "\uCF00\uC774"
+  CharacterName: "\uCE90\uB9AD\uD130"
+  Gold: 100
+  Crystal: 10
+  Level: 1
+  Exp: 0
   DayCount: 0
+  Like: 0
+  Energy: 50
   ItemInInventories:
-  - item: {fileID: 11400000, guid: 916470a54de11a94fb780f46e0650f7a, type: 2}
+  - item: {fileID: 11400000, guid: 47abaf8e646cb3a47a690b3813307c8b, type: 2}
+    itemCount: 1
+  - item: {fileID: 11400000, guid: efa60b8a068571d4288b3400556db3c0, type: 2}
+    itemCount: 1
+  - item: {fileID: 11400000, guid: 8d12dab471c0374478ad1f6d1c2a49d0, type: 2}
     itemCount: 1
   CollectItems:
   - item: {fileID: 11400000, guid: e33b08dc781e3384a9f9263e300d68e1, type: 2}
@@ -34,13 +41,13 @@ MonoBehaviour:
     isCollected: 0
   - item: {fileID: 11400000, guid: efa60b8a068571d4288b3400556db3c0, type: 2}
     ItemNumber: 3
-    isCollected: 0
+    isCollected: 1
   - item: {fileID: 11400000, guid: 5232b8cba5ef2ff44b6417f0d7c76933, type: 2}
     ItemNumber: 4
     isCollected: 0
   - item: {fileID: 11400000, guid: 47abaf8e646cb3a47a690b3813307c8b, type: 2}
     ItemNumber: 5
-    isCollected: 0
+    isCollected: 1
   - item: {fileID: 11400000, guid: 699cd3ae3dc8c0549a63dc1b233ba7c8, type: 2}
     ItemNumber: 6
     isCollected: 1
@@ -52,7 +59,7 @@ MonoBehaviour:
     isCollected: 1
   - item: {fileID: 11400000, guid: 17f763e5ed5e15541bccb01da0a39aa2, type: 2}
     ItemNumber: 9
-    isCollected: 0
+    isCollected: 1
   - item: {fileID: 11400000, guid: 2fb676d207a154c4295b29a96a8d7573, type: 2}
     ItemNumber: 10
     isCollected: 0
@@ -127,7 +134,7 @@ MonoBehaviour:
     isCollected: 0
   - item: {fileID: 11400000, guid: 8159d66ade387484d8b0fb412859e75b, type: 2}
     ItemNumber: 34
-    isCollected: 1
+    isCollected: 0
   - item: {fileID: 11400000, guid: 82fdc9b45606a46419b163103a1304fc, type: 2}
     ItemNumber: 35
     isCollected: 0
@@ -161,45 +168,36 @@ MonoBehaviour:
     isTakeOut: 1
     isAlarmed: 1
   - quest: {fileID: 11400000, guid: b83aa60ff47569d41b51bc66cffa8206, type: 2}
-    isCompleted: 0
-    isTakeOut: 0
-    isAlarmed: 0
+    isCompleted: 1
+    isTakeOut: 1
+    isAlarmed: 1
   - quest: {fileID: 11400000, guid: aa54dcc800d816d43bac26c33f75401f, type: 2}
     isCompleted: 0
     isTakeOut: 0
     isAlarmed: 0
   - quest: {fileID: 11400000, guid: 93fa8efca14b75f4e9b1dbde8217ffb2, type: 2}
-    isCompleted: 1
-    isTakeOut: 0
-    isAlarmed: 0
+    isCompleted: 0
+    isTakeOut: 1
+    isAlarmed: 1
   - quest: {fileID: 11400000, guid: 66e55d69985fd24488dff9814e9e4b26, type: 2}
     isCompleted: 0
     isTakeOut: 0
     isAlarmed: 0
-  hairTintColor: {r: 0.8784314, g: 0.7607843, b: 0.7529412, a: 1}
+  hairTintColor: {r: 0.7882353, g: 0.627451, b: 0.67058825, a: 1}
   hairDarkColor: {r: 0, g: 0, b: 0, a: 1}
-  pupilTintColor: {r: 0.6784314, g: 0.654902, b: 0.64705884, a: 1}
+  pupilTintColor: {r: 0.5529412, g: 0.5529412, b: 1, a: 1}
   pupilDarkColor: {r: 0, g: 0, b: 0, a: 1}
-  clothesTintColor: {r: 1, g: 0.92941177, b: 0.8784314, a: 1}
+  clothesTintColor: {r: 0.81960785, g: 0.79607844, b: 1, a: 1}
   clothesDarkColor: {r: 0, g: 0, b: 0, a: 1}
-  activeHairIndex: 0
-  activeEyesIndex: 0
-  activeEyelashIndex: 0
-  activeClothIndex: 0
+  activeHairIndex: 2
+  activeEyesIndex: 1
+  activeEyelashIndex: 1
+  activeClothIndex: 1
   TailSkin: 
-  HairBackSkin: 
-  BGMVolume: 0.37510198
-  SFXVolume: 0.56244886
+  HairBackSkin: hair_back/short1
+  BGMVolume: 1
+  SFXVolume: 1
   PlacedObjectsInMap:
-  - placedObject: {fileID: 7826734866460530553, guid: 8a553b364f476ad4cb2561d30d954355,
-      type: 3}
-    pos: {x: 1, y: 3, z: 0}
-  - placedObject: {fileID: 8959607329825804227, guid: 89b1fdb34cfbd514186a5c598dd5b501,
-      type: 3}
-    pos: {x: -3, y: 2, z: 0}
   - placedObject: {fileID: 7691180083802775639, guid: 23076d51eb6c71d478ccd46023b61f23,
       type: 3}
     pos: {x: -1, y: 2, z: 0}
-  - placedObject: {fileID: 1502402594785371736, guid: a397031e743f3504f95373c7cd785eb9,
-      type: 3}
-    pos: {x: 1, y: 3, z: 0}

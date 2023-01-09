@@ -47,6 +47,8 @@ public class Collections : MonoBehaviour
 
     public void LoadCollections(List<CollectItem> _list)
     {
+        if (_list.Count == 0) return;
+
         for (int i = 0; i < CollectList.Count; i++)
         {
             CollectList[i].isCollected = _list[i].isCollected;

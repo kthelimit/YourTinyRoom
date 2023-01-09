@@ -36,6 +36,7 @@ public class QuestManager : MonoBehaviour
     {
         if(_list.Count==0)
         {
+            Debug.Log("퀘스트 생성중");
             foreach (Quest quest in quests)
             {
                 QuestInList questInList = new QuestInList();
@@ -48,6 +49,7 @@ public class QuestManager : MonoBehaviour
         }
         else if (_list.Count != 0)
         {
+            Debug.Log("퀘스트 로딩중");
             foreach (QuestInList QIL in _list)
             {
                 QuestInList questInList = new QuestInList();

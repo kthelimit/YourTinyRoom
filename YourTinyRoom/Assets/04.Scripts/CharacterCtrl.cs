@@ -84,9 +84,28 @@ public class CharacterCtrl : MonoBehaviour
         textbubble.SetActive(false);
         energyParameter = energyMax;
         gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
+        StartAtHome();
+    }
+
+    public void LoadData(float like, float energy)
+    {
+        likingParameter = like;
+        energyParameter = energy;
         UpdateEnergyBar();
         UpdateLikeBar();
-        StartAtHome();
+    }
+
+    public float SaveData(int num)
+    {
+        if(num==1)
+        {
+            return likingParameter;
+        }
+        else if(num==2)
+        {
+            return energyParameter;
+        }
+        return 0;
     }
 
     public void StartAtHome()
@@ -123,6 +142,7 @@ public class CharacterCtrl : MonoBehaviour
     private void SendMessage()
     {
         if (IsVisited) return;
+        if (DialogSystem.dialogSystem.IsEvent) return;
         int randNum = Random.Range(0, 3);
         if (randNum == 0)
         {
@@ -169,6 +189,31 @@ public class CharacterCtrl : MonoBehaviour
         ChangeAnimation("대기");
         yield return new WaitForSeconds(3f);
         isReaction = false;
+        StartCoroutine("ChooseAction");
+    }
+
+    public void CallVisitEvent()
+    {
+        StartCoroutine("VisitEvent");
+    }
+    IEnumerator VisitEvent()
+    {
+        isReaction = true;
+        gameControl.OpenCharacterVisit(true);
+        gameControl.OpenCustomize(false);
+        isHome = false;
+        tr.position = visit.position;
+        UpdateLikeBar(5f);
+        Camera.main.transform.position = tr.position + new Vector3(0f, 0f, -10f);
+        ChangeAnimation("안녕");
+        yield return new WaitForSeconds(2f);
+        Talk("안녕!");
+        yield return new WaitForSeconds(2f);
+        Talk("좋아! 먼지 따위 전부 정리해버리겠어~!!");
+        yield return new WaitForSeconds(2f);
+        isReaction = false;
+        ChangeAnimation("대기");
+        yield return new WaitForSeconds(3f);
         StartCoroutine("ChooseAction");
     }
 

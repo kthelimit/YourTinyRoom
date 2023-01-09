@@ -171,6 +171,7 @@ public class ActionContoller : MonoBehaviour
         GameManager.gameManager.IncreaseExp(dust.Exp);
         ShowGetEffect(_transform, Energy.item, (int)-dust.Energy, Exp.item, (int)dust.Exp);
         characterCtrl.UpdateEnergyBar(-dust.Energy);
+        GameManager.gameManager.DustRemoveCount++;
         characterCtrl.isReaction = false;
         characterCtrl.StartCoroutine("ChooseAction");
 

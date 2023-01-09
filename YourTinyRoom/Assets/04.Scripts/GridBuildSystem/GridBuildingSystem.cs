@@ -29,6 +29,7 @@ public class GridBuildingSystem : MonoBehaviour
     private void Awake()
     {
         gbSystem = this;
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
     private void Start()
@@ -125,7 +126,12 @@ public class GridBuildingSystem : MonoBehaviour
 
     #endregion
 
-
+    public void MainTileMapColorChange(bool isopen)
+    {
+        Color _color = MainTileMap.color;
+        _color.a = isopen ? 0.3f : 0.0f;
+        MainTileMap.color = _color;
+    }
 
 
 

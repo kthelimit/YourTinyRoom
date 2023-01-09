@@ -7,7 +7,7 @@ public class CameraMove : MonoBehaviour
     public float SizeMax = 7f;
     private void Awake()
     {
-        mainCamera = Camera.main;
+        mainCamera = this.gameObject.GetComponent<Camera>();
     }
     void Update()
     {
@@ -23,4 +23,5 @@ public class CameraMove : MonoBehaviour
         mainCamera.orthographicSize += scroll;
 
     }
+
 }

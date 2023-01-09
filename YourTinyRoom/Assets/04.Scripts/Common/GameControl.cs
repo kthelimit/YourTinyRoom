@@ -18,14 +18,19 @@ public class GameControl : MonoBehaviour
     public CanvasGroup CropCG;
     public CanvasGroup AllCanvasCG;
     public CanvasGroup PhoneCG;
-    public Tilemap mainTileMap;
     public CapsuleCollider2D CharacterCollider;
     public GameObject NameEditPanel;
     public GameObject ClosePanel;
     public GameObject CNameEditPanel;
     public GameObject NextDayPanel;
     public GameObject AlarmPanel;
+    public CanvasGroup DialogCG;
 
+    public CanvasGroup BLCG;
+    public CanvasGroup BRCG;
+    public CanvasGroup TLCG;
+    public CanvasGroup TRCG;
+    public CanvasGroup TCCG;
 
     //캐릭터 방문시 아이콘
     public GameObject CharacterVisit;
@@ -158,9 +163,7 @@ public class GameControl : MonoBehaviour
         GridBuildCG.alpha = isopen ? 1.0f : 0.0f;
         GridBuildCG.blocksRaycasts = isopen;
         GridBuildCG.interactable = isopen;
-        Color _color = mainTileMap.color;
-        _color.a = isopen ? 0.3f : 0.0f;
-        mainTileMap.color = _color;
+        GridBuildingSystem.gbSystem.MainTileMapColorChange(isopen);
         AllCanvasCG.alpha = isopen ? 0.0f : 1.0f;
         AllCanvasCG.blocksRaycasts = !isopen;
         AllCanvasCG.interactable = !isopen;
@@ -183,12 +186,21 @@ public class GameControl : MonoBehaviour
         CropCG.alpha = isopen ? 1.0f : 0.0f;
         CropCG.blocksRaycasts = isopen;
         CropCG.interactable = isopen;
-        Color _color = mainTileMap.color;
-        _color.a = isopen ? 0.3f : 0.0f;
-        mainTileMap.color = _color;
-        AllCanvasCG.alpha = isopen ? 0.0f : 1.0f;
-        AllCanvasCG.blocksRaycasts = !isopen;
-        AllCanvasCG.interactable = !isopen;
+        GridBuildingSystem.gbSystem.MainTileMapColorChange(isopen);
+
+
+        BLCG.alpha = isopen ? 0.0f : 1.0f;
+        BLCG.blocksRaycasts = !isopen;
+        BLCG.interactable = !isopen;
+        BRCG.alpha = isopen ? 0.0f : 1.0f;
+        BRCG.blocksRaycasts = !isopen;
+        BRCG.interactable = !isopen;
+        TLCG.alpha = isopen ? 0.0f : 1.0f;
+        TLCG.blocksRaycasts = !isopen;
+        TLCG.interactable = !isopen;
+        TRCG.alpha = isopen ? 0.0f : 1.0f;
+        TRCG.blocksRaycasts = !isopen;
+        TRCG.interactable = !isopen;
         if (isopen)
         {
             Camera.main.cullingMask = 1 << 8;
@@ -334,4 +346,31 @@ public class GameControl : MonoBehaviour
         }
     }
 
+
+    public void OpenDialog(bool isopen)
+    {
+        if (DialogCG.alpha == 1f)
+            isopen = false;
+        DialogCG.alpha = isopen ? 1.0f : 0.0f;
+        DialogCG.blocksRaycasts = isopen;
+        DialogCG.interactable = isopen;
+        BLCG.alpha = isopen ? 0.0f : 1.0f;
+        BLCG.blocksRaycasts = !isopen;
+        BLCG.interactable = !isopen;
+        BRCG.alpha = isopen ? 0.0f : 1.0f;
+        BRCG.blocksRaycasts = !isopen;
+        BRCG.interactable = !isopen;
+        TLCG.alpha = isopen ? 0.0f : 1.0f;
+        TLCG.blocksRaycasts = !isopen;
+        TLCG.interactable = !isopen;
+        TRCG.alpha = isopen ? 0.0f : 1.0f;
+        TRCG.blocksRaycasts = !isopen;
+        TRCG.interactable = !isopen;
+        TCCG.alpha = isopen ? 0.0f : 1.0f;
+        TCCG.blocksRaycasts = !isopen;
+        TCCG.interactable = !isopen;
+
+        if (isopen)
+            DialogCG.transform.SetAsLastSibling();
+    }
 }
