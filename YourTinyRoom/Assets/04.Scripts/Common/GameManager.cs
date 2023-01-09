@@ -99,6 +99,17 @@ public class GameManager : MonoBehaviour
         crystalText.text = crystal.ToString("#,###");
         dayCountText.text = dayCount.ToString();
         expGauge.fillAmount = curExp / maxExp;
+
+        characterCtrl.isHome = gameData.isHome;
+        characterCtrl.IsVisited = gameData.IsVisited;
+        if(characterCtrl.IsVisited)
+        {
+            gameControl.OpenCharacterVisit(true);
+            characterCtrl.InviteBtn.interactable = false;
+            characterCtrl.phoneMessageButton.SetActive(false);
+        }
+        characterCtrl.tr.position = gameData.CharacterPos;
+
         //인벤토리
         Inventory.LoadInventory(gameData.ItemInInventories);
         //콜렉션
@@ -128,6 +139,15 @@ public class GameManager : MonoBehaviour
                
             }                
         }
+        //이벤트 데이터
+        if (gameData.dialogEvents.Count != 0)
+        {
+            for (int i = 0; i < gameData.dialogEvents.Count; i++)
+            {
+                DialogSystem.dialogSystem.dialogEvents[i].isFinished = gameData.dialogEvents[i].isFinished;
+            }        
+        }
+
     }
 
     public void SaveGameData()
@@ -144,6 +164,8 @@ public class GameManager : MonoBehaviour
         gameData.questInLists = questManager.SaveQuestList();
         gameData.Like = characterCtrl.SaveData(1);
         gameData.Energy = characterCtrl.SaveData(2);
+
+        gameData.CharacterPos = characterCtrl.tr.position;
 
         gameData.hairTintColor = colorChange.hairTintColor;
         gameData.hairDarkColor = colorChange.hairDarkColor;
@@ -179,11 +201,22 @@ public class GameManager : MonoBehaviour
         {
             PlacedObject placedObject = new PlacedObject();
             placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
-            placedObject.pos = furnitureList[i].transform.position;
+            placedObject.pos = DustList[i].transform.position;
             Debug.Log(placedObject.pos);
             gameData.PlacedObjectsInMap.Add(placedObject);
         }
 
+        gameData.dialogEvents = new List<DialogEvent>();
+        for(int i=0; i<DialogSystem.dialogSystem.dialogEvents.Count;i++)
+        {
+            DialogEvent de = new DialogEvent();
+            de.EventNumber = DialogSystem.dialogSystem.dialogEvents[i].EventNumber;
+            de.isFinished = DialogSystem.dialogSystem.dialogEvents[i].isFinished;
+            gameData.dialogEvents.Add(de);
+        }
+
+        gameData.isHome= characterCtrl.isHome;
+        gameData.IsVisited = characterCtrl.IsVisited;
 
         Debug.Log("데이터 저장중");
         UnityEditor.EditorUtility.SetDirty(gameData);

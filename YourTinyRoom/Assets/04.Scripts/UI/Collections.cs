@@ -53,6 +53,7 @@ public class Collections : MonoBehaviour
         {
             CollectList[i].isCollected = _list[i].isCollected;
         }
+        CheckItem();   
     }
 
     public List<CollectItem> SaveCollections()

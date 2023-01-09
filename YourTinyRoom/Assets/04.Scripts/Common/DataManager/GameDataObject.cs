@@ -20,6 +20,9 @@ public class GameDataObject : ScriptableObject
     public float DayCount=0f;
     public float Like = 0f;
     public float Energy = 50f;
+    public bool IsVisited = false;
+    public bool isHome = false;
+    public Vector3 CharacterPos= new Vector3(15f,-15f,0f);
 
     //인벤토리
     public List<ItemInInventory> ItemInInventories = new List<ItemInInventory>();
@@ -52,5 +55,8 @@ public class GameDataObject : ScriptableObject
 
     //맵
     public List<PlacedObject> PlacedObjectsInMap;
+
+    //이벤트
+    public List<DialogEvent> dialogEvents;
 
 }

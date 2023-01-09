@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class CharacterCtrl : MonoBehaviour
 {
-    Transform tr;
+    public Transform tr;
     SkeletonAnimation ani;
 
     //이동반경 설정
@@ -199,6 +199,7 @@ public class CharacterCtrl : MonoBehaviour
     IEnumerator VisitEvent()
     {
         isReaction = true;
+        phoneMessageButton.SetActive(false);
         gameControl.OpenCharacterVisit(true);
         gameControl.OpenCustomize(false);
         isHome = false;

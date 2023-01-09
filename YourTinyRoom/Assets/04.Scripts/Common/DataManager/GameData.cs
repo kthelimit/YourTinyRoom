@@ -67,6 +67,13 @@ namespace DataInfo
         public GameObject placedObject;
         public Vector3 pos;           
     }
+    [System.Serializable]
+    public class DialogEvent
+    {
+        public int EventNumber;
+        public bool isFinished = false;
+
+    }
 
 
 }
