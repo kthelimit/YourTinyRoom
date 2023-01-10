@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public GameDataObject gameData;
     public CharacterCustom characterCustom;
     public Transform FurnitureFolder;
+    public Transform CropFolder;
 
     void Awake()
     {
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         collections = GameObject.Find("Collection").GetComponent<Collections>();
         questManager = GetComponent<QuestManager>();
         FurnitureFolder = GameObject.Find("FurnitureFolder").transform;
+        CropFolder = GameObject.Find("CropFolder").transform;
         playerName = "플레이어";
         playerNameText.text = playerName;
         characterCtrl = GameObject.FindGameObjectWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
@@ -108,7 +110,14 @@ public class GameManager : MonoBehaviour
             characterCtrl.InviteBtn.interactable = false;
             characterCtrl.phoneMessageButton.SetActive(false);
         }
-        characterCtrl.tr.position = gameData.CharacterPos;
+        if(characterCtrl.isHome)
+        {
+            characterCtrl.tr.position = characterCtrl.home.position;
+        }
+        else
+        {
+            characterCtrl.tr.position = gameData.CharacterPos;
+        }
 
         //인벤토리
         Inventory.LoadInventory(gameData.ItemInInventories);
@@ -129,15 +138,24 @@ public class GameManager : MonoBehaviour
         
         //맵데이터
         foreach(PlacedObject placedObj in gameData.PlacedObjectsInMap)
-        {
+        {           
            GameObject obj= Instantiate(placedObj.placedObject, FurnitureFolder);
            obj.transform.position = placedObj.pos;
             if(obj.tag=="FURNITURE")
             {
                 Building _building = obj.transform.GetComponent<Building>();
-                _building.UpdateSortingOrder();     
+                _building.UpdateSortingOrder();                   
+            }
+            if(obj.tag=="CROP")
+            {
+                obj.transform.SetParent(CropFolder);                
+                //클릭을 해야 타이머가 움직이기 시작하는데 그럴거면 차라리 완성된 상태로 뜨는게 나을거 같음             
                
-            }                
+                obj.GetComponent<Crop>().curTime=9;
+                obj.GetComponent<Crop>().StartCoroutine("Timer");
+
+            }
+
         }
         //이벤트 데이터
         if (gameData.dialogEvents.Count != 0)
@@ -205,6 +223,16 @@ public class GameManager : MonoBehaviour
             Debug.Log(placedObject.pos);
             gameData.PlacedObjectsInMap.Add(placedObject);
         }
+        Crop[] CropList = CropFolder.GetComponentsInChildren<Crop>();
+        for(int i=0; i<CropList.Length; i++)
+        {
+            PlacedObject placedObject = new PlacedObject();
+            placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/strawberry.prefab", typeof(GameObject));
+            placedObject.pos = CropList[i].transform.position;
+            Debug.Log(placedObject.pos);
+            gameData.PlacedObjectsInMap.Add(placedObject);
+        }
+
 
         gameData.dialogEvents = new List<DialogEvent>();
         for(int i=0; i<DialogSystem.dialogSystem.dialogEvents.Count;i++)

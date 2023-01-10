@@ -21,7 +21,7 @@ public class GameDataObject : ScriptableObject
     public float Like = 0f;
     public float Energy = 50f;
     public bool IsVisited = false;
-    public bool isHome = false;
+    public bool isHome = true;
     public Vector3 CharacterPos= new Vector3(15f,-15f,0f);
 
     //인벤토리

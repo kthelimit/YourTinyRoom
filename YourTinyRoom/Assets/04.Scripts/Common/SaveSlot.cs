@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 public class SaveSlot : MonoBehaviour
 {
     public GameDataObject SaveData;
@@ -11,8 +12,10 @@ public class SaveSlot : MonoBehaviour
     public int slotnum;
     void Awake()
     {
+        SaveData = (GameDataObject)AssetDatabase.LoadAssetAtPath($"Assets/04.Scripts/Common/DataManager/GameDataSlot{slotnum}.asset", typeof(GameDataObject));
         PlayerNameText = transform.GetChild(2).GetComponent<Text>();
         PlayerNameText.text = SaveData.PlayerName;
+
     }
     public void ClickedSlot()
     {

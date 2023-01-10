@@ -10,6 +10,7 @@ public class Building : MonoBehaviour
     public BoundsInt area;
     private const int IsometricRangePerYUnit = 100;
     private Transform furnitureFolder;
+    private Transform CropFolder;
     private GameObject ControlPanel;
     public bool isShow = false;
     private Button PlaceButton;
@@ -23,6 +24,7 @@ public class Building : MonoBehaviour
     {
         TookSFX = Resources.Load<AudioClip>("SFX/collision_wood_soft_01");
         furnitureFolder = GameObject.Find("FurnitureFolder").transform;
+        CropFolder = GameObject.Find("CropFolder").transform;
         if (GetComponent<ItemInfo>().itemType == Item.ItemType.FURNITURE)
         {
             IsCrop = false;
@@ -76,6 +78,8 @@ public class Building : MonoBehaviour
         GetComponentInChildren<Canvas>().sortingOrder= -(int)(transform.position.y * IsometricRangePerYUnit);
         GridBuildingSystem.gbSystem.TakeArea(areaTemp);
         GridBuildingSystem.gbSystem.isOnMouse = false;
+        this.transform.SetParent(CropFolder);
+        this.transform.SetAsLastSibling();
         GetComponent<Crop>().StartCoroutine("Timer");
        
     }

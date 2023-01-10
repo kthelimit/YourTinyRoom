@@ -19,10 +19,11 @@ public class Crop : MonoBehaviour
     public int quantityMin =2;
     public int quantityMax =8;
     public float exp = 10f;
+    public float SeedPrice = 50f;
     Inventory inventory;
     Building place;
 
-    void Start()
+    void Awake()
     {
         curSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         TimeBar = transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<Image>();
@@ -33,8 +34,7 @@ public class Crop : MonoBehaviour
         timeTxt.enabled = false;
         inventory = GameObject.Find("Inventory").transform.GetComponent<Inventory>();
         canvasTimeBar = transform.GetChild(1).GetChild(0).GetComponent<CanvasGroup>();
-        quantity = Random.Range(quantityMin, quantityMax);
-        //StartCoroutine("Timer");
+        quantity = Random.Range(quantityMin, quantityMax);        
         place = GetComponent<Building>();
     }
 

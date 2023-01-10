@@ -46,6 +46,9 @@ public class GameControl : MonoBehaviour
     public GameObject CropObject;
     public bool isFarm = false;
 
+    //농장이동
+    public Transform FarmPos;
+    public Transform RoomPos;
 
     void Awake()
     {
@@ -56,6 +59,7 @@ public class GameControl : MonoBehaviour
         CollectionCG.blocksRaycasts = false;
         CollectionCG.interactable = false;
         charaVTarget = CharacterVisitSub.transform.position;
+
         GoRoom();
     }
 
@@ -258,6 +262,8 @@ public class GameControl : MonoBehaviour
         GoRoomObject.SetActive(true);
         CropObject.SetActive(true);
         InteriorObject.SetActive(false);
+        FarmPos = GameObject.Find("FarmPos").transform;        
+        Camera.main.transform.position = FarmPos.position;
 
     }
 
@@ -268,6 +274,8 @@ public class GameControl : MonoBehaviour
         GoRoomObject.SetActive(false);
         CropObject.SetActive(false);
         InteriorObject.SetActive(true);
+        RoomPos = GameObject.Find("RoomPos").transform;
+        Camera.main.transform.position = RoomPos.position;
     }
 
     public void GoNextDay()

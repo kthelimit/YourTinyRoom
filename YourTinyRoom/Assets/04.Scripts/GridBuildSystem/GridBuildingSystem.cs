@@ -69,8 +69,11 @@ public class GridBuildingSystem : MonoBehaviour
         else if(Input.GetMouseButtonDown(1))
         {
             if (temp.Placed) return;
-            ReturnToInventory(temp);
-
+            if (temp.tag == "FURNITURE")
+                ReturnToInventory(temp);
+            else if (temp.tag == "CROP")
+                Resell(temp);
+             
         }
     }
 
@@ -79,6 +82,13 @@ public class GridBuildingSystem : MonoBehaviour
         temp = _building;
         tempItem = temp.GetComponent<ItemInfo>().item;
         inventory.AcquireItem(tempItem, 1);
+        DeleteObject();
+    }
+
+    public void Resell(Building _building)
+    {
+        Crop _crop = _building.GetComponent<Crop>();
+        GameManager.gameManager.IncreaseGold(_crop.SeedPrice);
         DeleteObject();
     }
 

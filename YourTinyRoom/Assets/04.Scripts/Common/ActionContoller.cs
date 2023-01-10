@@ -76,8 +76,7 @@ public class ActionContoller : MonoBehaviour
             if (!gameControl.isEditable && !characterCtrl.isHome)
             {
                 characterCtrl.StopCoroutine("ChooseAction");
-                GetDust(hit);
-              //  StartCoroutine(RemoveDust(hit));
+                GetDust(hit);              
             }
         }
 

@@ -141,8 +141,9 @@ public class CharacterCtrl : MonoBehaviour
 
     private void SendMessage()
     {
-        if (IsVisited) return;
         if (DialogSystem.dialogSystem.IsEvent) return;
+        if (IsVisited) return;
+        
         int randNum = Random.Range(0, 3);
         if (randNum == 0)
         {
