@@ -16,6 +16,7 @@ public class LevelSystem : MonoBehaviour
     private float totalCrystal = 0;
     AudioClip LevelUpSFX;
     public Shop shop;
+    GameControl gameControl;
     private struct Level
     {
         public int level;
@@ -27,10 +28,11 @@ public class LevelSystem : MonoBehaviour
     List<Level> levelTable;
     private static string LevelCSVPath = "/Editor/CSVs/LevelCSV.csv";
     private int levelCount=1;
-    private bool isAdded = false;
+    public bool isAdded = false;
 
     private void Awake()
     {
+        gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
         LevelUpSFX = Resources.Load<AudioClip>("SFX/Complete_Level_01");
         LevelDataLoad();
     }
@@ -54,7 +56,14 @@ public class LevelSystem : MonoBehaviour
     public void LoadLevel(int _level)
     {
         levelCount = _level;
+        GameManager.gameManager.ChangeExpInterval(levelTable[levelCount - 1].expLimit, levelTable[levelCount].expLimit);
         GameManager.gameManager.UpdateLevelText(levelCount);
+        if(levelCount>=5)
+        {
+            shop.AddItemList(shop.itemListSecond);
+            isAdded = true;
+            shop.AssignSlot();
+        }
     }
     public int SaveLevel()
     {
@@ -63,26 +72,33 @@ public class LevelSystem : MonoBehaviour
 
     public void LevelUpCheck(float exp)
     {
-        while(exp>=levelTable[levelCount].expLimit)
+        if(exp >= levelTable[levelCount].expLimit)
         {
             levelCount++;
             levelUpPanel.SetActive(true);
             SoundManager.soundManager.PlaySfx(this.transform.position, LevelUpSFX);
             levelText.text = beforeLevel.ToString() + '→' + levelCount.ToString();
-            totalGold += levelTable[levelCount - 1].rewardGold;
+            totalGold += levelTable[levelCount-1].rewardGold;
             GoldText.text = totalGold.ToString();
-            totalCrystal += levelTable[levelCount - 1].rewardCrystal;
+            totalCrystal += levelTable[levelCount-1].rewardCrystal;
             CrystalText.text = totalCrystal.ToString();
-            GameManager.gameManager.ChangeExpInterval(levelTable[levelCount-1].expLimit, levelTable[levelCount].expLimit);
+            Debug.Log($"{levelCount}: crystal {totalCrystal}, gold {totalGold}");
+            GameManager.gameManager.ChangeExpInterval(levelTable[levelCount - 1].expLimit, levelTable[levelCount].expLimit);
             GameManager.gameManager.IncreaseExp(0);
-            GameManager.gameManager.UpdateLevelText(levelCount);           
-            GameManager.gameManager.IncreaseGold(levelTable[levelCount].rewardGold);
-            GameManager.gameManager.IncreaseCrystal(levelTable[levelCount].rewardCrystal);
-        }
-        if (levelCount == 5 && !isAdded)
+        }      
+
+        GameManager.gameManager.UpdateLevelText(levelCount);
+        GameManager.gameManager.IncreaseGold(totalGold);
+        GameManager.gameManager.IncreaseCrystal(totalCrystal);
+
+        //레벨이 5 이상이 되면 상점에 리스트가 추가된다.
+        if (levelCount >= 5 && !isAdded)
         {            
             shop.AddItemList(shop.itemListSecond);
             isAdded = true;
+            shop.AssignSlot();
+            gameControl.OpenDialog(true);
+            DialogSystem.dialogSystem.Talk(300);
         }
 
         beforeLevel = levelCount;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using DataInfo;
 public class GameManager : MonoBehaviour
 {
@@ -74,7 +73,8 @@ public class GameManager : MonoBehaviour
         characterNameText2.text = characterName + " 방문중!";
         levelSystem = transform.GetComponent<LevelSystem>();
         colorChange = characterCtrl.GetComponent<ColorChange>();
-        dustPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
+        dustPrefab = Resources.Load<GameObject>("Prefabs/Dust");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
         characterCustom = characterCtrl.GetComponent<CharacterCustom>();
         gameData = GameObject.Find("SceneManager").GetComponent<StartSceneManager>().currentGameData;
     }
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         characterNameText2.text = characterName + " 방문중!";
 
         //경험치, 골드, 크리스탈, 날짜, 호감도
-        curExp = gameData.Exp;
+        curExp = gameData.Exp;       
         gold = gameData.Gold;
         crystal = gameData.Crystal;
         dayCount = gameData.DayCount;
@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour
         for(int i=0; i< furnitureList.Length;i++)
         {
             PlacedObject placedObject = new PlacedObject();
-            placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/05.Prefabs/Furniture/Item{furnitureList[i].GetComponent<ItemInfo>().item.ItemNumber.ToString("000")}.prefab", typeof(GameObject));
+            placedObject.placedObject = Resources.Load<GameObject>($"Prefabs/Furniture/Item{furnitureList[i].GetComponent<ItemInfo>().item.ItemNumber.ToString("000")}");
             placedObject.pos = furnitureList[i].transform.position;
             gameData.PlacedObjectsInMap.Add(placedObject);
         }
@@ -218,18 +218,16 @@ public class GameManager : MonoBehaviour
         for(int i=0;i<DustList.Length;i++)
         {
             PlacedObject placedObject = new PlacedObject();
-            placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
+            placedObject.placedObject = dustPrefab;
             placedObject.pos = DustList[i].transform.position;
-            Debug.Log(placedObject.pos);
             gameData.PlacedObjectsInMap.Add(placedObject);
         }
         Crop[] CropList = CropFolder.GetComponentsInChildren<Crop>();
         for(int i=0; i<CropList.Length; i++)
         {
             PlacedObject placedObject = new PlacedObject();
-            placedObject.placedObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/strawberry.prefab", typeof(GameObject));
+            placedObject.placedObject = Resources.Load<GameObject>("Prefabs/strawberry");
             placedObject.pos = CropList[i].transform.position;
-            Debug.Log(placedObject.pos);
             gameData.PlacedObjectsInMap.Add(placedObject);
         }
 
@@ -247,7 +245,7 @@ public class GameManager : MonoBehaviour
         gameData.IsVisited = characterCtrl.IsVisited;
 
         Debug.Log("데이터 저장중");
-        UnityEditor.EditorUtility.SetDirty(gameData);
+    //    UnityEditor.EditorUtility.SetDirty(gameData);
 
     }
 

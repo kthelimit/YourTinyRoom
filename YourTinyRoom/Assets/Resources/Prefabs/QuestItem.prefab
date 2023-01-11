@@ -204,7 +204,9 @@ MonoBehaviour:
     type: 3}
   rewardPrefab: {fileID: 0}
   QuestAlarmPanelText: {fileID: 0}
+  isAlarmed: 0
   questItemCount: 0
+  RewardShowPanelReward: {fileID: 0}
 --- !u!1 &2168160918022918943
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +559,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5620040814832555213}
-        m_MethodName: TakeOut
+        m_MethodName: TakeOutEach
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

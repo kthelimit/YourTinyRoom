@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using DataInfo;
 
 public class Inventory : MonoBehaviour
@@ -24,7 +23,7 @@ public class Inventory : MonoBehaviour
 
     void Awake()
     {
-        FslotPrefab= (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/FSlot.prefab", typeof(GameObject));
+        FslotPrefab= Resources.Load<GameObject>("Prefabs/FSlot");
         slots = SlotsParent.GetComponentsInChildren<Slot>();
         fSlots= FSlotParent.GetComponentsInChildren<FSlot>();        
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b571270ebb3ea4bb56b5cf7a26d194, type: 3}
-  m_Name: GameDataSlot1
+  m_Name: GameDataSO
   m_EditorClassIdentifier: 
   IsStarted: 0
   PlayerName: "\uD50C\uB808\uC774\uC5B4"

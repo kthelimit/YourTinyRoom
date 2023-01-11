@@ -25,6 +25,7 @@ public class GameControl : MonoBehaviour
     public GameObject NextDayPanel;
     public GameObject AlarmPanel;
     public CanvasGroup DialogCG;
+    public GameObject RewardShowPanel;
 
     public CanvasGroup BLCG;
     public CanvasGroup BRCG;
@@ -47,8 +48,8 @@ public class GameControl : MonoBehaviour
     public bool isFarm = false;
 
     //농장이동
-    public Transform FarmPos;
-    public Transform RoomPos;
+    public Transform FarmPos=null;
+    public Transform RoomPos=null;
 
     void Awake()
     {
@@ -354,6 +355,21 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    public void ShowRewardShowPanel()
+    {
+        if (RewardShowPanel.gameObject.activeInHierarchy == false)
+        {
+            RewardShowPanel.SetActive(true);
+            ClosePanel.SetActive(true);
+            ClosePanel.GetComponent<Button>().onClick.AddListener(ShowRewardShowPanel);
+        }
+        else
+        {
+            RewardShowPanel.SetActive(false);
+            ClosePanel.SetActive(false);
+            ClosePanel.GetComponent<Button>().onClick.RemoveListener(ShowRewardShowPanel);
+        }
+    }
 
     public void OpenDialog(bool isopen)
     {

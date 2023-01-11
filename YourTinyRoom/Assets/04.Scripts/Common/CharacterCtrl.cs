@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class CharacterCtrl : MonoBehaviour
 {
@@ -74,7 +73,8 @@ public class CharacterCtrl : MonoBehaviour
         PhoneAlarmSFX = Resources.Load<AudioClip>("SFX/achievment_03");
         InviteSFX = Resources.Load<AudioClip>("SFX/slots_win_001");
         colorChange = GetComponent<ColorChange>();
-        GiftPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Gift.prefab", typeof(GameObject));
+        GiftPrefab = Resources.Load<GameObject>("Prefabs/Gift");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Gift.prefab", typeof(GameObject));
         tr = GetComponent<Transform>();
         ani = GetComponent<SkeletonAnimation>();
         ChangeAnimation("대기");
@@ -90,9 +90,10 @@ public class CharacterCtrl : MonoBehaviour
     public void LoadData(float like, float energy)
     {
         likingParameter = like;
+        likeBar.fillAmount = likeBar2.fillAmount = likeBarOnHead.fillAmount = likingParameter / likingMax;
+
         energyParameter = energy;
-        UpdateEnergyBar();
-        UpdateLikeBar();
+        energyBar.fillAmount = energyBarOnHead.fillAmount = energyParameter / energyMax;
     }
 
     public float SaveData(int num)
@@ -111,6 +112,7 @@ public class CharacterCtrl : MonoBehaviour
     public void StartAtHome()
     {
         isHome = true;
+        StopCoroutine("ChooseAction");
         phoneMessageButton.SetActive(true);
         tr.position = home.position;
         IsVisited = false;
@@ -204,6 +206,7 @@ public class CharacterCtrl : MonoBehaviour
         gameControl.OpenCharacterVisit(true);
         gameControl.OpenCustomize(false);
         isHome = false;
+        IsVisited = true;
         tr.position = visit.position;
         UpdateLikeBar(5f);
         Camera.main.transform.position = tr.position + new Vector3(0f, 0f, -10f);
@@ -389,6 +392,7 @@ public class CharacterCtrl : MonoBehaviour
         gameControl.OpenCharacterVisit(false);
         ChangeAnimation("정지");
         StopCoroutine("ChooseAction");
+        phoneMessageButton.SetActive(true);
     }
 
     public void ChangeAnimation(string str)

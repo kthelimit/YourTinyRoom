@@ -17,7 +17,7 @@ public class Seed : MonoBehaviour
     }
     public void ClickCropSeed()
     {
-        GridBuildingSystem.gbSystem.InitializeWithBuilding(CropPrefab);
+        GridBuildingSystem.gbSystem.InitializeWithCrop(CropPrefab);
         GameManager.gameManager.DecreaseGold(SeedPrice);
     }
 }

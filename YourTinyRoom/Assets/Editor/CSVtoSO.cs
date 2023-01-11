@@ -3,7 +3,7 @@ using UnityEditor;
 using System.IO;
 using System;
 using System.Linq ;
-
+using DataInfo;
 public class CSVtoSO
 {
     //ItemCSV파일 저장된 경로
@@ -143,29 +143,32 @@ public class CSVtoSO
             //퀘스트에 필요한 아이템 수량
             quest.questItemQuantity = int.Parse(splitData[4]);
 
-            //퀘스트 보상 아이템1
+            //퀘스트 보상 아이템 1
+            quest.RewardList = new System.Collections.Generic.List<Reward>();
             for (int i = 0; i < itemlist.Length; i++)
             {
                 if (splitData[5] == itemlist[i].ItemName)
                 {
-                    quest.RewardItem1 = itemlist[i];
+                    Reward reward = new Reward();
+                    reward.item = itemlist[i];
+                    reward.quantity = float.Parse(splitData[6]);
+                    quest.RewardList.Add(reward);
                     break;
                 }
             }
-            //퀘스트 보상 아이템1 수량
-            quest.RewardQuantity1 = float.Parse(splitData[6]);
 
             //퀘스트 보상 아이템2
             for (int i = 0; i < itemlist.Length; i++)
             {
                 if (splitData[7] == itemlist[i].ItemName)
                 {
-                    quest.RewardItem2 = itemlist[i];
+                    Reward reward = new Reward();
+                    reward.item = itemlist[i];
+                    reward.quantity = float.Parse(splitData[8]);
+                    quest.RewardList.Add(reward);
                     break;
                 }
             }
-            //퀘스트 보상 아이템2 수량
-            quest.RewardQuantity2 = float.Parse(splitData[8]);
             //asset파일로 추출
             AssetDatabase.CreateAsset(quest, $"Assets/Resources/Quest/Quest{quest.questID}.asset");
 

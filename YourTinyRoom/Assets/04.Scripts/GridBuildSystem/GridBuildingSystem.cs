@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
-using UnityEditor;
 
 public class GridBuildingSystem : MonoBehaviour
 {
@@ -36,9 +35,9 @@ public class GridBuildingSystem : MonoBehaviour
     {
         //string tilePath = @"09.Tilemap\";
         tileBases.Add(TileType.EMPTY, null);
-        tileBases.Add(TileType.WHITE, (TileBase)AssetDatabase.LoadAssetAtPath("Assets/09.Tilemap/white.asset", typeof(TileBase)));
-        tileBases.Add(TileType.GREEN, (TileBase)AssetDatabase.LoadAssetAtPath("Assets/09.Tilemap/green.asset", typeof(TileBase)));
-        tileBases.Add(TileType.RED, (TileBase)AssetDatabase.LoadAssetAtPath("Assets/09.Tilemap/red.asset", typeof(TileBase)));
+        tileBases.Add(TileType.WHITE, Resources.Load<TileBase>("Tilemap/white"));
+        tileBases.Add(TileType.GREEN, Resources.Load<TileBase>("Tilemap/green"));
+        tileBases.Add(TileType.RED, Resources.Load<TileBase>("Tilemap/red"));
     }
 
     private void Update()
@@ -156,6 +155,17 @@ public class GridBuildingSystem : MonoBehaviour
         isOnMouse = true;
         inventory.AcquireItem(tempItem, -1);
     }
+
+    public void InitializeWithCrop(GameObject crop)
+    {
+        if (isOnMouse) return;
+        temp = Instantiate(crop, spawnPoint.position, Quaternion.identity).GetComponent<Building>();
+        tempItem = temp.GetComponent<ItemInfo>().item;
+        FollowBuilding();
+        isOnMouse = true;
+    }
+
+
 
     //재배치
     public void RearrangeBuilding(GameObject building)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataInfo;
 
 [CreateAssetMenu(fileName = "New Quest", menuName = "New Quest/quest")]
 
@@ -11,13 +12,5 @@ public class Quest : ScriptableObject
     public string questDesc;
     public Item questItem;
     public int questItemQuantity;
-    public Item RewardItem1;
-    public float RewardQuantity1;
-    public Item RewardItem2;
-    public float RewardQuantity2;
-
-
-
-
-
+    public List<Reward> RewardList;
 }

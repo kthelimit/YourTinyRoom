@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class Shop : MonoBehaviour
 {
@@ -13,7 +12,6 @@ public class Shop : MonoBehaviour
     public List<Item> itemList;
     public List<Item> itemListFirst;
     public List<Item> itemListSecond;
-    //public Item[] itemList;
     public Transform buttonsParent;
     public Button[] categoryBtns;
     public Color selectedColor;
@@ -30,7 +28,8 @@ public class Shop : MonoBehaviour
         AddItemList(itemListFirst);
         shopItems = SlotsParent.GetComponentsInChildren<ShopItem>();
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
-        ShopItemPrefab=(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/ShopItem.prefab", typeof(GameObject));
+        ShopItemPrefab = Resources.Load<GameObject>("Prefabs/ShopItem");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/ShopItem.prefab", typeof(GameObject));
         AssignSlot();
     }
 
@@ -49,7 +48,7 @@ public class Shop : MonoBehaviour
         }     
 
     }
-    void AssignSlot() // 컬렉션 내의 슬롯에 아이템 번호대로 아이템 인포를 배정함
+    public void AssignSlot() // 컬렉션 내의 슬롯에 아이템 번호대로 아이템 인포를 배정함
     {
         ClearSlot();
         for (int i = 0; i < itemList.Count; i++)

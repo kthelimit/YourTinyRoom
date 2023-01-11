@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+
 
 public class Phone : MonoBehaviour
 {
@@ -33,10 +33,14 @@ public class Phone : MonoBehaviour
         gameControl = GameObject.Find("GameControl").transform.GetComponent<GameControl>();
         characterCtrl = GameObject.FindWithTag("CHARACTER").transform.GetComponent<CharacterCtrl>();
         talkData = new Dictionary<int, string[]>();
-        StartChatPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/StartChat.prefab", typeof(GameObject));
-        ChatBubbleCharaPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/ChatBubble.prefab", typeof(GameObject));
-        ChatBubbleMyPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/ChatBubble2.prefab", typeof(GameObject));
-        EndChatPrefab=(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/EndChat.prefab", typeof(GameObject));
+        StartChatPrefab = Resources.Load<GameObject>("Prefabs/StartChat");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/StartChat.prefab", typeof(GameObject));
+        ChatBubbleCharaPrefab = Resources.Load<GameObject>("Prefabs/ChatBubble");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/ChatBubble.prefab", typeof(GameObject));
+        ChatBubbleMyPrefab = Resources.Load<GameObject>("Prefabs/ChatBubble2");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/ChatBubble2.prefab", typeof(GameObject));
+        EndChatPrefab = Resources.Load<GameObject>("Prefabs/EndChat");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/EndChat.prefab", typeof(GameObject));
         GenerateData();
         ButtonPanel.SetActive(false);  
 

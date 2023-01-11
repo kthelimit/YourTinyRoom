@@ -17,7 +17,8 @@ MonoBehaviour:
   questDesc: "\uC9D1\uC5D0 \uBC30\uCE58\uD560 \uC758\uC790\uB97C \uAD6C\uC785\uD558\uC790!"
   questItem: {fileID: 11400000, guid: 699cd3ae3dc8c0549a63dc1b233ba7c8, type: 2}
   questItemQuantity: 1
-  RewardItem1: {fileID: 11400000, guid: 776ad3551ad8a344c8f6aa15b399ff79, type: 2}
-  RewardQuantity1: 200
-  RewardItem2: {fileID: 11400000, guid: 50522d1f806bfc648bf2c68f2d1f63cc, type: 2}
-  RewardQuantity2: 100
+  RewardList:
+  - item: {fileID: 11400000, guid: 776ad3551ad8a344c8f6aa15b399ff79, type: 2}
+    quantity: 200
+  - item: {fileID: 11400000, guid: 50522d1f806bfc648bf2c68f2d1f63cc, type: 2}
+    quantity: 100

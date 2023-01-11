@@ -27,7 +27,8 @@ public class Collections : MonoBehaviour
         ItemList = new List<Item>();        
         categoryBtns = buttonsParent.GetComponentsInChildren<Button>();
         prevXPos = categoryBtns[0].transform.position.x;
-        slotPrefab= (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/CollectionSlot.prefab", typeof(GameObject));
+        slotPrefab = Resources.Load<GameObject>("Prefabs/CollectionSlot");
+            //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/CollectionSlot.prefab", typeof(GameObject));
         foreach (Item item in Items)
         {
             if (item.ItemNumber != 0)

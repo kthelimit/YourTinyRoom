@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DataInfo;
-using UnityEngine.Tilemaps;
 //어튜리뷰트를 사용해서 자동 생성 
 [CreateAssetMenu(fileName = "GameDataSO",
             menuName = "Create GameData", order = 1)]

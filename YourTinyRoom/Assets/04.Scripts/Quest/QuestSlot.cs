@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEditor;
 using DataInfo;
 public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -27,19 +26,27 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     AudioClip QuestCompleteSFX;
     GameControl gameControl;
 
+    GameObject RewardSlot;
+    public Transform RewardShowPanelReward;
+
     private void Awake()
     {
         QuestCompleteSFX = Resources.Load<AudioClip>("SFX/Task_Complete_02");
         rewardPanel = transform.GetChild(3);
-        QuestAlarmPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/QuestAlarm.prefab", typeof(GameObject));
+        QuestAlarmPrefab = Resources.Load<GameObject>("Prefabs/QuestAlarm");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/QuestAlarm.prefab", typeof(GameObject));
         QuestAlarmPanelText = QuestAlarmPrefab.transform.GetChild(0).GetComponent<Text>();
-        rewardPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/RewardItem.prefab", typeof(GameObject));
+        rewardPrefab = Resources.Load<GameObject>("Prefabs/RewardItem");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/RewardItem.prefab", typeof(GameObject));
         canvasUI = GameObject.Find("Canvas-UI").transform;
         gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         scrollContents = this.transform.parent;
         rewardButton = transform.GetChild(0).GetComponent<Button>();
         rewardButton.interactable = false;
+        RewardShowPanelReward = gameControl.RewardShowPanel.transform.GetChild(1).GetChild(0);
+        RewardSlot = Resources.Load<GameObject>("Prefabs/RewardSlot");
+        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/RewardSlot.prefab", typeof(GameObject));
     }
     public void SetQuest(QuestInList _quest)
     {
@@ -63,14 +70,13 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void SetReward()
     {
-        GameObject reward1 = Instantiate(rewardPrefab, rewardPanel);
-        reward1.GetComponentInChildren<Image>().sprite = questData.RewardItem1.itemImage;
-        reward1.GetComponentInChildren<Text>().text = $"{questData.RewardQuantity1}";
-       
-        GameObject reward2 = Instantiate(rewardPrefab, rewardPanel);
-        reward2.GetComponentInChildren<Image>().sprite = questData.RewardItem2.itemImage;
-        reward2.GetComponentInChildren<Text>().text = $"{questData.RewardQuantity2}";
-
+        foreach(Reward reward in questData.RewardList)
+        {
+            GameObject obj = Instantiate(rewardPrefab, rewardPanel);
+            
+            obj.GetComponentInChildren<Image>().sprite = reward.item.itemImage;
+            obj.GetComponentInChildren<Text>().text= $"{reward.quantity}";
+        }
     }
 
     IEnumerator UpdateCheck()
@@ -117,17 +123,68 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         ChangeFinished();
 
         //리워드 지급
-        if (questData.RewardItem1.name == "Gold")
-            GameManager.gameManager.IncreaseGold(questData.RewardQuantity1);
-        else if (questData.RewardItem1.name == "Exp")
-            GameManager.gameManager.IncreaseExp(questData.RewardQuantity1);
-
-        if (questData.RewardItem2.name == "Gold")
-            GameManager.gameManager.IncreaseGold(questData.RewardQuantity2);
-        else if (questData.RewardItem2.name == "Exp")
-            GameManager.gameManager.IncreaseExp(questData.RewardQuantity2);
+        foreach (Reward reward in questData.RewardList) 
+        {
+            if (reward.item.ItemName == "Gold")
+            {
+                GameManager.gameManager.IncreaseGold(reward.quantity);
+            }
+            else if(reward.item.ItemName == "Exp")
+            {
+                GameManager.gameManager.IncreaseExp(reward.quantity);
+            }
+            else if(reward.item.ItemName == "Crystal")
+            {
+                GameManager.gameManager.IncreaseCrystal(reward.quantity);
+            }
+            else
+            {
+                inventory.AcquireItem(reward.item, (int)reward.quantity);
+            }
+        }
         QuestManager.AllTakeOut -= this.TakeOut;
 
+        QuestManager.questManager.CheckIsThereReward();
+    }
+
+    public void TakeOutEach()
+    {
+        isTakeOut = true;
+        ChangeFinished();
+
+        //리워드 지급
+        foreach (Reward reward in questData.RewardList)
+        {
+            if (reward.item.ItemName == "Gold")
+            {
+                GameManager.gameManager.IncreaseGold(reward.quantity);
+            }
+            else if (reward.item.ItemName == "Exp")
+            {
+                GameManager.gameManager.IncreaseExp(reward.quantity);
+            }
+            else if (reward.item.ItemName == "Crystal")
+            {
+                GameManager.gameManager.IncreaseCrystal(reward.quantity);
+            }
+            else
+            {
+                inventory.AcquireItem(reward.item, (int)reward.quantity);
+            }
+        }
+        gameControl.ShowRewardShowPanel();
+
+        Image[] images = RewardShowPanelReward.GetComponentsInChildren<Image>();
+        foreach (Image image in images)
+        {
+            Destroy(image.gameObject);
+        }
+        foreach (Reward reward in questData.RewardList)
+        {
+            GameObject obj = Instantiate(RewardSlot, RewardShowPanelReward);
+            obj.transform.GetChild(0).GetComponent<Image>().sprite = reward.item.itemImage;
+            obj.transform.GetChild(2).GetComponent<Text>().text = $"{reward.quantity}";
+        }
         QuestManager.questManager.CheckIsThereReward();
     }
 

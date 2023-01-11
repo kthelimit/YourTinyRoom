@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+
 public class SaveSlot : MonoBehaviour
 {
     public GameDataObject SaveData;
@@ -12,7 +12,7 @@ public class SaveSlot : MonoBehaviour
     public int slotnum;
     void Awake()
     {
-        SaveData = (GameDataObject)AssetDatabase.LoadAssetAtPath($"Assets/04.Scripts/Common/DataManager/GameDataSlot{slotnum}.asset", typeof(GameDataObject));
+        SaveData = Resources.Load<GameDataObject>($"SaveData/GameDataSlot{slotnum}");
         PlayerNameText = transform.GetChild(2).GetComponent<Text>();
         PlayerNameText.text = SaveData.PlayerName;
 
@@ -41,5 +41,15 @@ public class SaveSlot : MonoBehaviour
         SaveData.IsStarted = true;
         PlayerNameText.text = SaveData.PlayerName;
         StartSceneManager.startSceneManager.GoGame(slotnum);
+   }
+
+
+    public void ResetSaveData()
+    {        
+        //AssetDatabase.DeleteAsset($"Assets/04.Scripts/Common/DataManager/GameDataSlot{slotnum}.asset");
+        //AssetDatabase.CopyAsset("Assets/04.Scripts/Common/DataManager/GameDataSO.asset", $"Assets/04.Scripts/Common/DataManager/GameDataSlot{slotnum}.asset");
+
+        //SaveData = (GameDataObject)AssetDatabase.LoadAssetAtPath($"Assets/04.Scripts/Common/DataManager/GameDataSlot{slotnum}.asset", typeof(GameDataObject));
+        //PlayerNameText.text = SaveData.PlayerName;
     }
 }

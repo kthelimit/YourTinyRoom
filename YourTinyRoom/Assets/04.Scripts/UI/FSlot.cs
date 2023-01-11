@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+
 public class FSlot : MonoBehaviour
 {
     public Item item;
@@ -28,8 +28,7 @@ public class FSlot : MonoBehaviour
         itemImage.sprite = item.itemImage;
         itemImage.type = 0;
         itemImage.preserveAspect = true;
-        furniturePrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/05.Prefabs/Furniture/Item{item.ItemNumber.ToString("000")}.prefab", typeof(GameObject));
-
+        furniturePrefab = Resources.Load<GameObject>($"Prefabs/Furniture/Item{item.ItemNumber.ToString("000")}");
 
         go_CountImage.SetActive(true);
         text_count.text = itemCount.ToString();
