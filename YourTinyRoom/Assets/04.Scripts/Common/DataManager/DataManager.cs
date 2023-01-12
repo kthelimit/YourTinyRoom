@@ -8,52 +8,50 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager instance;
+    public static DataManager dataManager; //싱글턴
     public Dictionary<int, Item> dicItem;
-    private DataManager() { }
-
-    public static DataManager GetInstance()
-    {
-        if(DataManager.instance==null)
-        {
-            DataManager.instance = new DataManager();
-        }
-        return DataManager.instance;
-    }
+    [SerializeField]
     private string dataPath;
 
-    public void Initialize()
+    ConvertData convertData;
+
+    private void Awake()
     {
-        dataPath = Application.persistentDataPath + "/gameData.dat";
+        if (dataManager == null)
+            dataManager = this;
+        else if (dataManager != this)
+            Destroy(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
+        convertData = GetComponent<ConvertData>();
     }
+
+    //저장할 데이터패스
+    public void SetDataPath(int num)
+    {
+        dataPath = Application.persistentDataPath + $"/gameData{num}.dat";
+    }
+
 
     public void Save(GameData gameData)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(dataPath);
 
-        GameData data = new GameData();
-        data.PlayerName = gameData.PlayerName;
-        data.CharacterName = gameData.CharacterName;
-        data.Gold = gameData.Gold;
-        data.Crystal = gameData.Crystal;
-        data.Level = gameData.Level;
-        data.Exp = gameData.Exp;
-        data.ItemInInventories = gameData.ItemInInventories;
-        data.CollectItems = gameData.CollectItems;
-        data.questInLists = gameData.questInLists;
+        GameDataForSave data = convertData.ConvertDataToSaveData(gameData);
 
         bf.Serialize(file, data);
         file.Close();
     }
 
-    public GameData Load()
+    public GameData Load(int num)
     {
-        if(File.Exists(dataPath))
+        string LoaddataPath = Application.persistentDataPath + $"/gameData{num}.dat";
+        if (File.Exists(LoaddataPath))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(dataPath, FileMode.Open);
-            GameData data = (GameData)bf.Deserialize(file);
+            FileStream file = File.Open(LoaddataPath, FileMode.Open);
+            GameDataForSave SaveData = (GameDataForSave)bf.Deserialize(file);
+            GameData data = convertData.ConvertDataToGameData(SaveData);
             file.Close();
 
             return data;
@@ -63,6 +61,26 @@ public class DataManager : MonoBehaviour
             Debug.Log("데이터가 없어서 새로 만들었어.");
             GameData data = new GameData();
             return data;
+        }
+    }
+
+    public bool IsThereExist(int num)
+    {
+        string LoaddataPath = Application.persistentDataPath + $"/gameData{num}.dat";
+        if (File.Exists(LoaddataPath))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    //세이브 파일 리셋용
+    public void DeleteSaveData(int num)
+    {
+        dataPath = Application.persistentDataPath + $"/gameData{num}.dat";
+        if (File.Exists(dataPath))
+        {
+            File.Delete(dataPath);
         }
     }
 

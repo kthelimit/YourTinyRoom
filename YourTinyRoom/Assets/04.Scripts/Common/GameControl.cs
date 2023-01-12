@@ -48,8 +48,8 @@ public class GameControl : MonoBehaviour
     public bool isFarm = false;
 
     //농장이동
-    public Transform FarmPos=null;
-    public Transform RoomPos=null;
+    public Vector3 FarmPos=Vector3.zero;
+    public Vector3 RoomPos = Vector3.zero;
 
     void Awake()
     {
@@ -263,8 +263,9 @@ public class GameControl : MonoBehaviour
         GoRoomObject.SetActive(true);
         CropObject.SetActive(true);
         InteriorObject.SetActive(false);
-        FarmPos = GameObject.Find("FarmPos").transform;        
-        Camera.main.transform.position = FarmPos.position;
+        FarmPos = new Vector3(36f, 0.14f, -10f);
+       // FarmPos = GameObject.Find("FarmPos").transform;        
+        Camera.main.transform.position = FarmPos;
 
     }
 
@@ -275,8 +276,9 @@ public class GameControl : MonoBehaviour
         GoRoomObject.SetActive(false);
         CropObject.SetActive(false);
         InteriorObject.SetActive(true);
-        RoomPos = GameObject.Find("RoomPos").transform;
-        Camera.main.transform.position = RoomPos.position;
+        RoomPos = new Vector3(0f, 1.5f, -10f);
+        //RoomPos = GameObject.Find("RoomPos").transform;
+        Camera.main.transform.position = RoomPos;
     }
 
     public void GoNextDay()

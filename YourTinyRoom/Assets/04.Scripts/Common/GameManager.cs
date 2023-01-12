@@ -48,7 +48,8 @@ public class GameManager : MonoBehaviour
     public Collections collections;
     public QuestManager questManager;
     public ColorChange colorChange;
-    public GameDataObject gameData;
+    //public GameDataObject gameData;
+    public GameData gameData;
     public CharacterCustom characterCustom;
     public Transform FurnitureFolder;
     public Transform CropFolder;
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
         Inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         collections = GameObject.Find("Collection").GetComponent<Collections>();
         questManager = GetComponent<QuestManager>();
-        FurnitureFolder = GameObject.Find("FurnitureFolder").transform;
+     //   FurnitureFolder = GameObject.Find("FurnitureFolder").transform;
         CropFolder = GameObject.Find("CropFolder").transform;
         playerName = "플레이어";
         playerNameText.text = playerName;
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
         goldText.text = gold.ToString("#,###");
         crystalText.text = crystal.ToString("#,###");
         dayCountText.text = dayCount.ToString();
-        expGauge.fillAmount = curExp / maxExp;
+        
 
         characterCtrl.isHome = gameData.isHome;
         characterCtrl.IsVisited = gameData.IsVisited;
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            characterCtrl.tr.position = gameData.CharacterPos;
+            characterCtrl.tr.position = new Vector3(0f,0f,0f);
         }
 
         //인벤토리
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour
         collections.LoadCollections(gameData.CollectItems);
         //레벨
         levelSystem.LoadLevel(gameData.Level);
+        expGauge.fillAmount = (curExp - minExp) / (maxExp - minExp);
         //퀘스트리스트
         questManager.LoadQuestList(gameData.questInLists);
 
@@ -135,36 +137,40 @@ public class GameManager : MonoBehaviour
         //사운드
         SoundManager.soundManager.LoadVolume(gameData.SFXVolume, gameData.BGMVolume);
         mainCam.GetComponent<AudioSource>().volume = gameData.BGMVolume;
-        
-        //맵데이터
-        foreach(PlacedObject placedObj in gameData.PlacedObjectsInMap)
-        {           
-           GameObject obj= Instantiate(placedObj.placedObject, FurnitureFolder);
-           obj.transform.position = placedObj.pos;
-            if(obj.tag=="FURNITURE")
-            {
-                Building _building = obj.transform.GetComponent<Building>();
-                _building.UpdateSortingOrder();                   
-            }
-            if(obj.tag=="CROP")
-            {
-                obj.transform.SetParent(CropFolder);                
-                //클릭을 해야 타이머가 움직이기 시작하는데 그럴거면 차라리 완성된 상태로 뜨는게 나을거 같음             
-               
-                obj.GetComponent<Crop>().curTime=9;
-                obj.GetComponent<Crop>().StartCoroutine("Timer");
 
-            }
-
-        }
         //이벤트 데이터
         if (gameData.dialogEvents.Count != 0)
         {
             for (int i = 0; i < gameData.dialogEvents.Count; i++)
             {
                 DialogSystem.dialogSystem.dialogEvents[i].isFinished = gameData.dialogEvents[i].isFinished;
-            }        
+            }
         }
+        //맵데이터
+        if (gameData.PlacedObjectsInMap.Count !=0)
+        {
+            foreach (PlacedObject placedObj in gameData.PlacedObjectsInMap)
+            {
+                GameObject obj = Instantiate(placedObj.placedObject, FurnitureFolder);
+                obj.transform.position = placedObj.pos;
+                if (obj.tag == "FURNITURE")
+                {
+                    Building _building = obj.transform.GetComponent<Building>();
+                    _building.UpdateSortingOrder();
+                }
+                if (obj.tag == "CROP")
+                {
+                    obj.transform.SetParent(CropFolder);
+                    //클릭을 해야 타이머가 움직이기 시작하는데 그럴거면 차라리 완성된 상태로 뜨는게 나을거 같음             
+
+                    obj.GetComponent<Crop>().curTime = 9;
+                    obj.GetComponent<Crop>().StartCoroutine("Timer");
+
+                }
+
+            }
+        }
+
 
     }
 
@@ -183,7 +189,6 @@ public class GameManager : MonoBehaviour
         gameData.Like = characterCtrl.SaveData(1);
         gameData.Energy = characterCtrl.SaveData(2);
 
-        gameData.CharacterPos = characterCtrl.tr.position;
 
         gameData.hairTintColor = colorChange.hairTintColor;
         gameData.hairDarkColor = colorChange.hairDarkColor;
@@ -245,6 +250,7 @@ public class GameManager : MonoBehaviour
         gameData.IsVisited = characterCtrl.IsVisited;
 
         Debug.Log("데이터 저장중");
+        DataManager.dataManager.Save(gameData);
     //    UnityEditor.EditorUtility.SetDirty(gameData);
 
     }

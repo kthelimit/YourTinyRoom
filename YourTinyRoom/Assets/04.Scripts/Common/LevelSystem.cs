@@ -17,16 +17,8 @@ public class LevelSystem : MonoBehaviour
     AudioClip LevelUpSFX;
     public Shop shop;
     GameControl gameControl;
-    private struct Level
-    {
-        public int level;
-        public float expInterval;
-        public float expLimit;
-        public float rewardGold;
-        public float rewardCrystal;
-    };
-    List<Level> levelTable;
-    private static string LevelCSVPath = "/Editor/CSVs/LevelCSV.csv";
+
+    LevelTable levelTable;
     private int levelCount=1;
     public bool isAdded = false;
 
@@ -34,29 +26,15 @@ public class LevelSystem : MonoBehaviour
     {
         gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
         LevelUpSFX = Resources.Load<AudioClip>("SFX/Complete_Level_01");
-        LevelDataLoad();
+        levelTable = Resources.Load<LevelTable>("levelTable");
     }
-    private void LevelDataLoad()
-    {
-        levelTable = new List<Level>();
-        string[] allLines = File.ReadAllLines(Application.dataPath + LevelCSVPath);
-        foreach (string s in allLines)
-        {
-            string[] splitData = s.Split(',');
-            Level _level = new Level();
-            _level.level = int.Parse(splitData[0]);
-            _level.expInterval = float.Parse(splitData[1]);
-            _level.expLimit = float.Parse(splitData[2]);
-            _level.rewardGold = float.Parse(splitData[3]);
-            _level.rewardCrystal = float.Parse(splitData[4]);
-            levelTable.Add(_level);
-        }
-    }
+ 
 
     public void LoadLevel(int _level)
     {
         levelCount = _level;
-        GameManager.gameManager.ChangeExpInterval(levelTable[levelCount - 1].expLimit, levelTable[levelCount].expLimit);
+        beforeLevel = _level;
+        GameManager.gameManager.ChangeExpInterval(levelTable.leveltable[levelCount - 1].expLimit, levelTable.leveltable[levelCount].expLimit);
         GameManager.gameManager.UpdateLevelText(levelCount);
         if(levelCount>=5)
         {
@@ -72,18 +50,18 @@ public class LevelSystem : MonoBehaviour
 
     public void LevelUpCheck(float exp)
     {
-        if(exp >= levelTable[levelCount].expLimit)
+        if(exp >= levelTable.leveltable[levelCount].expLimit)
         {
             levelCount++;
             levelUpPanel.SetActive(true);
             SoundManager.soundManager.PlaySfx(this.transform.position, LevelUpSFX);
             levelText.text = beforeLevel.ToString() + '→' + levelCount.ToString();
-            totalGold += levelTable[levelCount-1].rewardGold;
+            totalGold += levelTable.leveltable[levelCount-1].rewardGold;
             GoldText.text = totalGold.ToString();
-            totalCrystal += levelTable[levelCount-1].rewardCrystal;
+            totalCrystal += levelTable.leveltable[levelCount-1].rewardCrystal;
             CrystalText.text = totalCrystal.ToString();
             Debug.Log($"{levelCount}: crystal {totalCrystal}, gold {totalGold}");
-            GameManager.gameManager.ChangeExpInterval(levelTable[levelCount - 1].expLimit, levelTable[levelCount].expLimit);
+            GameManager.gameManager.ChangeExpInterval(levelTable.leveltable[levelCount - 1].expLimit, levelTable.leveltable[levelCount].expLimit);
             GameManager.gameManager.IncreaseExp(0);
         }      
 

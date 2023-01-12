@@ -32,9 +32,8 @@ public class QuestManager : MonoBehaviour
             questManager = this;
         quests = Resources.LoadAll<Quest>("Quest");
         questInLists = new List<QuestInList>();
-
+        questItem = Resources.Load<GameObject>("Prefabs/QuestItem");
         RewardSlot = Resources.Load<GameObject>("Prefabs/RewardSlot");
-        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/RewardSlot.prefab", typeof(GameObject));
         gameControl = GameObject.Find("GameControl").GetComponent<GameControl>();
         CheckIsThereReward();
     }

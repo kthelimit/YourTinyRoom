@@ -1530,8 +1530,8 @@ MonoBehaviour:
   InteriorObject: {fileID: 799865918}
   CropObject: {fileID: 1629178032}
   isFarm: 0
-  FarmPos: {fileID: 0}
-  RoomPos: {fileID: 0}
+  FarmPos: {x: 0, y: 0, z: 0}
+  RoomPos: {x: 0, y: 0, z: 0}
 --- !u!4 &42939798
 Transform:
   m_ObjectHideFlags: 0
@@ -10506,10 +10506,41 @@ MonoBehaviour:
   collections: {fileID: 0}
   questManager: {fileID: 0}
   colorChange: {fileID: 0}
-  gameData: {fileID: 11400000, guid: 97c1ee6a99d779844824ca7e9ce84a9e, type: 2}
+  gameData:
+    IsStarted: 0
+    PlayerName: "\uD50C\uB808\uC774\uC5B4"
+    CharacterName: "\uCE90\uB9AD\uD130"
+    Gold: 1000
+    Crystal: 10
+    Level: 1
+    Exp: 0
+    DayCount: 0
+    Like: 0
+    Energy: 50
+    IsVisited: 0
+    isHome: 1
+    ItemInInventories: []
+    CollectItems: []
+    questInLists: []
+    hairTintColor: {r: 1, g: 1, b: 1, a: 1}
+    hairDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    pupilTintColor: {r: 1, g: 1, b: 1, a: 1}
+    pupilDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    clothesTintColor: {r: 1, g: 1, b: 1, a: 1}
+    clothesDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    activeHairIndex: 0
+    activeEyesIndex: 0
+    activeEyelashIndex: 0
+    activeClothIndex: 0
+    TailSkin: 
+    HairBackSkin: 
+    BGMVolume: 1
+    SFXVolume: 1
+    PlacedObjectsInMap: []
+    dialogEvents: []
   characterCustom: {fileID: 0}
-  FurnitureFolder: {fileID: 0}
-  CropFolder: {fileID: 0}
+  FurnitureFolder: {fileID: 97742811}
+  CropFolder: {fileID: 2002599245}
 --- !u!4 &448715063
 Transform:
   m_ObjectHideFlags: 0
@@ -16096,6 +16127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60d7b7187776c640959456b218eb253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataPath: 
 --- !u!4 &619086823
 Transform:
   m_ObjectHideFlags: 0

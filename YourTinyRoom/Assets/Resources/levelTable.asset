@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda6b3e34e763744386c71b6cefcdc71, type: 3}
+  m_Name: levelTable
+  m_EditorClassIdentifier: 
+  leveltable:
+  - level: 1
+    expInterval: 0
+    expLimit: 0
+    rewardGold: 0
+    rewardCrystal: 0
+  - level: 2
+    expInterval: 30
+    expLimit: 30
+    rewardGold: 1000
+    rewardCrystal: 5
+  - level: 3
+    expInterval: 85
+    expLimit: 115
+    rewardGold: 2000
+    rewardCrystal: 5
+  - level: 4
+    expInterval: 175
+    expLimit: 290
+    rewardGold: 3000
+    rewardCrystal: 5
+  - level: 5
+    expInterval: 310
+    expLimit: 600
+    rewardGold: 4000
+    rewardCrystal: 5
+  - level: 6
+    expInterval: 500
+    expLimit: 1100
+    rewardGold: 5000
+    rewardCrystal: 5
+  - level: 7
+    expInterval: 755
+    expLimit: 1855
+    rewardGold: 6000
+    rewardCrystal: 5
+  - level: 8
+    expInterval: 1085
+    expLimit: 2940
+    rewardGold: 7000
+    rewardCrystal: 5
+  - level: 9
+    expInterval: 1500
+    expLimit: 4440
+    rewardGold: 8000
+    rewardCrystal: 5
+  - level: 10
+    expInterval: 2010
+    expLimit: 6450
+    rewardGold: 9000
+    rewardCrystal: 5
+  - level: 11
+    expInterval: 2625
+    expLimit: 9075
+    rewardGold: 10000
+    rewardCrystal: 5
+  - level: 12
+    expInterval: 3355
+    expLimit: 12430
+    rewardGold: 11000
+    rewardCrystal: 5
+  - level: 13
+    expInterval: 4210
+    expLimit: 16640
+    rewardGold: 12000
+    rewardCrystal: 5
+  - level: 14
+    expInterval: 5200
+    expLimit: 21840
+    rewardGold: 13000
+    rewardCrystal: 5
+  - level: 15
+    expInterval: 6335
+    expLimit: 28175
+    rewardGold: 14000
+    rewardCrystal: 5
+  - level: 16
+    expInterval: 7625
+    expLimit: 35800
+    rewardGold: 15000
+    rewardCrystal: 5
+  - level: 17
+    expInterval: 9080
+    expLimit: 44880
+    rewardGold: 16000
+    rewardCrystal: 5
+  - level: 18
+    expInterval: 10710
+    expLimit: 55590
+    rewardGold: 17000
+    rewardCrystal: 5
+  - level: 19
+    expInterval: 12525
+    expLimit: 68115
+    rewardGold: 18000
+    rewardCrystal: 5
+  - level: 20
+    expInterval: 14535
+    expLimit: 82650
+    rewardGold: 19000
+    rewardCrystal: 5
+  - level: 21
+    expInterval: 16750
+    expLimit: 99400
+    rewardGold: 20000
+    rewardCrystal: 5
+  - level: 22
+    expInterval: 19180
+    expLimit: 118580
+    rewardGold: 21000
+    rewardCrystal: 5
+  - level: 23
+    expInterval: 21835
+    expLimit: 140415
+    rewardGold: 22000
+    rewardCrystal: 5
+  - level: 24
+    expInterval: 24725
+    expLimit: 165140
+    rewardGold: 23000
+    rewardCrystal: 5
+  - level: 25
+    expInterval: 27860
+    expLimit: 193000
+    rewardGold: 24000
+    rewardCrystal: 5
+  - level: 26
+    expInterval: 31250
+    expLimit: 224250
+    rewardGold: 25000
+    rewardCrystal: 5
+  - level: 27
+    expInterval: 34905
+    expLimit: 259155
+    rewardGold: 26000
+    rewardCrystal: 5
+  - level: 28
+    expInterval: 38835
+    expLimit: 297990
+    rewardGold: 27000
+    rewardCrystal: 6
+  - level: 29
+    expInterval: 43050
+    expLimit: 341040
+    rewardGold: 28000
+    rewardCrystal: 7
+  - level: 30
+    expInterval: 47560
+    expLimit: 388600
+    rewardGold: 29000
+    rewardCrystal: 8

@@ -377,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 7352342649967584590, guid: c810e28c73d359e4b8910f6ba13afa9d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7352342649967584590, guid: c810e28c73d359e4b8910f6ba13afa9d,
         type: 3}
@@ -432,10 +432,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SaveSlotPanel: {fileID: 1693212880}
+  SaveSlotCG: {fileID: 1693212885}
   ButtonPanel: {fileID: 1562234100}
   ClosePanel: {fileID: 1799461928}
   NamePanel: {fileID: 1762580855}
-  currentGameData: {fileID: 0}
+  currentGameData:
+    IsStarted: 0
+    PlayerName: "\uD50C\uB808\uC774\uC5B4"
+    CharacterName: "\uCE90\uB9AD\uD130"
+    Gold: 1000
+    Crystal: 10
+    Level: 1
+    Exp: 0
+    DayCount: 0
+    Like: 0
+    Energy: 50
+    IsVisited: 0
+    isHome: 1
+    ItemInInventories: []
+    CollectItems: []
+    questInLists: []
+    hairTintColor: {r: 1, g: 1, b: 1, a: 1}
+    hairDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    pupilTintColor: {r: 1, g: 1, b: 1, a: 1}
+    pupilDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    clothesTintColor: {r: 1, g: 1, b: 1, a: 1}
+    clothesDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    activeHairIndex: 0
+    activeEyesIndex: 0
+    activeEyelashIndex: 0
+    activeClothIndex: 0
+    TailSkin: 
+    HairBackSkin: 
+    BGMVolume: 1
+    SFXVolume: 1
+    PlacedObjectsInMap: []
+    dialogEvents: []
 --- !u!4 &257204043
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,7 +1309,7 @@ PrefabInstance:
     - target: {fileID: 7352342649967584590, guid: c810e28c73d359e4b8910f6ba13afa9d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -166.66666
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7352342649967584590, guid: c810e28c73d359e4b8910f6ba13afa9d,
         type: 3}
@@ -3047,6 +3079,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562234100}
   m_CullTransparentMesh: 0
+--- !u!1 &1643133701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1643133704}
+  - component: {fileID: 1643133703}
+  - component: {fileID: 1643133702}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1643133702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643133701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c889bc6df02943930b93efaff0dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1643133703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643133701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60d7b7187776c640959456b218eb253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataPath: 
+--- !u!4 &1643133704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643133701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7395442, y: 1.0004072, z: -0.34523922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1651929775
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,13 +3583,14 @@ GameObject:
   - component: {fileID: 1693212884}
   - component: {fileID: 1693212883}
   - component: {fileID: 1693212882}
+  - component: {fileID: 1693212885}
   m_Layer: 5
   m_Name: SaveSlotPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1693212881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3585,6 +3675,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693212880}
   m_CullTransparentMesh: 0
+--- !u!225 &1693212885
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693212880}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1750203552
 GameObject:
   m_ObjectHideFlags: 0

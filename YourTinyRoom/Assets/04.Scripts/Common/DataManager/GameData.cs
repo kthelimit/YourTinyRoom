@@ -20,7 +20,6 @@ namespace DataInfo
         public float Energy = 50f;
         public bool IsVisited = false;
         public bool isHome = true;
-        public Vector3 CharacterPos = new Vector3(15f, -15f, 0f);
 
         //인벤토리
         public List<ItemInInventory> ItemInInventories = new List<ItemInInventory>();
@@ -52,10 +51,10 @@ namespace DataInfo
         public float SFXVolume = 1f;
 
         //맵
-        public List<PlacedObject> PlacedObjectsInMap;
+        public List<PlacedObject> PlacedObjectsInMap = new List<PlacedObject>();
 
         //이벤트
-        public List<DialogEvent> dialogEvents;
+        public List<DialogEvent> dialogEvents= new List<DialogEvent>();
     }
     [System.Serializable]
     public class ItemInInventory
@@ -97,5 +96,93 @@ namespace DataInfo
         public Item item;
         public float quantity;
     }
+
+
+    //데이터 저장용 새 클래스
+    [System.Serializable]
+    public class GameDataForSave
+    {
+        public bool IsStarted;
+        //게임 기본 정보
+        public string PlayerName;
+        public string CharacterName;
+        public float Gold;
+        public float Crystal;
+        public int Level;
+        public float Exp;
+        public float DayCount;
+        public float Like;
+        public float Energy;
+        public bool IsVisited;
+        public bool isHome;
+
+
+        //인벤토리
+        public List<ItemsInInventoryForSave> ItemInInventories = new List<ItemsInInventoryForSave>();
+
+        //콜렉션
+        public List<CollectItemForSave> CollectItems = new List<CollectItemForSave>();
+
+        //퀘스트 리스트
+        public List<QuestInListForSave> questInLists = new List<QuestInListForSave>();
+
+        //캐릭터 커스텀
+        public float[] hairTintColor = new float[4];
+        public float[] hairDarkColor = new float[4];
+        public float[] pupilTintColor = new float[4];
+        public float[] pupilDarkColor = new float[4];
+        public float[] clothesTintColor = new float[4];
+        public float[] clothesDarkColor = new float[4];
+
+        public int activeHairIndex = 0;
+        public int activeEyesIndex = 0;
+        public int activeEyelashIndex = 0;
+        public int activeClothIndex = 0;
+
+        public string TailSkin = "";
+        public string HairBackSkin = "";
+
+        //사운드
+        public float BGMVolume = 1f;
+        public float SFXVolume = 1f;
+
+        //맵
+        public List<PlacedObjectForSave> PlacedObjectsInMap = new List<PlacedObjectForSave>();
+
+        //이벤트
+        public List<DialogEvent> dialogEvents = new List<DialogEvent>();
+    }
+
+    [System.Serializable]
+    public class ItemsInInventoryForSave
+    {
+        public string Item;
+        public int itemCount;
+    }
+
+    [System.Serializable]
+    public class QuestInListForSave
+    {
+        public int questID;
+        public bool isCompleted;
+        public bool isTakeOut;
+        public bool isAlarmed;
+    }
+
+    [System.Serializable]
+    public class CollectItemForSave
+    {
+        public string itemName;
+        public int ItemNumber;
+        public bool isCollected;
+    }
+
+    [System.Serializable]
+    public class PlacedObjectForSave
+    {
+        public string placedObjectPath;
+        public float[] pos = new float[3];
+    }
+
 
 }

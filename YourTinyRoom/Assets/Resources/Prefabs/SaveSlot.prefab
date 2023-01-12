@@ -166,10 +166,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95bb0a0429c4643498224bb04b53b1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SaveData: {fileID: 0}
+  SaveData:
+    IsStarted: 0
+    PlayerName: "\uD50C\uB808\uC774\uC5B4"
+    CharacterName: "\uCE90\uB9AD\uD130"
+    Gold: 1000
+    Crystal: 10
+    Level: 1
+    Exp: 0
+    DayCount: 0
+    Like: 0
+    Energy: 50
+    IsVisited: 0
+    isHome: 1
+    ItemInInventories: []
+    CollectItems: []
+    questInLists: []
+    hairTintColor: {r: 1, g: 1, b: 1, a: 1}
+    hairDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    pupilTintColor: {r: 1, g: 1, b: 1, a: 1}
+    pupilDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    clothesTintColor: {r: 1, g: 1, b: 1, a: 1}
+    clothesDarkColor: {r: 0, g: 0, b: 0, a: 0}
+    activeHairIndex: 0
+    activeEyesIndex: 0
+    activeEyelashIndex: 0
+    activeClothIndex: 0
+    TailSkin: 
+    HairBackSkin: 
+    BGMVolume: 1
+    SFXVolume: 1
+    PlacedObjectsInMap: []
+    dialogEvents: []
   NamePanel: {fileID: 0}
   playerNameInput: {fileID: 0}
   slotnum: 1
+  DeleteButton: {fileID: 7352342650860656714}
 --- !u!114 &7352342649967584578
 MonoBehaviour:
   m_ObjectHideFlags: 0

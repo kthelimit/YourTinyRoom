@@ -21,7 +21,7 @@ public class CsScore : MonoBehaviour
 
 	void Update()
 	{		
-		pos.y += 0.012f;
+		pos.y += 0.0012f;
 		transform.position = pos;
 	}
 	IEnumerator DisplayScore()
@@ -31,7 +31,7 @@ public class CsScore : MonoBehaviour
 		for (float a = 1; a >= 0; a -= 0.2f)
 		{
 			cg.alpha = a;
-			yield return new WaitForFixedUpdate();
+			yield return new WaitForSeconds(0.1f);
 		}
 		Destroy(this.gameObject, 0.1f);
 	}

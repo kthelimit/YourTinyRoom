@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.IO;
 using System;
+using System.Collections.Generic;
 using System.Linq ;
 using DataInfo;
 public class CSVtoSO
@@ -175,5 +176,30 @@ public class CSVtoSO
         }
         AssetDatabase.SaveAssets();
 
+    }
+
+    //QuestCSV파일 저장된 경로
+    private static string LevelCSVPath = "/Editor/CSVs/LevelCSV.csv";
+
+    //위의 메뉴에 추가 
+    [MenuItem("Utilities/Generate LevelTable")]
+    public static void GenerateLevelTable()
+    {
+        string[] allLines = File.ReadAllLines(Application.dataPath + LevelCSVPath);
+        LevelTable levels = new LevelTable();
+        levels.leveltable = new List<Level>();
+        foreach (string s in allLines)
+        {
+            string[] splitData = s.Split(',');
+            Level _level = new Level();
+            _level.level = int.Parse(splitData[0]);
+            _level.expInterval = float.Parse(splitData[1]);
+            _level.expLimit = float.Parse(splitData[2]);
+            _level.rewardGold = float.Parse(splitData[3]);
+            _level.rewardCrystal = float.Parse(splitData[4]);
+            levels.leveltable.Add(_level);
+        }
+
+        AssetDatabase.CreateAsset(levels, $"Assets/Resources/levelTable.asset");
     }
 }
