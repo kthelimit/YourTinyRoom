@@ -89,6 +89,10 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 QuestComplete();
             }
+            else if(isCompleted&&isTakeOut)
+            {
+                break;
+            }
         }
     }
 

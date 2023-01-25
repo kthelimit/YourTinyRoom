@@ -48,12 +48,14 @@ public class GameManager : MonoBehaviour
     public Collections collections;
     public QuestManager questManager;
     public ColorChange colorChange;
+
     //public GameDataObject gameData;
     public GameData gameData;
     public CharacterCustom characterCustom;
     public Transform FurnitureFolder;
     public Transform CropFolder;
 
+    private AudioClip SaveSfx;
     void Awake()
     {
         if (gameManager == null)
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour
         //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Dust.prefab", typeof(GameObject));
         characterCustom = characterCtrl.GetComponent<CharacterCustom>();
         gameData = GameObject.Find("SceneManager").GetComponent<StartSceneManager>().currentGameData;
+        SaveSfx = Resources.Load<AudioClip>("SFX/Select_Item_01");
     }
     public void LoadGameData()
     {
@@ -176,6 +179,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveGameData()
     {
+        SoundManager.soundManager.PlaySfx(this.transform.position,SaveSfx);
         gameData.PlayerName = playerName;
         gameData.CharacterName = characterName;
         gameData.Exp = curExp;
@@ -346,7 +350,14 @@ public class GameManager : MonoBehaviour
         characterNameText.text = characterName;
         characterNameText3.text = characterName;
         characterNameText2.text = characterName+" 방문중!";
-        gameControl.ShowCNameEditPanel();
+        if (DialogSystem.dialogSystem.isAction)
+        {
+            gameControl.ShowCNamedEditPanelForEvent();
+        }
+        else 
+        {
+            gameControl.ShowCNameEditPanel();
+        }
     }
 
     public void GoNextDay()

@@ -149,7 +149,7 @@ public class DialogSystem : MonoBehaviour
         }
         else if (talkWho == 8)
         {
-            gameControl.ShowCNameEditPanel();
+            gameControl.ShowCNamedEditPanelForEvent();
         }
         else if (talkWho == 9)
         {

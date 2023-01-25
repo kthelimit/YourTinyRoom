@@ -328,6 +328,22 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    public void ShowCNamedEditPanelForEvent()
+    {
+        if (CNameEditPanel.gameObject.activeInHierarchy == false)
+        {
+            CNameEditPanel.SetActive(true);
+            DialogCG.interactable = false;
+        }
+        else
+        {
+            CNameEditPanel.SetActive(false);
+            DialogCG.interactable = true;
+            DialogSystem.dialogSystem.NextSentence();
+        }
+
+    }
+
     public void OpenPhone(bool isopen)
     {
         if (PhoneCG.alpha == 1f)

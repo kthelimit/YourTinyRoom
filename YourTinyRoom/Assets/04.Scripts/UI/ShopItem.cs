@@ -16,6 +16,7 @@ public class ShopItem : MonoBehaviour
 
     public Inventory inventory;
     public Collections collections;
+    public Shop shop;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class ShopItem : MonoBehaviour
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         collections = GameObject.Find("Collection").GetComponent<Collections>();
         getEffectPrefab = Resources.Load<GameObject>("GetEffectUI");
+        shop = GameObject.Find("Shop").GetComponent<Shop>();
     }
 
     public void SetItem(Item _item)
@@ -71,7 +73,7 @@ public class ShopItem : MonoBehaviour
             {
                 GameManager.gameManager.DecreaseGold(item.ItemPrice);
             }
-            CheckPrice();
+            shop.AssignSlot();
             ShowGetEffect(priceButton.transform, item);
         }
         SoundManager.soundManager.PlaySfx(this.transform.position, cashSFX);

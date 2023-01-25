@@ -27,6 +27,7 @@ public class CharacterCtrl : MonoBehaviour
     //y좌표로 출력 순서 조정
     public Renderer characterRenderer;
     private const int IsometricRangePerYUnit = 100;
+    public float charaOffset=0;
    
     //캐릭터 방문 관련
     public Transform home;
@@ -74,7 +75,6 @@ public class CharacterCtrl : MonoBehaviour
         InviteSFX = Resources.Load<AudioClip>("SFX/slots_win_001");
         colorChange = GetComponent<ColorChange>();
         GiftPrefab = Resources.Load<GameObject>("Prefabs/Gift");
-        //(GameObject)AssetDatabase.LoadAssetAtPath("Assets/05.Prefabs/Gift.prefab", typeof(GameObject));
         tr = GetComponent<Transform>();
         ani = GetComponent<SkeletonAnimation>();
         ChangeAnimation("대기");
@@ -163,10 +163,7 @@ public class CharacterCtrl : MonoBehaviour
         {
             phone.Talk(130);
         }
-        //else if (randNum == 4)
-        //{
-        //    phone.Talk(140);
-        //}
+
         gameControl.ShowAlarmPanel();
         SoundManager.soundManager.PlaySfx(this.transform.position,PhoneAlarmSFX);
         ImageAlarm.SetActive(true);
@@ -224,8 +221,8 @@ public class CharacterCtrl : MonoBehaviour
 
     void Update()
     {
-        characterRenderer.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);
-        textbubbleCanvas.sortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit)+1;
+        characterRenderer.sortingOrder = -(int)((transform.position.y + charaOffset) * IsometricRangePerYUnit);
+        textbubbleCanvas.sortingOrder = -(int)((transform.position.y + charaOffset) * IsometricRangePerYUnit)+1;
         if (energyParameter<=0f&&!isHome)
         {
             StartCoroutine("ByeBye");
